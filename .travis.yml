@@ -1,36 +1,14 @@
-###
-### .travis.yml
-###
-
-# ----------------------------- DEFINE STAGES IN CI ---------------------------- #
-
-# these are executed in order.  each must pass for the next to be run
 stages:
-  - precache # warm up cache for default Node.js version
-  - lint # lint code and docs
-  - test # all tests
-  
-
-# -------------------------- CD ENVIRONMENT SETTINGS ------------------------- #
-
-# defaults
+  - precache
+  - lint
+  - test
 language: node_js
 node_js: '9'
 addons:
   apt:
     packages:
       - libnotify-bin
-
-# ---------------------- INSTALL DEPENDENCIES CI SCRIPT ---------------------- #
-
-# this avoids compilation in most cases (where we don't need it)
-install: npm ci --ignore-scripts
-
-# `nvm install` happens before the cache is restored, which means
-# we must install our own npm elsewhere (`~/npm`)
-# ref: https://github.com/mochajs/mocha/blob/master/.travis.yml
-# ref: https://boneskull.com/mocha-and-travis-ci-build-stages/
-
+install: true
 before_script: npm install -g npm@5.8.0
 before_install: |
   [[ ! -x ~/npm/node_modules/.bin/npm ]] && {
@@ -40,76 +18,53 @@ before_install: |
   } || true
   # avoids bugs around https://github.com/travis-ci/travis-ci/issues/5092
   export PATH=~/npm/node_modules/.bin:$PATH
-
-# ------------------------------ CACHING CI ENV ------------------------------ #
-
-# this avoids compilation in most cases (where we don't need it)
 cache:
   directories:
-    - ~/.npm # cache npm's cache
-    - ~/npm # cache latest npm
-
-# ------------------------ DEFINE JOB IN EACH CI STAGE ----------------------- #
-
+    - '~/.npm'
 jobs:
   include:
-    # Jobs lacking a stage will use the same stage as the previous job in the list; 
-    # if there is no previous job, the default stage is test
-    # TEST STAGE
-    - &test 
-      stage: test
-      install:
+    - stage: test
+      install: &1
         - npm install
       script: npm run test
       before_install: true
       after_success: npm run coverage
-      cache:
+      cache: &2
         directories:
-          - ~/.npm
-          - node_modules # npm install, unlike npm ci, doesn't wipe node_modules
-    - <<: *test
+          - '~/.npm'
+          - node_modules
+    - stage: test
+      install: *1
+      script: npm run test
+      before_install: true
+      after_success: npm run coverage
+      cache: *2
       node_js: '8'
-
-    - <<: *test
+    - stage: test
+      install: *1
+      script: npm run test
+      before_install: true
+      after_success: npm run coverage
+      cache: *2
       node_js: '10'
-
-    # LINT STAGE
-    #  linting code - that make code linting and fail which has any issue about code syntax 
     - stage: lint
       before_install: true
       install:
-      - npm install -g eslint
-      - npm install -g snazzy
+        - npm install -g eslint
+        - npm install -g snazzy
       script: npm run lint
-
-    # PRECACHE STAGE 
-    # - script = true means it works on this stage and everything warmed-up OK
     - stage: precache
       script: true
-
 after_success: npm run coverage
-
-# --------------------------------- CI SETTINGS --------------------------------- #
-
-cache:
-  directories:
-    - ~/.npm
 sudo: false
-install: true
-
-# ----------------------------- DEPLOYMENT SCRIPT ---------------------------- #
-
 before_deploy:
-  - rm -rf node_modules # omit from the tarball, since we skip cleanup
-
+  - rm -rf node_modules
 deploy:
   provider: heroku
   api_key:
-    secure
+    secure: lv1fXka1cYwpQ576NQjD5aIFnKe3r1detXS57BdXThID75Ttem9pYONQPvWohOT8cpNxsn/g9xSuplGBDWRKB+MThTmWIyo7EAAkFKlfG0aFm/7nytnu+EYpkY+rXip4/HtL33JMBFM8CggDK65HwXvSMkmkHX82PAbSnSjt1pTxkn070vxA+RPMsYEeHam13Am33E4hBFCaooCfsVFriSsZCn3qddibaoBOSGkRSk3SkaKDfz7/Yj0zyheWnPf+XQmZ52aQy4POKAinYLnQrSp/bD7tnVRCUsybyuXg5zDToU5N2NNtQdyzbGPLjW/yaJBPkbB+0cyZnFB2XSMkPaoWu/NDRcj0P4O+aDMahUFCZGadn2zDLAwsvZ7sdDJ3GDUJLn2QUpCDCYaZi0d4NWEKrBUw+NCfxrpM9GCK9Vdr3kU1D2WHRvbQraDZs7S7LakngHETRnncddAEobSR27FMQ7vdKFBLl70NXBfqnbqO+TZiMe7MBXQqxW2w5klWYSzAKea4Do4rKjs1k9i+LCNn7Gr87Ocl2YUHtgiUoLs8xdSzEcR0KsZH2dPeegNp5l0uKSyFX5UGm0YAc6kxdRJi7e2ULyR2MpR0TWkQyshKjs9s0EIdumssjAoTByNOJ5ukmuBrmwnNZeEUjP+Nh7VD/giwHHlHsfcEkGmIuiU=
   app: react-seed
+  on: master
   skip_cleanup: true
-
-# ----------------------------------- HOOKS ---------------------------------- #
-
 notifications:
   webhooks: https://hooks.slack.com/services/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
