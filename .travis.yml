@@ -1,13 +1,13 @@
 stages:
-  - precache
-  - lint
-  - test
+- precache
+- lint
+- test
 language: node_js
 node_js: '9'
 addons:
   apt:
     packages:
-      - libnotify-bin
+    - libnotify-bin
 install: true
 before_script: npm install -g npm@5.8.0
 before_install: |
@@ -20,50 +20,51 @@ before_install: |
   export PATH=~/npm/node_modules/.bin:$PATH
 cache:
   directories:
-    - '~/.npm'
+  - "~/.npm"
 jobs:
   include:
-    - stage: test
-      install: &1
-        - npm install
-      script: npm run test
-      before_install: true
-      after_success: npm run coverage
-      cache: &2
-        directories:
-          - '~/.npm'
-          - node_modules
-    - stage: test
-      install: *1
-      script: npm run test
-      before_install: true
-      after_success: npm run coverage
-      cache: *2
-      node_js: '8'
-    - stage: test
-      install: *1
-      script: npm run test
-      before_install: true
-      after_success: npm run coverage
-      cache: *2
-      node_js: '10'
-    - stage: lint
-      before_install: true
-      install:
-        - npm install -g eslint
-        - npm install -g snazzy
-      script: npm run lint
-    - stage: precache
-      script: true
+  - stage: test
+    install: &1
+    - npm install
+    script: npm run test
+    before_install: true
+    after_success: npm run coverage
+    cache: &2
+      directories:
+      - "~/.npm"
+      - node_modules
+  - stage: test
+    install: *1
+    script: npm run test
+    before_install: true
+    after_success: npm run coverage
+    cache: *2
+    node_js: '8'
+  - stage: test
+    install: *1
+    script: npm run test
+    before_install: true
+    after_success: npm run coverage
+    cache: *2
+    node_js: '10'
+  - stage: lint
+    before_install: true
+    install:
+    - npm install -g eslint
+    - npm install -g snazzy
+    script: npm run lint
+  - stage: precache
+    script: true
 after_success: npm run coverage
 sudo: false
 before_deploy:
-  - rm -rf node_modules
+- rm -rf node_modules
 deploy:
   provider: heroku
+  local_dir: build
   api_key:
-    secure: lv1fXka1cYwpQ576NQjD5aIFnKe3r1detXS57BdXThID75Ttem9pYONQPvWohOT8cpNxsn/g9xSuplGBDWRKB+MThTmWIyo7EAAkFKlfG0aFm/7nytnu+EYpkY+rXip4/HtL33JMBFM8CggDK65HwXvSMkmkHX82PAbSnSjt1pTxkn070vxA+RPMsYEeHam13Am33E4hBFCaooCfsVFriSsZCn3qddibaoBOSGkRSk3SkaKDfz7/Yj0zyheWnPf+XQmZ52aQy4POKAinYLnQrSp/bD7tnVRCUsybyuXg5zDToU5N2NNtQdyzbGPLjW/yaJBPkbB+0cyZnFB2XSMkPaoWu/NDRcj0P4O+aDMahUFCZGadn2zDLAwsvZ7sdDJ3GDUJLn2QUpCDCYaZi0d4NWEKrBUw+NCfxrpM9GCK9Vdr3kU1D2WHRvbQraDZs7S7LakngHETRnncddAEobSR27FMQ7vdKFBLl70NXBfqnbqO+TZiMe7MBXQqxW2w5klWYSzAKea4Do4rKjs1k9i+LCNn7Gr87Ocl2YUHtgiUoLs8xdSzEcR0KsZH2dPeegNp5l0uKSyFX5UGm0YAc6kxdRJi7e2ULyR2MpR0TWkQyshKjs9s0EIdumssjAoTByNOJ5ukmuBrmwnNZeEUjP+Nh7VD/giwHHlHsfcEkGmIuiU=
-  app: react-seed
+    secure: GA0Gw5A3XcCm7JkFi21VqAqxGXkl5QWrRPOSzY/IQl5ya/PBGQ+ZQld5pwTKkO7bzSeUvJNoyf4NM3hErPR4nGQhFyyCMSuhJ/lD+SaUOs+pZOq6UhGro1CHB7+q5Vww9kd7h/oCQdLca0+ZNkyWV1G3C4yax6FntG3VNh76O/55GMucLF3Xo4u/yx2UXyKMKV+sAtuZL/GwbQuytq9WFrtCrr1Wjxn6ub6IeTdybMCIIwaompzLYVfNXIjK6b6VAZiHUcmoudAwR+oDQYiBc4TjpScqwrVbLLLhEeNL4C6xRuBtMdVUznLcysdbnKze42TgUuW3tvv3ZNgtKwLJw6xuicWPZfYOnqGKcySgsMDiEjAWlFKI1uImddOd43Xdu80csQ61WtNVRfoXZOCOI7GRibUe+arNYE53UzWrbytu0XgDjdfjlC4B432Mq8Dl9bFkmPr3zU03TMw0ggDd+0/s7Sesyqpcol0qtVR0Cvq8wWH+/HcLHAhloZn9NqgaFrQpELEnGPeBPJX+Z7tydZRY2WvXt0DzhX/tFhfH3nioABezbFVwpiHVEHXPCB7Jc0Y7B1N1XJAx5inBthZBQdUCD/EFCTkf3sKvypPBBoDHvPFzetLoRgzdf49zNUmKAv5WyYsWbp7IfgwSSs88QyhxfF0/rPEx+AY/VSLsGIQ=
+  app: react-seed-starter
   on: master
   skip_cleanup: true
 notifications:
