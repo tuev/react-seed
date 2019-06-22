@@ -1,13 +1,56 @@
+###
+### .travis.yml
+###
+
+# ----------------------------- DEFINE STAGES IN CI ---------------------------- #
+
+# these are executed in order.  each must pass for the next to be run
 stages:
   - lint
   - test
+  - build
+
+# -------------------------- CD ENVIRONMENT SETTINGS ------------------------- #
+
+# defaults
 language: node_js
 node_js:
   - 'stable'
-install: true
+addons:
+  apt:
+    packages:
+      - libnotify-bin
+
+# ---------------------- INSTALL DEPENDENCIES CI SCRIPT ---------------------- #
+
+# this avoids compilation in most cases (where we don't need it)
+install: npm ci --ignore-scripts
+
+# `nvm install` happens before the cache is restored, which means
+# we must install our own npm elsewhere (`~/npm`)
+# ref: https://github.com/mochajs/mocha/blob/master/.travis.yml
+# ref: https://boneskull.com/mocha-and-travis-ci-build-stages/
+
+before_script: npm install -g npm@5.8.0
+before_install: |
+  [[ ! -x ~/npm/node_modules/.bin/npm ]] && {
+    # caching feature creates `~/npm` for us
+    cd ~/npm && npm install npm
+    cd -
+  } || true
+  # avoids bugs around https://github.com/travis-ci/travis-ci/issues/5092
+  export PATH=~/npm/node_modules/.bin:$PATH
+
+# ------------------------------ CACHING CI ENV ------------------------------ #
+
+# this avoids compilation in most cases (where we don't need it)
 cache:
   directories:
-    - '~/.npm'
+    - ~/.npm # cache npm's cache
+    - ~/npm # cache latest npm
+
+# ------------------------ DEFINE JOB IN EACH CI STAGE ----------------------- #
+
 jobs:
   include:
     - stage: test
@@ -40,15 +83,15 @@ jobs:
         - npm install -g eslint
         - npm install -g snazzy
       script: npm run lint
-    - stage: precache
-      script: true
+    - stage: build
+      script: npm run build
 after_success: npm run coverage
 sudo: false
 before_deploy:
-  - npm run build
   - rm -rf node_modules
 deploy:
   provider: heroku
+  local_dir: build
   api_key:
     secure: GA0Gw5A3XcCm7JkFi21VqAqxGXkl5QWrRPOSzY/IQl5ya/PBGQ+ZQld5pwTKkO7bzSeUvJNoyf4NM3hErPR4nGQhFyyCMSuhJ/lD+SaUOs+pZOq6UhGro1CHB7+q5Vww9kd7h/oCQdLca0+ZNkyWV1G3C4yax6FntG3VNh76O/55GMucLF3Xo4u/yx2UXyKMKV+sAtuZL/GwbQuytq9WFrtCrr1Wjxn6ub6IeTdybMCIIwaompzLYVfNXIjK6b6VAZiHUcmoudAwR+oDQYiBc4TjpScqwrVbLLLhEeNL4C6xRuBtMdVUznLcysdbnKze42TgUuW3tvv3ZNgtKwLJw6xuicWPZfYOnqGKcySgsMDiEjAWlFKI1uImddOd43Xdu80csQ61WtNVRfoXZOCOI7GRibUe+arNYE53UzWrbytu0XgDjdfjlC4B432Mq8Dl9bFkmPr3zU03TMw0ggDd+0/s7Sesyqpcol0qtVR0Cvq8wWH+/HcLHAhloZn9NqgaFrQpELEnGPeBPJX+Z7tydZRY2WvXt0DzhX/tFhfH3nioABezbFVwpiHVEHXPCB7Jc0Y7B1N1XJAx5inBthZBQdUCD/EFCTkf3sKvypPBBoDHvPFzetLoRgzdf49zNUmKAv5WyYsWbp7IfgwSSs88QyhxfF0/rPEx+AY/VSLsGIQ=
   app: react-seed-starter
