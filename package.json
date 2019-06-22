@@ -18,7 +18,8 @@
     "lint:eslint": "eslint --verbose | snazzy '**/*.js' '**/*.*.js'",
     "lint:eslint:fix": "eslint 'src/**/*.{js,jsx}' --fix --verbose | snazzy",
     "lint:js": "npm run lint:eslint -- . ",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "coverage": "npm run test -- --coverage"
   },
   "browserslist": {
     "production": [
