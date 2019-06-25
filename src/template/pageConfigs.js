@@ -5,13 +5,13 @@ const pageConfigs = [
   {
     path: '/404',
     component: Page404,
-    exact: true,
+    exact: true
   },
   {
     path: '/',
     component: HomePage,
-    exact: true,
-  },
+    exact: true
+  }
 ]
 
 export default pageConfigs

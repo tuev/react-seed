@@ -10,37 +10,37 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
+  DropdownItem
 } from 'reactstrap'
-import {HeaderWrapper} from './header.style'
+import { HeaderWrapper } from './header.style'
 
 export default class Example extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.toggle = this.toggle.bind(this)
     this.state = {
-      isOpen: false,
+      isOpen: false
     }
   }
-  toggle() {
+  toggle () {
     this.setState({
-      isOpen: !this.state.isOpen,
+      isOpen: !this.state.isOpen
     })
   }
-  render() {
+  render () {
     return (
       <HeaderWrapper>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
+        <Navbar color='light' light expand='md'>
+          <NavbarBrand href='/'>reactstrap</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
+            <Nav className='ml-auto' navbar>
               <NavItem>
-                <NavLink href="/components/">Components</NavLink>
+                <NavLink href='/components/'>Components</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">
+                <NavLink href='https://github.com/reactstrap/reactstrap'>
                   GitHub
                 </NavLink>
               </NavItem>

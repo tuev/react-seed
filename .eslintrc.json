@@ -1,7 +1,0 @@
-{
-  "extends": ["react-app", "plugin:jsx-a11y/recommended"],
-  "plugins": ["jsx-a11y", "react-hooks", "react", "import"],
-  "rules": {
-    "quotes": ["error", "single"]
-  }
-}
