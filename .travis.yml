@@ -44,6 +44,7 @@ jobs:
       after_success: npm run coverage
       cache: *2
       node_js: '8'
+      if: branch != master
     - stage: test
       install: *1
       script: npm run test
@@ -56,6 +57,7 @@ jobs:
       before_install: true
       install:
         - npm install
+      if: branch != master
 after_success: npm run coverage
 sudo: false
 before_deploy:
