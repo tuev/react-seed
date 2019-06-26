@@ -27,7 +27,11 @@
     "lint:eslint:fix": "eslint 'src/**/*.{js,jsx}' --fix",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
-    "coverage": "npm run test -- --coverage"
+    "coverage": "npm run test -- --coverage",
+    "start:prod": "node server/index.js",
+    "build:clean": "rimraf ./build",
+    "heroku-postbuild": "npm run build",
+    "prebuild": "npm run build:clean"
   },
   "browserslist": {
     "production": [
@@ -52,7 +56,8 @@
     "eslint-plugin-react-hooks": "^1.5.0",
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^2.4.1",
-    "lint-staged": "^8.2.1"
+    "lint-staged": "^8.2.1",
+    "rimraf": "^2.6.3"
   },
   "husky": {
     "hooks": {
