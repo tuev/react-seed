@@ -1,1 +1,4 @@
 build
+*.test.js
+serviceWorker.js
+server/

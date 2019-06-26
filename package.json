@@ -6,6 +6,7 @@
     "bootstrap": "^4.3.1",
     "lodash": "^4.17.11",
     "node-sass": "^4.12.0",
+    "prettier": "^1.18.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
@@ -30,7 +31,8 @@
     "start:prod": "node server/index.js",
     "build:clean": "rimraf ./build",
     "heroku-postbuild": "npm run build",
-    "prebuild": "npm run build:clean"
+    "prebuild": "npm run build:clean",
+    "link:scss": "stylelint '**/*.scss'"
   },
   "browserslist": {
     "production": [
@@ -56,7 +58,9 @@
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^2.4.1",
     "lint-staged": "^8.2.1",
-    "rimraf": "^2.6.3"
+    "rimraf": "^2.6.3",
+    "stylelint": "^10.1.0",
+    "stylelint-config-recommended": "^2.2.0"
   },
   "husky": {
     "hooks": {
