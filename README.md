@@ -2,6 +2,9 @@
 [![Build Status](https://travis-ci.com/tuev/react-seed.svg?branch=master)](https://travis-ci.com/tuev/react-seed)
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## ESLint
+[rules](https://eslint.org/docs/rules/)
+
 ## Available Scripts
 
 In the project directory, you can run:

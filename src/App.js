@@ -4,7 +4,7 @@ import './App.scss'
 import Main from './template/main'
 
 class App extends React.Component {
-  render () {
+  render() {
     return (
       <div className='App'>
         <Main />
