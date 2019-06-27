@@ -52,12 +52,12 @@ jobs:
       after_success: npm run coverage
       cache: *2
       node_js: '10'
+      if: branch != master
     - stage: lint
       script: npm run lint
       before_install: true
       install:
         - npm install
-      if: branch != master
 after_success: npm run coverage
 sudo: false
 before_deploy:

@@ -55,6 +55,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^2.4.1",
     "lint-staged": "^8.2.1",
+    "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
     "stylelint": "^10.1.0",
     "stylelint-config-recommended": "^2.2.0"

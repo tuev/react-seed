@@ -1,5 +1,6 @@
-#REACT-SEED
+# REACT-SEED
 [![Build Status](https://travis-ci.com/tuev/react-seed.svg?branch=master)](https://travis-ci.com/tuev/react-seed)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## ESLint
