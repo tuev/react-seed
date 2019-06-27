@@ -1,12 +1,5 @@
 {
-  "extends": [
-    "standard",
-    "standard-react",
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
+  "extends": ["standard", "standard-react"],
   "plugins": ["react-hooks", "react", "jsx-a11y"],
   "rules": {
     "react/jsx-filename-extension": [
