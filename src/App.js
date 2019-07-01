@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React from 'react'
 import './App.scss'
-import Main from './template/main'
+import Main from './Template/main'
 
 class App extends React.Component {
-  render() {
+  render () {
     return (
       <div className='App'>
         <Main />

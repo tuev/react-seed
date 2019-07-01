@@ -1,5 +1,6 @@
 import Page404 from './pages/404'
-import HomePage from './pages/home'
+import HomePage from './pages/Home'
+import LoginPage from './pages/Login'
 
 const pageConfigs = [
   {
@@ -10,6 +11,11 @@ const pageConfigs = [
   {
     path: '/',
     component: HomePage,
+    exact: true
+  },
+  {
+    path: '/login',
+    component: LoginPage,
     exact: true
   }
 ]
