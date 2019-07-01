@@ -5,9 +5,9 @@ const monitorReducerEnhancer = createStore => (
   initialState,
   enhancer
 ) => {
-  const monitoredReducer = (state, action) => {
+  const monitoredReducer = async (state, action) => {
     const start = performance.now()
-    const newState = reducer(state, action)
+    const newState = await reducer(state, action)
     const end = performance.now()
     const diff = round(end - start)
 

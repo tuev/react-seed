@@ -14,8 +14,10 @@ export default function configureStore (preloadedState) {
   }
   const middlewareEnhancer = applyMiddleware(...middlewares)
 
-  const enhancers = [middlewareEnhancer, monitorReducersEnhancer]
-
+  const enhancers = [middlewareEnhancer]
+  if (process.env.NODE_ENV === 'development') {
+    enhancers.push(monitorReducersEnhancer)
+  }
   const composedEnhancers =
     process.env.NODE_ENV === 'development'
       ? composeWithDevTools(...enhancers)
