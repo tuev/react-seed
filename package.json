@@ -87,5 +87,8 @@
         "git add --force"
       ]
     }
+  },
+  "resolutions": {
+    "ansi-styles": "^3.2.0"
   }
 }
