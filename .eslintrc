@@ -39,5 +39,12 @@
     "jest": true,
     "browser": true,
     "es6": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }
