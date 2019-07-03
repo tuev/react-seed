@@ -1,6 +1,6 @@
-import Page404 from './pages/404'
-import HomePage from './pages/Home'
-import LoginPage from './pages/Login'
+import Page404 from './Pages/404'
+import HomePage from './Pages/Home'
+import LoginPage from './Pages/Login'
 
 const pageConfigs = [
   {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { HashRouter, Switch, Route } from 'react-router-dom'
-import Page404 from './pages/404'
-import Header from './header'
-import Footer from './footer'
+import Page404 from './Pages/404'
+import Header from './Header'
+import Footer from './Footer'
 import pageConfigs from './pageConfigs'
 import { MainWrapper } from './main.style'
 
