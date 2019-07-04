@@ -1,9 +1,19 @@
 # REACT-SEED
+
 [![Build Status](https://travis-ci.com/tuev/react-seed.svg?branch=master)](https://travis-ci.com/tuev/react-seed)
+
+## Live Project
+
+https://react-seed-starter.herokuapp.com/
+
+## Commit Convention
+
+[rules]https://www.conventionalcommits.org/en/v1.0.0-beta.4/#specification
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## ESLint
+
 [rules](https://eslint.org/docs/rules/)
 
 ## Available Scripts
