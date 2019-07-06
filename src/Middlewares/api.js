@@ -30,7 +30,6 @@ export default store => next => async action => {
   }
 
   let { endpoint, types, options = {} } = requestAPI
-  // debugger
   // Expect type of requestApi action consist of: start fetch action, get success action, get fail action
   if (!isArray(types) || types.length !== 3) {
     throw new Error('Expected an array of three action types.')
@@ -54,7 +53,6 @@ export default store => next => async action => {
   next(actionWith({ type: requestType }))
   try {
     const response = await callApi(endpoint, options)
-    // debugger
     return next(actionWith({ ...response, type: successType }))
   } catch (error) {
     return next(

@@ -1,43 +1,46 @@
-import React from 'react'
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem
-} from 'reactstrap'
-import { HeaderWrapper, NavLinkWrapper } from './header.style'
+import React, { Component } from 'react'
+import { Collapse, NavbarToggler, NavbarBrand, Nav } from 'reactstrap'
+import { get } from 'lodash'
+import HeaderConfigs from './header'
+import HeaderDropdown from './HeaderDropdown'
+import HeaderItem from './HeaderItem'
+import { HeaderNav } from './header.style'
 
-export default class Example extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.toggle = this.toggle.bind(this)
-    this.state = {
-      isOpen: false
-    }
+export default class Example extends Component {
+  state = {
+    isOpen: false
   }
-  toggle () {
+
+  _toggle = () =>
     this.setState({
       isOpen: !this.state.isOpen
     })
+
+  _renderHeaderItem = (item, idx) => {
+    const isDropdown = get(item, 'items')
+    const childProps = { ...item, key: idx }
+    return isDropdown ? (
+      <HeaderDropdown {...childProps} />
+    ) : (
+      <HeaderItem {...childProps} />
+    )
   }
+
   render () {
+    const { isOpen } = this.state
     return (
-      <HeaderWrapper>
-        <Navbar color='light' light expand='md'>
-          <NavbarBrand to='/'>JiptJipt</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+      <div>
+        <HeaderNav color='light' light expand='md'>
+          <NavbarBrand href='/'>JiptJipt</NavbarBrand>
+          <NavbarToggler onClick={this._toggle} />
+          <Collapse isOpen={isOpen} navbar>
             <Nav className='ml-auto' navbar>
-              <NavItem>
-                <NavLinkWrapper to='/login'>Login</NavLinkWrapper>
-              </NavItem>
+              {HeaderConfigs.map(this._renderHeaderItem)}
             </Nav>
           </Collapse>
-        </Navbar>
-      </HeaderWrapper>
+          <HeaderItem label='Signin' href='/login' />
+        </HeaderNav>
+      </div>
     )
   }
 }

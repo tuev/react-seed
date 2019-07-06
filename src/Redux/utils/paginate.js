@@ -1,4 +1,4 @@
-import { isArray, isString, isFunction, union, get } from 'lodash'
+import { isArray, isString, union, get } from 'lodash'
 
 const initPaginationState = {
   isFetching: false,
@@ -9,10 +9,8 @@ const initPaginationState = {
   error: null
 }
 
-const updatePagination = ([requestType, successType, failureType]) => (
-  state = initPaginationState,
-  action
-) => {
+const updatePagination = ({ state = initPaginationState, action, types }) => {
+  const [requestType, successType, failureType] = types
   switch (action.type) {
   case requestType:
     return {
@@ -25,7 +23,7 @@ const updatePagination = ([requestType, successType, failureType]) => (
       isFetching: false,
       skip: get(action, 'response.skip', 0),
       total: get(action, 'response.total', 0),
-      ids: union(state.ids, action.response.data)
+      ids: union(get(state, 'ids'), action.response.data)
     }
   case failureType:
     return {
@@ -39,17 +37,13 @@ const updatePagination = ([requestType, successType, failureType]) => (
 
 // Creates a reducer managing pagination, given the action types to handle,
 // and a function telling how to extract the key from an action.
-const paginate = ({ types, mapActionToKey }) => {
+const paginate = ({ types }) => {
   if (!isArray(types) || types.length !== 3) {
     throw new Error('Expected types to be an array of three elements.')
   }
   if (!types.every(type => isString(type))) {
     throw new Error('Expected types to be strings.')
   }
-  if (!isFunction(mapActionToKey)) {
-    throw new Error('Expected mapActionToKey to be a function.')
-  }
-
   const [requestType, successType, failureType] = types
 
   return (state = {}, action) => {
@@ -58,13 +52,13 @@ const paginate = ({ types, mapActionToKey }) => {
     case requestType:
     case successType:
     case failureType:
-      const key = mapActionToKey(action) || 'pagination'
-      if (!isString(key)) {
-        throw new Error('Expected key to be a string.')
-      }
       return {
         ...state,
-        [key]: updatePagination(types)(state[key], action)
+        pagination: updatePagination({
+          state: state.pagination,
+          action,
+          types
+        })
       }
     default:
       return state

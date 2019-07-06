@@ -1,23 +1,24 @@
 import { applyMiddleware, compose, createStore } from 'redux'
-import logger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import monitorReducersEnhancer from 'Enhancers/monitorReducer'
+// import monitorReducersEnhancer from 'Enhancers/monitorReducer'
 import api from 'Middlewares/api'
 import rootReducer from './rootReducer'
 
 export default function configureStore (preloadedState) {
-  let middlewares = [api, thunkMiddleware]
+  let middlewares = [thunkMiddleware, api]
   if (process.env.NODE_ENV === 'development') {
-    middlewares = [...middlewares, logger]
+    middlewares = [...middlewares, createLogger()]
   }
   const middlewareEnhancer = applyMiddleware(...middlewares)
 
   const enhancers = [middlewareEnhancer]
-  if (process.env.NODE_ENV === 'development') {
-    enhancers.push(monitorReducersEnhancer)
-  }
+  // TODO: fix bug about monitorReducersEnhancer
+  // if (process.env.NODE_ENV === 'development') {
+  //   enhancers.push(monitorReducersEnhancer)
+  // }
   const composedEnhancers =
     process.env.NODE_ENV === 'development'
       ? composeWithDevTools(...enhancers)

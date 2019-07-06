@@ -17,7 +17,6 @@ const errorMessage = (state = null, action) => {
 
 // Updates the pagination data for different actions.
 const eventData = paginate({
-  mapActionToKey: () => '',
   types: [
     actionTypes.EVENT_REQUEST,
     actionTypes.EVENT_SUCCESS,
