@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export default function Footer () {
-  return (
-    <div className='container-fluid'>
-      <div className='row justify-content-center'>&copy; Copyright 2019</div>
-    </div>
-  )
+export default class index extends Component {
+  render () {
+    return (
+      <div />
+    )
+  }
 }
