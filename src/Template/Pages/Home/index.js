@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { requestEvent } from 'Redux/Event/event.action'
+import EventItem from '../../../Containers/Event/index'
 
 class HomePage extends Component {
   componentDidMount () {
@@ -10,9 +11,7 @@ class HomePage extends Component {
     return (
       <div>
         <h1>HOME PAGE</h1>
-        <button onClick={() => this.props.requestEvent({ endpoint: 'test' })}>
-          FETCH
-        </button>
+        <EventItem />
       </div>
     )
   }
