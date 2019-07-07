@@ -29,14 +29,14 @@
     "test:dev": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "npm run lint:js",
-    "lint:eslint": "eslint '**/*.js' '**/*.*.js'",
-    "lint:eslint:fix": "eslint 'src/**/*.{js,jsx}' --fix",
+    "lint:eslint": "eslint \"**/*.js\" \"**/*.*.js\"",
+    "lint:eslint:fix": "eslint \"src/**/*.{js,jsx}\" --fix",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
     "coverage": "npm run test -- --coverage",
     "build:clean": "rimraf ./build",
     "prebuild": "npm run build:clean",
-    "link:scss": "stylelint '**/*.scss'"
+    "link:scss": "stylelint \"**/*.scss\""
   },
   "browserslist": {
     "production": [
