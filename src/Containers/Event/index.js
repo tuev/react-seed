@@ -181,7 +181,7 @@ export default class Event extends Component {
       }
     )
     return (
-      <div className='content-bucket eds-l-pad-vert-20'>
+      <div className='content-bucket'>
         <div className='contentEvent'><h2>Phát Quà Gia Lai</h2><a className='seeLink'>Đọc thêm</a>></div>
         <div className='eds-show-up-md'>
           {EventList}
