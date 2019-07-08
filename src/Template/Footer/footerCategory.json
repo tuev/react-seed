@@ -1,0 +1,57 @@
+[
+  {
+    "subject": "Use Eventbrite",
+    "items": [
+      { "label": "How It Works", "href": "" },
+      { "label": "For Large & Complex Events", "href": "" },
+      { "label": " Pricing", "href": "" },
+      { "label": "Content Standards", "href": "" },
+      { "label": "Eventbrite Mobile App", "href": "" },
+      { "label": "Eventbrite Check-In App", "href": "" },
+      { "label": "Eventbrite Spectrum", "href": "" },
+      { "label": "Rally - Fun Things To Do", "href": "" },
+      { "label": "FAQs", "href": "" },
+      { "label": "Sitemap", "href": "" }
+    ]
+  },
+  {
+    "subject": "Plan Events",
+    "items": [
+      { "label": "Conference Management Software", "href": "" },
+      { "label": "Eventbrite + Yoga", "href": "" },
+      { "label": "Nonprofits & Fundraisers", "href": "" },
+      { "label": "Sell Tickets", "href": "" },
+      { "label": "Event Management & Planning", "href": "" },
+      { "label": "Online Event Registration", "href": "" },
+      { "label": "Online RSVP", "href": "" },
+      { "label": "Music Venues & Promoters", "href": "" },
+      { "label": "Event Equipment & Staffing", "href": "" },
+      { "label": "Eventbrite Sales Number", "href": "" }
+    ]
+  },
+  {
+    "subject": "Find Events",
+    "items": [
+      { "label": "Boston Events", "href": "" },
+      { "label": "Chicago Events", "href": "" },
+      { "label": "Denver Events", "href": "" },
+      { "label": "Houston Events", "href": "" },
+      { "label": "Los Angeles Events", "href": "" },
+      { "label": "Nashville Events", "href": "" },
+      { "label": "New York Events", "href": "" },
+      { "label": "San Diego Events", "href": "" },
+      { "label": "San Francisco Events", "href": "" },
+      { "label": "All Cities", "href": "" }
+    ]
+  },
+  {
+    "subject": "Connect With Us",
+    "items": [
+      { "label": "Contact Support", "href": "" },
+      { "label": "Twitter", "href": "" },
+      { "label": "Facebook", "href": "" },
+      { "label": "LinkedIn", "href": "" },
+      { "label": "Instagram", "href": "" }
+    ]
+  }
+]
