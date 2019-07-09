@@ -3,7 +3,7 @@
   color: #dbdae3;
   font-size: 12px;
   text-decoration: none;
-  &.category {
+  &__category {
     text-align: left;
     &.subject {
       font-size: 1.17em;
@@ -21,7 +21,7 @@
     }
   }
 
-  &.logo {
+  &__logo {
     padding-top: 16px;
     padding-bottom: 16px;
     li {
@@ -38,7 +38,7 @@
       padding: 0px 8px;
     }
   }
-  &.shortcut {
+  &__shortcut {
     padding-top: 16px;
     padding-bottom: 16px;
     color: #6f7287;
