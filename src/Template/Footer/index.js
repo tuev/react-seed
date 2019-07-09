@@ -8,8 +8,8 @@ import './footer.scss'
 export default class index extends Component {
   render () {
     return (
-      <div className='footer'>
-        <Container>
+      <div className='footer pt-3'>
+        <Container className='pt-3'>
           <Row>
             <FooterCategory />
           </Row>

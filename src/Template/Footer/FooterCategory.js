@@ -14,7 +14,7 @@ export default class FooterCategory extends React.Component {
         </ul>
       </Col>
     )
-  };
+  }
 
   render () {
     return (

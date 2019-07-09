@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default ({ items }) => (
+export default ({ items = [] }) => (
   <div>
-    {items.map((item, idx) => {
+    {items.map(({ href, label } = {}, idx) => {
       return (
         <li key={idx}>
-          <a href={item.href}>{item.label}</a>
+          <a href={href}>{label}</a>
         </li>
       )
     })}

@@ -28,14 +28,16 @@
       display: inline-block;
     }
 
-    &.link-bullet::after {
-      content: "●";
-      font-size: 6px;
-      color: rgb(111, 114, 135);
-      line-height: 16px;
-      position: relative;
-      top: -2px;
-      padding: 0px 8px;
+    &.link-bullet {
+      &::after {
+        content: '●';
+        font-size: 6px;
+        color: rgb(111, 114, 135);
+        line-height: 16px;
+        position: relative;
+        top: -2px;
+        padding: 0px 8px;
+      }
     }
   }
   &__shortcut {
