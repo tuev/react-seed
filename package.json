@@ -8,6 +8,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "classnames": "^2.2.6",
     "lodash": "^4.17.11",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
@@ -23,20 +24,22 @@
     "styled-tools": "^1.7.1"
   },
   "scripts": {
-    "start": "NODE_ENV=development && react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --watchAll=false",
-    "test:dev": "react-scripts test --watchAll=false",
+    "build:clean": "rimraf ./build",
+    "coverage": "npm run test -- --coverage",
     "eject": "react-scripts eject",
+    "link:scss": "stylelint \"**/*.scss\"",
     "lint": "npm run lint:js",
     "lint:eslint": "eslint \"**/*.js\" \"**/*.*.js\"",
     "lint:eslint:fix": "eslint \"src/**/*.{js,jsx}\" --fix",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
-    "coverage": "npm run test -- --coverage",
-    "build:clean": "rimraf ./build",
     "prebuild": "npm run build:clean",
-    "link:scss": "stylelint \"**/*.scss\""
+    "start": "NODE_ENV=development && react-scripts start",
+    "stylelint": "stylelint \"**/*.scss\"",
+    "stylelint:fix": "stylelint \"**/*.scss\" --fix",
+    "test": "react-scripts test --watchAll=false",
+    "test:dev": "react-scripts test --watchAll=false"
   },
   "browserslist": {
     "production": [
@@ -69,12 +72,14 @@
     "redux-logger": "^3.0.6",
     "rimraf": "^2.6.3",
     "stylelint": "^10.1.0",
-    "stylelint-config-recommended": "^2.2.0"
+    "stylelint-config-recommended": "^2.2.0",
+    "stylelint-config-recommended-scss": "^3.3.0",
+    "stylelint-scss": "^3.9.0"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run lint && npm run test",
+      "pre-push": "lint-staged && npm run lint && npm run test",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
@@ -89,6 +94,10 @@
       ],
       "*.json": [
         "prettier --write",
+        "git add --force"
+      ],
+      "*.scss": [
+        "npm run stylelint:fix",
         "git add --force"
       ]
     }
