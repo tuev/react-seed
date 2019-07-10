@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Card, CardImg, CardBody, Row, Col, Button } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faUpload } from '@fortawesome/free-solid-svg-icons'
-
 import './event.scss'
 
 export default class EventItem extends Component {
