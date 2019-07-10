@@ -36,9 +36,9 @@ export default class Example extends Component {
           <Collapse isOpen={isOpen} navbar>
             <Nav className='ml-auto' navbar>
               {HeaderConfigs.map(this._renderHeaderItem)}
+              <HeaderItem label='Signin' href='/login' />
             </Nav>
           </Collapse>
-          <HeaderItem label='Signin' href='/login' />
         </HeaderNav>
       </div>
     )
