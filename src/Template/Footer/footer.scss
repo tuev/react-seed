@@ -1,0 +1,55 @@
+.footer {
+	background-color: hsl(264, 71%, 14%);
+	color: #dbdae3;
+	font-size: 12px;
+	text-decoration: none;
+
+	&__category {
+		text-align: left;
+
+		&.subject {
+			font-size: 1.17em;
+			padding-top: 8px;
+			padding-bottom: 8px;
+		}
+
+		ul {
+			padding-inline-start: 0px;
+		}
+
+		li {
+			list-style-type: none;
+		}
+
+		a {
+			color: #dbdae3;
+		}
+	}
+
+	&__logo {
+		padding-top: 16px;
+		padding-bottom: 16px;
+
+		li {
+			display: inline-block;
+		}
+
+		&.link-bullet {
+			&::after {
+				content: '●';
+				font-size: 6px;
+				color: rgb(111, 114, 135);
+				line-height: 16px;
+				position: relative;
+				top: -2px;
+				padding: 0px 8px;
+			}
+		}
+	}
+
+	&__shortcut {
+		padding-top: 16px;
+		padding-bottom: 16px;
+		color: #6f7287;
+	}
+}
