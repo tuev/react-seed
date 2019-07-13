@@ -11,7 +11,7 @@ class HomePage extends Component {
     return (
       <div>
         <h1>HOME PAGE</h1>
-          <EventList/>
+        <EventList />
         <button onClick={() => this.props.requestEvent({ endpoint: 'test' })}>
           FETCH
         </button>
