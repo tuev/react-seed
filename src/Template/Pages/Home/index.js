@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { requestEvent } from 'Redux/Event/event.action'
-import EventList from 'Containers/EventList'
+import EventItem from 'Containers/EventItem'
 
 class HomePage extends Component {
   componentDidMount () {
@@ -11,7 +11,7 @@ class HomePage extends Component {
     return (
       <div>
         <h1>HOME PAGE</h1>
-        <EventList />
+        <EventItem />
       </div>
     )
   }
