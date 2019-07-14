@@ -1,15 +1,11 @@
-.event-time {
-	&--month {
-		color: #f05537;
-		font-size: 0.75rem;
-		line-height: 1rem;
-	}
-}
+.event {
+	border: 0px solid rgb(235, 235, 235);
 
-.event-title {
-	color: #39364f;
-	font-size: 1.125rem;
-	line-height: 1.5rem;
-	letter-spacing: 0.25px;
-	font-weight: 600
+	&:hover {
+		box-shadow: 7px 20px 20px 13px rgba(40, 44, 53, 0.1), 0 2px 2px 0 rgba(40, 44, 53, 0.1);
+		background-color: white;
+		
+		border-radius: 4px;
+		transition: all .35s ease-in,background-color .24s cubic-bezier(.4,0,.3,1);
+	}
 }

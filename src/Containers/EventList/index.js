@@ -1,27 +1,30 @@
-import React, { Component } from 'react'
-import { Container, Row, Col, NavLink } from 'reactstrap'
-// import EventItem from '../EventItem'
-import eventData from './../EventItem/event.json'
+import React from 'react'
+import { Container, Row } from 'reactstrap'
+import { isEmpty } from 'lodash'
+import EventItem from '../EventItem'
 
-export default class EventList extends Component {
-  _renderEventItem = (item, idx) => {
-    // const childProps = { ...item }
-    return (
-      <Col key={idx} md='12' sm='6' xs='12'>
-        <div className='contentEvent'>
-          <h4>{item.subject}</h4>
-          <NavLink className='seeLink'>See more</NavLink>>
-        </div>
-        {/* <EventItem {...childProps} /> */}
-        <span>this is Tue's code</span>
-      </Col>
-    )
-  }
-  render () {
-    return (
-      <Container>
-        <Row>{eventData.map(this._renderEventItem)}</Row>
-      </Container>
-    )
-  }
+const EventList = ({ subject = '', items = [] }) => {
+  console.log(items)
+  return (
+    <Container>
+      <Row style={{ paddingBottom: 35 }}>
+        <h1
+          style={{
+            fontSize: 52,
+            fontWeight: 800,
+            letterSpacing: 1,
+            lineHeight: '64px'
+          }}
+        >
+          {subject}
+        </h1>
+      </Row>
+      <Row>
+        {!isEmpty(items) &&
+          items.map((item, idx) => <EventItem key={idx} {...item} />)}
+      </Row>
+    </Container>
+  )
 }
+
+export default EventList
