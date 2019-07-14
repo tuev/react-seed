@@ -9,11 +9,11 @@ export default class EventItemList extends Component {
     console.log(event)
     const childPropsItem = { ...event }
     return (
-      <Col key={idx} lg='4' md='6' sm='12' xs='12' className='event__list'>
+      <Col>
         <Item {...childPropsItem} />
       </Col>
     )
-  };
+  }
 
   render () {
     console.clear()
