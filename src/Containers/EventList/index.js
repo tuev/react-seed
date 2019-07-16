@@ -2,20 +2,14 @@ import React from 'react'
 import { Container, Row } from 'reactstrap'
 import { isEmpty } from 'lodash'
 import EventItem from '../EventItem'
+import './eventList.scss'
 
 const EventList = ({ subject = '', items = [] }) => {
   console.log(items)
   return (
     <Container>
-      <Row style={{ paddingBottom: 35 }}>
-        <h1
-          style={{
-            fontSize: 52,
-            fontWeight: 800,
-            letterSpacing: 1,
-            lineHeight: '64px'
-          }}
-        >
+      <Row className='event-list'>
+        <h1 className='subject'>
           {subject}
         </h1>
       </Row>
