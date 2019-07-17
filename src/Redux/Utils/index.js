@@ -15,9 +15,6 @@ const updateItemInArray = (
 const createReducer = (initialState, handlers) => (
   state = initialState,
   action
-) =>
-  handlers.hasOwnProperty(action.type)
-    ? handlers[action.type](state, action)
-    : state
+) => (handlers[action.type] ? handlers[action.type](state, action) : state)
 
 export { updateObject, updateItemInArray, createReducer }

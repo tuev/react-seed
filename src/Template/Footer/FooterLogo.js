@@ -14,6 +14,7 @@ export default class FooterLogo extends React.Component {
       </li>
     )
   }
+
   render () {
     return (
       <ul className='footer__logo'>{logo.map(this._renderFooterLogoItem)}</ul>

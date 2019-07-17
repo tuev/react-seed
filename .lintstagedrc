@@ -1,0 +1,14 @@
+{
+  "*.js": [
+    "npm run lint:eslint:fix",
+    "git add --force"
+  ],
+  "*.json": [
+    "prettier --write",
+    "git add --force"
+  ],
+  "*.scss": [
+    "npm run stylelint:fix",
+    "git add --force"
+  ]
+}

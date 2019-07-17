@@ -1,14 +1,14 @@
 [
   {
-    "subject": "Use Eventbrite",
+    "subject": "Use JiptJipt",
     "items": [
       { "label": "How It Works", "href": "" },
       { "label": "For Large & Complex Events", "href": "" },
       { "label": " Pricing", "href": "" },
       { "label": "Content Standards", "href": "" },
-      { "label": "Eventbrite Mobile App", "href": "" },
-      { "label": "Eventbrite Check-In App", "href": "" },
-      { "label": "Eventbrite Spectrum", "href": "" },
+      { "label": "JiptJipt Mobile App", "href": "" },
+      { "label": "JiptJipt Check-In App", "href": "" },
+      { "label": "JiptJipt Spectrum", "href": "" },
       { "label": "Rally - Fun Things To Do", "href": "" },
       { "label": "FAQs", "href": "" },
       { "label": "Sitemap", "href": "" }
@@ -18,7 +18,7 @@
     "subject": "Plan Events",
     "items": [
       { "label": "Conference Management Software", "href": "" },
-      { "label": "Eventbrite + Yoga", "href": "" },
+      { "label": "JiptJipt + Yoga", "href": "" },
       { "label": "Nonprofits & Fundraisers", "href": "" },
       { "label": "Sell Tickets", "href": "" },
       { "label": "Event Management & Planning", "href": "" },
@@ -26,7 +26,7 @@
       { "label": "Online RSVP", "href": "" },
       { "label": "Music Venues & Promoters", "href": "" },
       { "label": "Event Equipment & Staffing", "href": "" },
-      { "label": "Eventbrite Sales Number", "href": "" }
+      { "label": "JiptJipt Sales Number", "href": "" }
     ]
   },
   {

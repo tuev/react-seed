@@ -9,7 +9,7 @@
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.14",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -17,8 +17,8 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-spring": "^8.0.27",
-    "reactstrap": "^8.0.0",
-    "redux": "^4.0.1",
+    "reactstrap": "^8.0.1",
+    "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.3.2",
     "styled-tools": "^1.7.1"
@@ -54,19 +54,19 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.0.0",
-    "@commitlint/config-conventional": "^8.0.0",
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
     "eslint-config-react-app": "^4.0.1",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-config-standard-react": "^7.0.2",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-config-standard-react": "^8.0.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-node": "^9.1.0",
-    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.14.2",
-    "eslint-plugin-react-hooks": "^1.5.0",
+    "eslint-plugin-react-hooks": "^1.6.1",
     "eslint-plugin-standard": "^4.0.0",
-    "husky": "^2.4.1",
-    "lint-staged": "^8.2.1",
+    "husky": "^3.0.0",
+    "lint-staged": "^9.2.0",
     "prettier": "^1.18.2",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
@@ -74,32 +74,13 @@
     "stylelint": "^10.1.0",
     "stylelint-config-recommended": "^2.2.0",
     "stylelint-config-recommended-scss": "^3.3.0",
-    "stylelint-scss": "^3.9.0"
+    "stylelint-scss": "^3.9.1"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
       "pre-push": "lint-staged && npm run lint && npm run test",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "lint-staged": {
-    "ignore": [
-      "package.json"
-    ],
-    "linters": {
-      "*.js": [
-        "npm run lint:eslint:fix",
-        "git add --force"
-      ],
-      "*.json": [
-        "prettier --write",
-        "git add --force"
-      ],
-      "*.scss": [
-        "npm run stylelint:fix",
-        "git add --force"
-      ]
     }
   },
   "resolutions": {
