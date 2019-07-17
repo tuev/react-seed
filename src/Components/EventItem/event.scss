@@ -1,6 +1,7 @@
 .event-item {
 	.item {
 		border: 0px solid rgb(235, 235, 235);
+		width: 100%;
 
 		&:hover {
 			box-shadow: 7px 20px 20px 13px rgba(40, 44, 53, 0.1),
@@ -20,43 +21,41 @@
 		}
 
 		&__info {
-			.info {
-				&__month {
-					color: #f05537;
-					font-size: 0.75rem;
-					line-height: 1rem;
-				}
+			&--month {
+				color: #f05537;
+				font-size: 0.75rem;
+				line-height: 1rem;
+			}
 
-				&__date {
-					color: "#6f7287";
-					font-size: "1.125rem";
-					line-height: "1.5rem";
-				}
+			&--date {
+				color: '#6f7287';
+				font-size: '1.125rem';
+				line-height: '1.5rem';
+			}
 
-				&__title {
-					color: #39364f;
-					font-size: 1.125rem;
-					line-height: 1.5rem;
-					font-weight: 60px;
-				}
+			&--title {
+				color: #39364f;
+				font-size: 1.125rem;
+				line-height: 1.5rem;
+				font-weight: 60px;
+			}
 
-				&__content {
-					color: #6f7287;
-					font-size: 0.75rem;
-					line-height: 1rem;
-				}
+			&--content {
+				color: #6f7287;
+				font-size: 0.75rem;
+				line-height: 1rem;
+			}
 
-				&__address {
-					color: #6f7287;
-					font-size: 0.75rem;
-					line-height: 1rem;
-				}
+			&--address {
+				color: #6f7287;
+				font-size: 0.75rem;
+				line-height: 1rem;
+			}
 
-				&__price {
-					color: #6f7287;
-					font-size: 0.75rem;
-					line-height: 1rem;
-				}
+			&--price {
+				color: #6f7287;
+				font-size: 0.75rem;
+				line-height: 1rem;
 			}
 		}
 
@@ -65,7 +64,7 @@
 			top: -22px;
 			right: 16px;
 
-			.item-share {
+			&--share {
 				border-radius: 50%;
 				border: 1px solid #eeedf2;
 				padding: 1px;
@@ -75,7 +74,7 @@
 				cursor: pointer;
 			}
 
-			.item-like {
+			&--like {
 				border-radius: 50%;
 				border: 1px solid #eeedf2;
 				padding: 1px;
