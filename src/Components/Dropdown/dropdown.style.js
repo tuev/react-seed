@@ -11,6 +11,9 @@ export const DropdownWrapper = styled.div`
     0 2px 4px 0 rgba(40, 44, 53, 0.1);
   @media (min-width: 768px) {
     position: absolute;
+    z-index: 2;
+    min-width: 250px;
+    right: 0;
   }
 `
 
