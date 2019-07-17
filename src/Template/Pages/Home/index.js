@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { isEmpty } from 'lodash'
 import { connect } from 'react-redux'
 import { requestEvent } from 'Redux/Event/event.action'
+import EventList from 'Containers/EventList'
+import eventData from './event'
 
 class HomePage extends Component {
   componentDidMount () {
@@ -9,10 +12,12 @@ class HomePage extends Component {
   render () {
     return (
       <div>
-        <h1>HOME PAGE</h1>
-        <button onClick={() => this.props.requestEvent({ endpoint: 'test' })}>
-          FETCH
-        </button>
+        {
+          !isEmpty(eventData) &&
+          eventData.map((itemsList = {}, idx) => (
+            <EventList key={idx} {...itemsList} />
+          ))
+        }
       </div>
     )
   }
