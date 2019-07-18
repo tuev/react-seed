@@ -4,11 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import './event.scss'
 
-const Item = ({ image, alt, month, date, title, content }) => (
+const Item = ({ image, alt, month, date, title, content, address, price }) => (
   <Col lg='4' md='6' sm='12' className='event-item pl-0 pr-3 pb-3'>
     <div className='item'>
       <Row className='item__image mx-0'>
         <img src={image} alt={alt} />
+        {price === 'Free' && <div className='item__image--free d-flex position-absolute justify-content-center align-items-center'>
+          <span>
+            Free
+          </span>
+        </div>
+        }
       </Row>
       <Row className='item__info p-3 position-relative'>
         <Col xs='2'>
@@ -18,8 +24,8 @@ const Item = ({ image, alt, month, date, title, content }) => (
         <Col xs='10' className='d-flex flex-column align-items-start'>
           <p className='item__info--title mb-0'>{title}</p>
           <p className='item__info--content mb-0'>{content}</p>
-          <p className='item__info--address mb-0'>{'- Somewhere...?'}</p>
-          <p className='item__info--price mb-0'>{'- Free or Premium ?'}</p>
+          <p className='item__info--address mb-0'>{address}</p>
+          <p className='item__info--price mb-0'>{price}</p>
         </Col>
         <div className='item__action d-flex position-absolute'>
           <Col className='pl-0'>
