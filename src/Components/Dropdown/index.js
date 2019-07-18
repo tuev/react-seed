@@ -21,6 +21,7 @@ export default class Dropdown extends Component {
   }
 
   _handleMouseEnter = () => this.state.width > 768 && this._showDropdown()
+
   _handleMouseLeave = () => this.state.width > 768 && this._hideDropdown()
 
   render () {
