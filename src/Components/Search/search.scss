@@ -1,0 +1,41 @@
+.header-search {
+	position: relative;
+
+	&__content {
+		// position: absolute;
+		// flex: 1 1 auto;
+		// left: 0;
+		// right: 0;
+		//top: -50px;
+		//min-height: 100px;
+		//width: 100%;
+
+		background-color: #1e0a3c;
+		color: #fff;
+
+		.search__item {
+			border-right: 1px solid #f8f7fa;
+			height: 100px;
+			padding: 16px;
+			width: 100%;
+		}
+
+		.search__button {
+			height: 100px;
+			padding-bottom: 20px;
+			padding-top: 20px;
+
+			&--content {
+				height: 100%;
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+
+			&--icon {
+				background-color: #d1410c;
+				height: 100%;
+				width: 100%;
+			}
+		}
+	}
+}
