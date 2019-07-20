@@ -25,7 +25,7 @@ const HeaderSearch = ({ locationSlug = '', items = [] }) => (
                 </div>
               </Col>
               <Col lg='4' md='12' className='p-0'>
-                <div className='search__item'>
+                <div className='search__item border-right-0'>
                   <SearchOn />
                 </div>
               </Col>
