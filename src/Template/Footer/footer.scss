@@ -9,8 +9,8 @@
 
 		&.subject {
 			font-size: 1.17em;
-			padding-top: 8px;
 			padding-bottom: 8px;
+			padding-top: 8px;
 		}
 
 		ul {
@@ -27,8 +27,8 @@
 	}
 
 	&__logo {
-		padding-top: 16px;
 		padding-bottom: 16px;
+		padding-top: 16px;
 
 		li {
 			display: inline-block;
@@ -36,20 +36,20 @@
 
 		&.link-bullet {
 			&::after {
+				color: rgb(111, 114, 135);
 				content: '●';
 				font-size: 6px;
-				color: rgb(111, 114, 135);
 				line-height: 16px;
+				padding: 0 8px;
 				position: relative;
 				top: -2px;
-				padding: 0 8px;
 			}
 		}
 	}
 
 	&__shortcut {
-		padding-top: 16px;
-		padding-bottom: 16px;
 		color: #6f7287;
+		padding-bottom: 16px;
+		padding-top: 16px;
 	}
 }
