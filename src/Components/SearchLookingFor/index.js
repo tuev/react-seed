@@ -1,10 +1,13 @@
 import React from 'react'
+import { Container, Row } from 'reactstrap'
 import LookingForDropdown from './LookingForDropdown'
 
 const SearchLookingFor = () => (
-  <div className='d-flex flex-column  align-items-start'>
-    <div>
+  <Container>
+    <Row>
       <div>Looking For</div>
+    </Row>
+    <Row>
       <div style={{ width: '100%' }}>
         <input
           type='search'
@@ -23,9 +26,11 @@ const SearchLookingFor = () => (
           }}
         />
       </div>
-    </div>
-    <div><LookingForDropdown /></div>
-  </div>
+    </Row>
+    <Row>
+      <LookingForDropdown />
+    </Row>
+  </Container>
 )
 
 export default SearchLookingFor
