@@ -1,0 +1,61 @@
+.search-looking-for {
+	&__input-wrapper {
+		padding: 12px 0;
+		width: 100%;
+
+		input {
+			background-color: #1e0a3c;
+			border: 1px solid red;
+			border-left: 0;
+			border-right: 0;
+			border-top: 0;
+			color: #fff;
+			font-size: 1.125rem;
+			font-weight: 600;
+			line-height: 1.5rem;
+			width: 100%;
+		}
+	}
+
+	.drop-down {
+		background-color: #fff;
+		margin-right: 16px;
+		max-height: 500px;
+		overflow: auto;
+		position: absolute;
+		z-index: 100;
+
+		&__header {
+			color: #39364f;
+			font-size: 20px;
+			padding: 4px 16px;
+		}
+
+		&__item {
+			cursor: pointer;
+			padding-bottom: 16px;
+			text-align: left;
+
+			&:hover {
+				background-color: lightcyan;
+			}
+
+			&--image {
+				width: 100%;
+			}
+
+			&--title {
+				color: #1e0a3c;
+				font-size: 14px;
+				margin: 0;
+			}
+
+			&--content,
+			&--address {
+				color: #6f7287;
+				font-size: 12px;
+				margin: 0;
+			}
+		}
+	}
+}

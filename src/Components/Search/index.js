@@ -16,7 +16,7 @@ const HeaderSearch = ({ locationSlug = '', items = [] }) => (
             <Row className='p-0 m-0'>
               <Col lg='4' md='12' className='p-0'>
                 <div className='search__item'>
-                  <SearchLookingFor />
+                  <SearchLookingFor items={items} />
                 </div>
               </Col>
               <Col lg='4' md='12' className='p-0'>

@@ -2,29 +2,15 @@ import React from 'react'
 import { Container, Row } from 'reactstrap'
 import DropdownItem from './DropdownItem'
 
-const LookingForDropdown = () => (
-  <div
-    style={{
-      backgroundColor: 'lightblue',
-      zIndex: '100',
-      position: 'absolute',
-      marginRight: '12px'
-    }}
-  >
+const LookingForDropdown = ({ items = [] }) => (
+  <div className='drop-down'>
     <Container>
-      <Row>
+      <Row className='drop-down__header'>
         <div>
-          <h3
-            style={{ color: '#39364f', padding: '4px 24px', fontSize: '20px' }}
-          >
-            Events
-          </h3>
+          <h3>Events</h3>
         </div>
       </Row>
-      <DropdownItem />
-      <DropdownItem />
-      <DropdownItem />
-      <DropdownItem />
+      {items.map((item, idx) => <DropdownItem key={idx} {...item} />)}
     </Container>
   </div>
 )
