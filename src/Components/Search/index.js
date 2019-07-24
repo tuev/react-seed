@@ -21,7 +21,7 @@ const HeaderSearch = ({ locationSlug = '', items = [] }) => (
               </Col>
               <Col lg='4' md='12' className='p-0'>
                 <div className='search__item'>
-                  <SearchIn locationSlug={locationSlug} />
+                  <SearchIn locationSlug={locationSlug} items={items} />
                 </div>
               </Col>
               <Col lg='4' md='12' className='p-0'>

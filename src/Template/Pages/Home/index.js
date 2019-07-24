@@ -12,7 +12,7 @@ class HomePage extends Component {
   }
 
   render () {
-    const locationSlug = '"vietnam--ho-chi-minh-city"'
+    const locationSlug = 'Ho Chi Minh City'
     const eventDataItem = eventData.reduce((acc, curVal) => {
       return acc.concat(curVal.items)
     }, [])
