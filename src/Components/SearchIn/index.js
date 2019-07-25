@@ -31,7 +31,7 @@ const SearchIn = ({ locationSlug = '', items }) => {
       {isOpen && (
         <div ref={innerBorderRef}>
           <Row>
-            <InDropdown items={itemsAddress} setInputIn={setInputIn} /> *
+            <InDropdown items={itemsAddress} setInputIn={setInputIn} />
           </Row>
         </div>
       )}
