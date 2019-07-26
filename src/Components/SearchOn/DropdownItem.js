@@ -1,8 +1,8 @@
 import React from 'react'
 import { Row, Col } from 'reactstrap'
 
-const DropdownItem = ({ item }) => (
-  <Row className='header-search__item'>
+const DropdownItem = ({ item = '' }) => (
+  <Row className='header-search__item  pb-0'>
     <Col>
       <span className='header-search__item--title'>
         {item}
