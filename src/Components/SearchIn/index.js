@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Container, Row } from 'reactstrap'
-import useOnOutsideClick from '../Search/UseOnOutsideClick'
+import useOnOutsideClick from 'Hooks/UseOnOutsideClick'
 import InDropdown from './DropdownList'
 
 const SearchIn = ({ locationSlug = '', items }) => {
@@ -25,6 +25,7 @@ const SearchIn = ({ locationSlug = '', items }) => {
             placeholder='Your location'
             value={inputIn}
             onClick={() => setOpen(true)}
+            readOnly
           />
         </div>
       </Row>

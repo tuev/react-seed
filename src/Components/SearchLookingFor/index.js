@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Container, Row } from 'reactstrap'
-import useOnOutsideClick from '../Search/UseOnOutsideClick'
+import useOnOutsideClick from '../../Hooks/UseOnOutsideClick'
 import LookingForDropdown from './DropdownList'
 
 const SearchLookingFor = ({ items }) => {
@@ -21,6 +21,7 @@ const SearchLookingFor = ({ items }) => {
             placeholder='Event'
             value={inputLookingFor}
             onClick={() => setOpen(true)}
+            readOnly
           />
         </div>
       </Row>

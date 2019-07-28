@@ -8,7 +8,7 @@ import eventData from './event'
 
 class HomePage extends Component {
   componentDidMount () {
-    this.props.requestEvent({ endpoint: 'test' })
+    // this.props.requestEvent({ endpoint: 'test' })
   }
 
   render () {

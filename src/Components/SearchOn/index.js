@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import useOnOutsideClick from '../Search/UseOnOutsideClick'
+import useOnOutsideClick from '../../Hooks/UseOnOutsideClick'
 import OnDropdown from './DropdownList'
 
 const OnLists = [

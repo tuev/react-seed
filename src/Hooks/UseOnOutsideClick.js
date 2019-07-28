@@ -4,6 +4,7 @@ const useOnOutsideClick = handleOutsideClick => {
   const innerBorderRef = useRef()
 
   const onClick = event => {
+    console.log(innerBorderRef.current, event)
     if (
       innerBorderRef.current &&
       !innerBorderRef.current.contains(event.target)
