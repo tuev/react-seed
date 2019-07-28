@@ -27,11 +27,15 @@ class HomePage extends Component {
   }
 
   render () {
-    const locationSlug = '"vietnam--ho-chi-minh-city"'
+    const locationSlug = 'Ho Chi Minh City'
+    const eventDataItem = eventData.reduce((acc, curVal) => {
+      return acc.concat(curVal.items)
+    }, [])
+
     return (
       <div>
         {!isEmpty(eventData) && (
-          <Search locationSlug={locationSlug} {...eventData} />
+          <Search locationSlug={locationSlug} items={eventDataItem} />
         )}
 
         <DropDownNav light expand='md'>
