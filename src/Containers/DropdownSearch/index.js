@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import { DropdownWrapper, DropdownTitle } from './dropdownSearch.style'
 
@@ -40,14 +40,7 @@ export default class Dropdown extends Component {
         >
           {header}
           {caret && (
-            <div
-              style={{
-                transform: `rotate(${isOpen ? '180deg' : '0'})`,
-                transition: 'all 0.5s ease'
-              }}
-            >
-              <FontAwesomeIcon icon={faCaretDown} />
-            </div>
+            isOpen ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faCaretDown} />
           )}
         </DropdownTitle>
         <DropdownWrapper show={isOpen} isNav={isNav}>
