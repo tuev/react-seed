@@ -3,9 +3,9 @@ import { Container, Row, Col } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import SearchNav from './SearchNav'
-import SearchLookingFor from '../SearchLookingFor'
-import SearchIn from '../SearchIn'
-import SearchOn from '../SearchOn'
+import SearchLookingFor from '../SearchEventDropdown'
+import SearchIn from '../SearchLocationDropdown'
+import SearchOn from '../SearchTimeDropdown'
 import './search.scss'
 
 const searchList = [

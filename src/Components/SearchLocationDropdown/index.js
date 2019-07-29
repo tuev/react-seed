@@ -5,7 +5,7 @@ import InDropdown from './DropdownList'
 
 const SearchIn = ({ locationSlug = '', items }) => {
   const [isOpen, setOpen] = useState(false)
-  const [inputIn, setInputIn] = useState(locationSlug)
+  const [inputIn, setInput] = useState(locationSlug)
   const { innerBorderRef } = useOnOutsideClick(() => setOpen(false))
   const itemsAddress = items.reduce(
     (acc, curVal) => acc.concat(curVal.address),
@@ -32,7 +32,7 @@ const SearchIn = ({ locationSlug = '', items }) => {
       {isOpen && (
         <div ref={innerBorderRef}>
           <Row>
-            <InDropdown items={itemsAddress} setInputIn={setInputIn} />
+            <InDropdown items={itemsAddress} setInput={setInput} setOpen={setOpen} />
           </Row>
         </div>
       )}

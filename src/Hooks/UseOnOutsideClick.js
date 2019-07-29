@@ -4,7 +4,7 @@ const useOnOutsideClick = handleOutsideClick => {
   const innerBorderRef = useRef()
 
   const onClick = event => {
-    console.log(innerBorderRef.current, event)
+    // console.log(innerBorderRef.current, event)
     if (
       innerBorderRef.current &&
       !innerBorderRef.current.contains(event.target)
@@ -20,6 +20,7 @@ const useOnOutsideClick = handleOutsideClick => {
       // almost same as componentWillUnmount
       document.removeEventListener('click', onClick, true)
     }
+    // eslint-disable-next-line
   }, []) // []: render 1 time ~ ComponentDidMount
 
   return { innerBorderRef }

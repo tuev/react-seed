@@ -47,6 +47,7 @@
 			font-size: 1.125rem;
 			font-weight: 600;
 			line-height: 1.5rem;
+			outline-color: transparent;
 			width: 100%;
 		}
 	}
@@ -67,15 +68,17 @@
 	}
 
 	&__item {
-		cursor: pointer;
-		padding-bottom: 16px;
+		color:
+		black
 
-		&--header {
+		&--header					{
 			color: #39364f;
 			cursor: default;
 			font-size: 20px;
 			padding: 4px 16px;
 		}
+		cursor: pointer;
+		padding-bottom: 16px;
 
 		&:hover {
 			background-color: hsla(222, 88%, 74%, 0.91);

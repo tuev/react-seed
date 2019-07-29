@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row } from 'reactstrap'
-import DropdownItem from './DropdownItem'
+import DropdownItem from './SearchTimeItem'
 
 const Dropdown = ({ items = [], setInputOn }) => (
   <div className='header-search__drop-down'>

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Container, Row } from 'reactstrap'
 import useOnOutsideClick from '../../Hooks/UseOnOutsideClick'
-import LookingForDropdown from './DropdownList'
+// import DropdownList from '../SearchDropdownList'
+import DropdownList from './DropdownList'
+import SearchEventItem from './SearchEventItem'
 
-const SearchLookingFor = ({ items }) => {
+const SearchLookingFor = ({ items = [] }) => {
   const [isOpen, setOpen] = useState(false)
-  const [inputLookingFor, setInputLookingFor] = useState('')
+  const [input, setInput] = useState('')
   const { innerBorderRef } = useOnOutsideClick(() => setOpen(false))
 
   return (
@@ -19,7 +21,7 @@ const SearchLookingFor = ({ items }) => {
             className='input-search'
             type='search'
             placeholder='Event'
-            value={inputLookingFor}
+            value={input}
             onClick={() => setOpen(true)}
             readOnly
           />
@@ -28,9 +30,12 @@ const SearchLookingFor = ({ items }) => {
       {isOpen && (
         <div ref={innerBorderRef}>
           <Row>
-            <LookingForDropdown
+            <DropdownList
+              ComponentItem={SearchEventItem}
+              titelSearch={'Event'}
               items={items}
-              setInputLookingFor={setInputLookingFor}
+              setInput={setInput}
+              setOpen={setOpen}
             />
           </Row>
         </div>
