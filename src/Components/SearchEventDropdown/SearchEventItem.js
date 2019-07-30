@@ -1,16 +1,9 @@
 import React from 'react'
 import { Row, Col } from 'reactstrap'
-import isEmpty from 'lodash'
 
-const SearchEventItem = ({
-  image = '',
-  alt = '',
-  title = '',
-  content = '',
-  address = ''
-}) => {
-  console.log(title)
-  return !isEmpty(title) && (
+const SearchEventItem = ({ item }) => {
+  const { image = '', alt = '', title = '', content = '', address = '' } = item
+  return (
     <div>
       <Row className='header-search__item'>
         <Col xs='3' className='d-flex align-self-center pr-0'>

@@ -59,29 +59,31 @@
 		0 1px 17px 0 rgba(40, 44, 53, 0.1),
 		0 2px 4px 0 rgba(40, 44, 53, 0.1);
 		//margin-right: 16px;
-		max-height: 300px;
+		color: black;
+		max-height: 60vh;
 		overflow: auto;
-		//position: absolute;
 		text-align: left;
 		width: 100%;
 		z-index: 100;
 	}
 
 	&__item {
-		color:
-		black
+		cursor: pointer;
+		padding-bottom: 16px;
+		padding-top: 16px;
 
-		&--header					{
+		&--header {
 			color: #39364f;
 			cursor: default;
 			font-size: 20px;
 			padding: 4px 16px;
 		}
-		cursor: pointer;
-		padding-bottom: 16px;
 
 		&:hover {
-			background-color: hsla(222, 88%, 74%, 0.91);
+			background-color: #f8f7fa;
+			color: #1e0a3c;
+			outline: none;
+			text-decoration: none;
 		}
 
 		&--image {

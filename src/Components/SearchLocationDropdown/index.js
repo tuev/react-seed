@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 import { Container, Row } from 'reactstrap'
 import useOnOutsideClick from 'Hooks/UseOnOutsideClick'
-import InDropdown from './DropdownList'
+import DropdownList from '../SearchDropdownList'
+import DropdownItem from './SearchLocationItem'
 
-const SearchIn = ({ locationSlug = '', items }) => {
+const SearchLocation = ({ locationSlug = '', items }) => {
   const [isOpen, setOpen] = useState(false)
   const [inputIn, setInput] = useState(locationSlug)
   const { innerBorderRef } = useOnOutsideClick(() => setOpen(false))
-  const itemsAddress = items.reduce(
-    (acc, curVal) => acc.concat(curVal.address),
-    []
-  )
+  const itemsAddress = items.map(item => item.address)
 
   return (
     <Container className='search-in'>
@@ -32,7 +30,13 @@ const SearchIn = ({ locationSlug = '', items }) => {
       {isOpen && (
         <div ref={innerBorderRef}>
           <Row>
-            <InDropdown items={itemsAddress} setInput={setInput} setOpen={setOpen} />
+            <DropdownList
+              DropdownItem={DropdownItem}
+              headerDropdown={'Popular'}
+              items={itemsAddress}
+              setInput={setInput}
+              setOpen={setOpen}
+            />
           </Row>
         </div>
       )}
@@ -40,4 +44,4 @@ const SearchIn = ({ locationSlug = '', items }) => {
   )
 }
 
-export default SearchIn
+export default SearchLocation

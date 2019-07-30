@@ -3,7 +3,8 @@ import { Container, Row, Col } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import useOnOutsideClick from '../../Hooks/UseOnOutsideClick'
-import OnDropdown from './DropdownList'
+import DropdownList from '../SearchDropdownList/'
+import DropdownItem from './SearchTimeItem'
 
 const OnLists = [
   'Today',
@@ -15,9 +16,9 @@ const OnLists = [
   'Pick a date'
 ]
 
-const SearchOn = () => {
+const SearchTime = () => {
   const [isOpen, setOpen] = useState(false)
-  const [inputOn, setInputOn] = useState('Any date')
+  const [inputOn, setInput] = useState('Any date')
   const { innerBorderRef } = useOnOutsideClick(() => setOpen(false))
 
   return (
@@ -47,7 +48,13 @@ const SearchOn = () => {
       {isOpen && (
         <div ref={innerBorderRef}>
           <Row>
-            <OnDropdown items={OnLists} setInputOn={setInputOn} />
+            <DropdownList
+              DropdownItem={DropdownItem}
+              headerDropdown={'Any date'}
+              items={OnLists}
+              setInput={setInput}
+              setOpen={setOpen}
+            />
           </Row>
         </div>
       )}
@@ -55,4 +62,4 @@ const SearchOn = () => {
   )
 }
 
-export default SearchOn
+export default SearchTime

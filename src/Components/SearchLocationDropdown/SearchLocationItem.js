@@ -1,12 +1,12 @@
 import React from 'react'
 import { Row, Col } from 'reactstrap'
 
-const DropdownItem = ({ address }) => (
+const SearchLocationItem = ({ item }) => (
   <Row className='header-search__item'>
     <Col>
-      <div className='header-search__item--address'>{address}</div>
+      <div className='header-search__item--address'>{item}</div>
     </Col>
   </Row>
 )
 
-export default DropdownItem
+export default SearchLocationItem
