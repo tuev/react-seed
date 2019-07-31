@@ -7,7 +7,6 @@ const SearchList = [
     component: SearchEvent,
     titleDropdown: 'Looking for',
     placeHolder: 'Event',
-    typeInput: 'input',
     headerDropdown: 'Event',
     mouseEnterEvent: true
   },
@@ -15,7 +14,6 @@ const SearchList = [
     component: SearchLocation,
     titleDropdown: 'In',
     placeHolder: 'Your location',
-    typeInput: 'input',
     headerDropdown: 'Popular',
     mouseEnterEvent: false
   },
@@ -23,7 +21,6 @@ const SearchList = [
     component: SearchTime,
     titleDropdown: 'On',
     placeHolder: 'Any date',
-    typeInput: 'combobox',
     headerDropdown: 'Any date',
     mouseEnterEvent: false,
     itemsTime: [

@@ -23,7 +23,6 @@ const HeaderSearch = ({ locationSlug = '', items = [] }) => (
                   itemsEvent={items}
                   titleDropdown={searchItem.titleDropdown}
                   placeHolder={searchItem.placeHolder}
-                  typeInput={searchItem.typeInput}
                   headerDropdown={searchItem.headerDropdown}
                   mouseEnterEvent={searchItem.mouseEnterEvent}
                   itemsTime={searchItem.itemsTime}

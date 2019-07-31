@@ -30,7 +30,7 @@ const SearchEvent = ({
           className='header-search__input-wrapper'
           onClick={() => setOpen(true)}
         >
-          {typeInput === 'input' ? (
+          {titleDropdown === 'Looking for' || titleDropdown === 'In' ? (
             <input
               className='input-search'
               type='search'
