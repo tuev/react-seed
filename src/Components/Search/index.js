@@ -2,23 +2,9 @@ import React from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import SearchList from './SearchList'
 import SearchNav from './SearchNav'
-import SearchLookingFor from '../SearchEventDropdown'
-import SearchIn from '../SearchLocationDropdown'
-import SearchOn from '../SearchTimeDropdown'
 import './search.scss'
-
-const searchList = [
-  {
-    component: SearchLookingFor
-  },
-  {
-    component: SearchIn
-  },
-  {
-    component: SearchOn
-  }
-]
 
 const HeaderSearch = ({ locationSlug = '', items = [] }) => (
   <Container className='p-0'>
@@ -27,14 +13,20 @@ const HeaderSearch = ({ locationSlug = '', items = [] }) => (
         <Row className='p-0 m-0'>
           <Col lg='11' md='12' className='p-0'>
             <Row className='p-0 m-0'>
-              {searchList.map((searchItem, idx) => (
+              {SearchList.map((searchItem, idx) => (
                 <SearchNav
                   key={idx}
                   keyIndex={idx}
-                  Dropdown={searchItem.component}
+                  countList={SearchList.length}
+                  DropdownItem={searchItem.component}
                   locationSlug={locationSlug}
-                  items={items}
-                  countList={searchList.length}
+                  itemsEvent={items}
+                  titleDropdown={searchItem.titleDropdown}
+                  placeHolder={searchItem.placeHolder}
+                  typeInput={searchItem.typeInput}
+                  headerDropdown={searchItem.headerDropdown}
+                  mouseEnterEvent={searchItem.mouseEnterEvent}
+                  itemsTime={searchItem.itemsTime}
                 />
               ))}
             </Row>

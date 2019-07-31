@@ -1,47 +1,26 @@
-import React, { useState } from 'react'
-import { Container, Row } from 'reactstrap'
-import useOnOutsideClick from '../../Hooks/UseOnOutsideClick'
-import DropdownList from '../SearchDropdownList'
-import DropdownItem from './SearchEventItem'
+import React from 'react'
+import { Row, Col } from 'reactstrap'
 
-const SearchEvent = ({ items = [] }) => {
-  const [isOpen, setOpen] = useState(false)
-  const [inputVal, setInput] = useState('')
-  const { innerBorderRef } = useOnOutsideClick(() => setOpen(false))
-
+const SearchEventItem = ({ item = [] }) => {
+  const { image = '', alt = '', title = '', content = '', address = '' } = item
   return (
-    <Container className='search-looking-for'>
-      <Row>
-        <div>Looking For</div>
+    <div>
+      <Row className='header-search__item'>
+        <Col xs='3' className='d-flex align-self-center pr-0'>
+          <div>
+            <img src={image} alt={alt} className='header-search__item--image' />
+          </div>
+        </Col>
+        <Col>
+          <div className='d-flex flex-column justify-content-start align-items-start '>
+            <p className='header-search__item--title'>{title}</p>
+            <p className='header-search__item--content'>{content}</p>
+            <p className='header-search__item--address'>{address}</p>
+          </div>
+        </Col>
       </Row>
-      <Row>
-        <div className='header-search__input-wrapper'>
-          <input
-            className='input-search'
-            type='search'
-            placeholder='Event'
-            value={inputVal}
-            onClick={() => setOpen(true)}
-            readOnly
-          />
-        </div>
-      </Row>
-      {isOpen && (
-        <div ref={innerBorderRef}>
-          <Row>
-            <DropdownList
-              DropdownItem={DropdownItem}
-              headerDropdown={'Event'}
-              items={items}
-              mouseEnterEvent
-              setInput={setInput}
-              setOpen={setOpen}
-            />
-          </Row>
-        </div>
-      )}
-    </Container>
+    </div>
   )
 }
 
-export default SearchEvent
+export default SearchEventItem
