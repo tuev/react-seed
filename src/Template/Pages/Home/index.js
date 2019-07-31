@@ -3,6 +3,7 @@ import { isEmpty } from 'lodash'
 import { connect } from 'react-redux'
 import { requestEvent } from 'Redux/Event/event.action'
 import EventList from 'Components/EventList'
+import EventBanner from 'Components/EventBanner'
 import Search from 'Components/Search'
 import eventData from './event'
 
@@ -26,6 +27,7 @@ class HomePage extends Component {
           eventData.map((itemsList = {}, idx) => (
             <EventList key={idx} {...itemsList} />
           ))}
+        <EventBanner />
       </div>
     )
   }
