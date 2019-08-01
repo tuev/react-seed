@@ -8,9 +8,9 @@
     "at-rule-no-unknown": [
       true,
       {
-        "ignoreAtRules": ["extends"]
+        "ignoreAtRules": ["extends", "include"]
       }
-    ],
+    ],  
     "block-no-empty": null,
     "indentation": ["tab", {
       "except": ["value"]

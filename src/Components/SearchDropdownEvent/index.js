@@ -19,6 +19,7 @@ const SearchEvent = ({
   const [inputVal, setInput] = useState('')
   const { innerBorderRef } = useOnOutsideClick(() => setOpen(false))
   const itemsAddress = itemsEvent.map(item => item.address)
+  const _openDropdown = () => setOpen(true)
 
   return (
     <Container className='search-looking-for'>
@@ -26,10 +27,7 @@ const SearchEvent = ({
         <div>{titleDropdown}</div>
       </Row>
       <Row>
-        <div
-          className='header-search__input-wrapper'
-          onClick={() => setOpen(true)}
-        >
+        <div className='header-search__input-wrapper' onClick={_openDropdown}>
           {titleDropdown === 'Looking for' || titleDropdown === 'In' ? (
             <input
               className='input-search'
@@ -46,7 +44,7 @@ const SearchEvent = ({
                 </div>
               </Col>
               <Col xs='1' className='px-0'>
-                <div className=' input-search'>
+                <div className=' input-search b-0'>
                   <FontAwesomeIcon icon={faChevronDown} />
                 </div>
               </Col>

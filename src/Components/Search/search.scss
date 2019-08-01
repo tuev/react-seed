@@ -1,3 +1,7 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins/_breakpoints";
+
 .header-search {
 	position: relative;
 
@@ -6,10 +10,14 @@
 		color: #fff;
 
 		.search__item {
-			border-right: 1px solid #f8f7fa;
+			border-right: 1px solid #1e0a3c;
 			height: 100px;
 			padding: 16px;
 			width: 100%;
+
+			@include media-breakpoint-up(lg) {
+				border-right: 1px solid #f8f7fa;
+			}
 		}
 
 		.search__button {

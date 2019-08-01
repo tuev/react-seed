@@ -10,7 +10,7 @@ export default class SearchNav extends Component {
       'border-right-0': keyIndex === countList - 1
     })
     return (
-      <Col lg={12 / +countList} md='12' className='p-0'>
+      <Col lg='4' md='12' className='p-0'>
         <div className={classItem}>
           <DropdownEvent DropdownItem={DropdownItem} {...restProps} />
         </div>
