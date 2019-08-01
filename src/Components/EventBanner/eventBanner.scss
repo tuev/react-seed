@@ -1,9 +1,14 @@
+$min-height: 143px;
+
 .event-banner {
 	background-color: #3150cc;
 	color: #fff;
+	left: -15px;
+	position: relative;
+	width: calc(100% + 30px);
 
 	&__content {
-		min-height: 143px;
+		min-height: $min-height;
 
 		&-create-event {
 			font-size: 32px;

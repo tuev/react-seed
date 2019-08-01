@@ -8,15 +8,17 @@ const EventBanner = () => (
   <div className='event-banner'>
     <Container>
       <Row className='event-banner__content d-flex align-items-center'>
-        <Col md='8' sm='12'>
+        <Col sm='8' xs='12'>
           <div className='event-banner__content-create-event'>
             Want to create an <span className='event-text'>event</span>?
           </div>
         </Col>
-        <Col md='4' sm='12'>
-          <div className='event-banner__content-learn-more'>
-            <div>Learn more </div>
-            <FontAwesomeIcon icon={faChevronCircleRight} className='icon' />
+        <Col sm='4' xs='12'>
+          <div className='event-banner__content-learn-more d-flex align-items-center text-right'>
+            Learn more
+            <div className='icon'>
+              <FontAwesomeIcon icon={faChevronCircleRight} />
+            </div>
           </div>
         </Col>
       </Row>
