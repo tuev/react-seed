@@ -1,3 +1,7 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins/_breakpoints";
+
 $min-height: 143px;
 
 .event-banner {
@@ -19,6 +23,10 @@ $min-height: 143px;
 
 			.event-text {
 				color: #fff58c;
+			}
+
+			@include media-breakpoint-up(lg) {
+				font-size: 52px;
 			}
 		}
 
