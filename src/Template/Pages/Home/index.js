@@ -3,6 +3,7 @@ import { isEmpty } from 'lodash'
 import { connect } from 'react-redux'
 import { requestEvent } from 'Redux/Event/event.action'
 import EventList from 'Components/EventList'
+import Catagories from 'Components/Categories'
 import eventData from './event'
 
 class HomePage extends Component {
@@ -17,6 +18,7 @@ class HomePage extends Component {
           eventData.map((itemsList = {}, idx) => (
             <EventList key={idx} {...itemsList} />
           ))}
+        <Catagories />
       </div>
     )
   }
