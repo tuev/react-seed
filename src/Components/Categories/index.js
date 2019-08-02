@@ -12,7 +12,6 @@ export default class Responsive extends Component {
     const _slickSettings = {
       nextArrow: <NextArrow />,
       prevArrow: <PrevArrow />,
-      dots: true,
       infinite: false,
       speed: 500,
       slidesToShow: 4,
@@ -24,8 +23,7 @@ export default class Responsive extends Component {
           settings: {
             slidesToShow: 3,
             slidesToScroll: 3,
-            infinite: true,
-            dots: true
+            infinite: true
           }
         },
         {
@@ -48,7 +46,7 @@ export default class Responsive extends Component {
 
     return (
       <div className='categories-event'>
-        <h2> Categories to explore </h2>
+        <h2 className='categories-event__title'> Categories to explore </h2>
         <Slider {..._slickSettings}>
           {items.map((item, idx) => (
             <CategoriesItem key={idx} {...item} />

@@ -1,25 +1,43 @@
-$height-image: 170px;
+$height-item: 245px;
 
 .categories-event {
+	background: #1f0a3d !important;
+	color: #fff !important;
+	left: -15px;
+	padding-bottom: 3rem;
 	padding-left: 3rem;
 	padding-right: 3rem;
+	position: relative;
+	width: calc(100% + 30px);
+
+	&__title {
+		font-size: 3rem;
+		padding-bottom: 30px;
+		padding-top: 30px;
+	}
 
 	&__item {
-		height: 250px;
-		width: 245px;
+		height: 300px;
+		width: $height-item;
 
-		img {
-			height: $height-image;
-			width: 170px;
+		&--image {
+			height: $height-item;
+			overflow: hidden;
+			width: $height-item;
+
+			img {
+				height: $height-item;
+				object-fit: cover;
+				width: $height-item;
+			}
 		}
 	}
 
-	.slick-next::before {
-		content: "";
-	}
-
-	.slick-prev::before {
-		content: "";
+	.slick-next,
+	.slick-prev {
+		&::before {
+			content: "";
+		}
 	}
 
 	&__arrow {
@@ -27,7 +45,7 @@ $height-image: 170px;
 		background: #e5e5e5 !important;
 		height: 80px !important;
 		// prettier-ignore
-		top: calc (#{$height-image}/2) !important;
+		top: calc (#{$height-item} / 2) !important;
 		width: 32px !important;
 
 		:hover {

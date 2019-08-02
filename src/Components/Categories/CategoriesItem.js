@@ -5,10 +5,12 @@ const CategoriesItem = ({ title = '', image = '', subtitle = '' }) => (
   <div className='categories-event__item'>
     <Container>
       <Row>
-        <img src={image} />
+        <div className='categories-event__item--image'>
+          <img src={image} />
+        </div>
       </Row>
       <Row>
-        <h3>{title}</h3>
+        <h4>{title}</h4>
       </Row>
       <Row>
         <p>{subtitle}</p>
