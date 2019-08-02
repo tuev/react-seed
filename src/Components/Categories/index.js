@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
 import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import items from './categories.json'
+import CategoriesItem from './CategoriesItem'
+import { NextArrow, PrevArrow } from './CategoriesArrows'
+import './categories.scss'
 
 export default class Responsive extends Component {
   render () {
-    const settings = {
+    const _slickSettings = {
+      nextArrow: <NextArrow />,
+      prevArrow: <PrevArrow />,
       dots: true,
       infinite: false,
       speed: 500,
@@ -21,7 +29,7 @@ export default class Responsive extends Component {
           }
         },
         {
-          breakpoint: 600,
+          breakpoint: 700,
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
@@ -37,154 +45,14 @@ export default class Responsive extends Component {
         }
       ]
     }
+
     return (
-      <div>
-        <h2> Responsive </h2>
-        <Slider {...settings}>
-          <div style={{ width: '100% ', display: 'inline-block' }}>
-            <h3
-              style={{
-                background: '#5f9ea0',
-                color: '#fff',
-                'font-size': '36px',
-                'line-height': '100px',
-                margin: '10px',
-                padding: '2%',
-                position: 'relative',
-                'text-align': 'center'
-              }}
-            >
-              1
-            </h3>
-          </div>
-          <div style={{ width: '100% ', display: 'inline-block' }}>
-            <h3
-              style={{
-                background: '#5f9ea0',
-                color: '#fff',
-                'font-size': '36px',
-                'line-height': '100px',
-                margin: '10px',
-                padding: '2%',
-                position: 'relative',
-                'text-align': 'center'
-              }}
-            >
-              2
-            </h3>
-          </div>
-          <div style={{ width: '100% ', display: 'inline-block' }}>
-            <h3
-              style={{
-                background: '#5f9ea0',
-                color: '#fff',
-                'font-size': '36px',
-                'line-height': '100px',
-                margin: '10px',
-                padding: '2%',
-                position: 'relative',
-                'text-align': 'center'
-              }}
-            >
-              3
-            </h3>
-          </div>
-          <div style={{ width: '100% ', display: 'inline-block' }}>
-            <h3
-              style={{
-                background: '#5f9ea0',
-                color: '#fff',
-                'font-size': '36px',
-                'line-height': '100px',
-                margin: '10px',
-                padding: '2%',
-                position: 'relative',
-                'text-align': 'center'
-              }}
-            >
-              4
-            </h3>
-          </div>
-          <div style={{ width: '100% ', display: 'inline-block' }}>
-            <h3
-              style={{
-                background: '#5f9ea0',
-                color: '#fff',
-                'font-size': '36px',
-                'line-height': '100px',
-                margin: '10px',
-                padding: '2%',
-                position: 'relative',
-                'text-align': 'center'
-              }}
-            >
-              5
-            </h3>
-          </div>
-          <div style={{ width: '100% ', display: 'inline-block' }}>
-            <h3
-              style={{
-                background: '#5f9ea0',
-                color: '#fff',
-                'font-size': '36px',
-                'line-height': '100px',
-                margin: '10px',
-                padding: '2%',
-                position: 'relative',
-                'text-align': 'center'
-              }}
-            >
-              6
-            </h3>
-          </div>
-          <div style={{ width: '100% ', display: 'inline-block' }}>
-            <h3
-              style={{
-                background: '#5f9ea0',
-                color: '#fff',
-                'font-size': '36px',
-                'line-height': '100px',
-                margin: '10px',
-                padding: '2%',
-                position: 'relative',
-                'text-align': 'center'
-              }}
-            >
-              7
-            </h3>
-          </div>
-          <div style={{ width: '100% ', display: 'inline-block' }}>
-            <h3
-              style={{
-                background: '#5f9ea0',
-                color: '#fff',
-                'font-size': '36px',
-                'line-height': '100px',
-                margin: '10px',
-                padding: '2%',
-                position: 'relative',
-                'text-align': 'center'
-              }}
-            >
-              8
-            </h3>
-          </div>
-          <div style={{ width: '100% ', display: 'inline-block' }}>
-            <h3
-              style={{
-                background: '#5f9ea0',
-                color: '#fff',
-                'font-size': '36px',
-                'line-height': '100px',
-                margin: '10px',
-                padding: '2%',
-                position: 'relative',
-                'text-align': 'center'
-              }}
-            >
-              9
-            </h3>
-          </div>
+      <div className='categories-event'>
+        <h2> Categories to explore </h2>
+        <Slider {..._slickSettings}>
+          {items.map((item, idx) => (
+            <CategoriesItem key={idx} {...item} />
+          ))}
         </Slider>
       </div>
     )
