@@ -10,7 +10,7 @@
       {
         "ignoreAtRules": ["extends", "include"]
       }
-    ],  
+    ],
     "block-no-empty": null,
     "indentation": ["tab", {
       "except": ["value"]
