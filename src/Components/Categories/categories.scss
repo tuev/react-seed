@@ -1,8 +1,9 @@
 $height-item: 245px;
+$background-main: #fff;
 
 .categories-event {
-	background: #1f0a3d !important;
-	color: #fff !important;
+	background: $background-main !important;
+	color: black !important;
 	left: -15px;
 	padding-bottom: 3rem;
 	padding-left: 3rem;
@@ -17,7 +18,10 @@ $height-item: 245px;
 	}
 
 	&__item {
-		height: 300px;
+		background: $background-main;
+		color: #fff;
+		cursor: pointer;
+		height: 370px;
 		width: $height-item;
 
 		&--image {
@@ -28,7 +32,53 @@ $height-item: 245px;
 			img {
 				height: $height-item;
 				object-fit: cover;
+				transform: scale(1.4) rotate(-25deg);
 				width: $height-item;
+			}
+		}
+
+		&--frame {
+			border-radius: 50px;
+			box-shadow: 15px 15px 10px 0 #dedfe0;
+			overflow: hidden;
+			transform: scale(0.7) rotate(25deg);
+		}
+
+		&--title {
+			color: black;
+		}
+
+		// @keyframes showItem {
+		//   from {
+		//     background: #f2f2f2;
+		//     border-radius: 20px;
+		//     color: black;
+		//   }
+		//   to {
+		//     background: #fff;
+		//     border-radius: 00px;
+		//     color: fff;
+		//   }
+		// }
+
+		&:hover {
+			//   animation-name: showItem;
+			//   animation-duration: 3s;
+			//   animation-iteration-count: infinite;
+
+			background: #f2f2f2;
+			border-radius: 20px;
+			color: black;
+
+			.categories-event__item--frame {
+				border-radius: 0;
+				border-top-left-radius: 20px;
+				border-top-right-radius: 20px;
+				transform: none;
+			}
+
+			img {
+				transform: none;
 			}
 		}
 	}
@@ -48,7 +98,7 @@ $height-item: 245px;
 		width: 32px !important;
 
 		:hover {
-			background: #00bbab !important;
+			background: #9fb3b6 !important;
 		}
 
 		&--content {
@@ -70,6 +120,16 @@ $height-item: 245px;
 
 		&--prev {
 			left: -48px !important;
+		}
+	}
+
+	.slick-dots {
+		button {
+			&::before {
+				color: black;
+				content: "⎔";
+				font-size: 16px;
+			}
 		}
 	}
 }

@@ -6,13 +6,15 @@ const CategoriesItem = ({ title = '', image = '', subtitle = '' }) => (
     <Container>
       <Row>
         <div className='categories-event__item--image'>
-          <img src={image} />
+          <div className='categories-event__item--frame'>
+            <img src={image} alt={title} />
+          </div>
         </div>
       </Row>
-      <Row>
+      <Row className='categories-event__item--title d-flex justify-content-center '>
         <h4>{title}</h4>
       </Row>
-      <Row>
+      <Row className='categories-event__item--subtitle d-flex justify-content-center'>
         <p>{subtitle}</p>
       </Row>
     </Container>
