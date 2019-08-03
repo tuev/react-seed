@@ -1,0 +1,35 @@
+[
+  {
+    "subject": "Any day",
+    "items": [
+      { "label": "Today", "href": "" },
+      { "label": "Tomorrow", "href": "" },
+      { "label": "This weekend", "href": "" },
+      { "label": "This week", "href": "" },
+      { "label": "Next week", "href": "" },
+      { "label": "This month", "href": "" },
+      { "label": "Eventbrite Spectrum", "href": "" },
+      { "label": "Next month", "href": "" },
+      { "label": "Pick a date...", "href": "" }
+    ]
+  },
+  {
+    "subject": "Any price",
+    "items": [{ "label": "Free", "href": "" }, { "label": "Paid", "href": "" }]
+  },
+  {
+    "subject": "Any category",
+    "items": [
+      { "label": "Auto, Boat & Air", "href": "" },
+      { "label": "Business", "href": "" },
+      { "label": "Charity & Causes", "href": "" },
+      { "label": "Community", "href": "" },
+      { "label": "Family & Education", "href": "" },
+      { "label": "Fashion", "href": "" },
+      { "label": "Film & Media", "href": "" },
+      { "label": "Food & Drink", "href": "" },
+      { "label": "Government", "href": "" },
+      { "label": "Health", "href": "" }
+    ]
+  }
+]

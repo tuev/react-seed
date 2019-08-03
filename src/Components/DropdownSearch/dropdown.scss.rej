@@ -1,0 +1,26 @@
+diff a/src/Components/DropdownSearch/dropdown.scss b/src/Components/DropdownSearch/dropdown.scss	(rejected hunks)
+@@ -3,2 +3,2 @@
+-	width: 300px ;
+-     
++	width: 300px;
++
+@@ -6 +6 @@
+-		background-color: #F8F7FA;
++		background-color: #f8f7fa;
+@@ -8 +8,2 @@
+-	    border-radius: 100px;
++		border-radius: 100px;
++
+@@ -10,2 +10,0 @@
+-			text-decoration: none;
+-			display: flex;
+@@ -13,2 +12,4 @@
+-			 width: auto;
+-			 height: auto;
++			display: flex;
++			height: auto;
++			text-decoration: none;
++			width: auto;
+@@ -32 +33 @@
+-	    box-shadow:
++		box-shadow:

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/runtime": "^7.5.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
@@ -35,7 +36,7 @@
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
     "prebuild": "npm run build:clean",
-    "start": "NODE_ENV=development && react-scripts start",
+    "start": "react-scripts start",
     "stylelint": "stylelint \"**/*.scss\"",
     "stylelint:fix": "stylelint \"**/*.scss\" --fix",
     "test": "react-scripts test --watchAll=false",

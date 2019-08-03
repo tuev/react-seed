@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Col } from 'reactstrap'
 import classNames from 'classnames'
 
-export default class SearchNav extends Component {
+export default class DropDownNav extends Component {
   render () {
     const { Dropdown, countList, keyIndex, ...restProps } = this.props
     const classItem = classNames('search__item', {

@@ -3,7 +3,7 @@ import { isEmpty } from 'lodash'
 import { connect } from 'react-redux'
 import { requestEvent } from 'Redux/Event/event.action'
 import EventList from 'Components/EventList'
-import Search from 'Components/Search'
+import Search from 'Components/DropdownSearch'
 import eventData from './event'
 
 class HomePage extends Component {
@@ -12,15 +12,10 @@ class HomePage extends Component {
   }
 
   render () {
-    const locationSlug = 'Ho Chi Minh City'
-    const eventDataItem = eventData.reduce((acc, curVal) => {
-      return acc.concat(curVal.items)
-    }, [])
-
     return (
       <div>
         {!isEmpty(eventData) && (
-          <Search locationSlug={locationSlug} items={eventDataItem} />
+          <Search />
         )}
         {!isEmpty(eventData) &&
           eventData.map((itemsList = {}, idx) => (

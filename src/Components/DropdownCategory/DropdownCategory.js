@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col } from 'reactstrap'
 
-const SearchTimeItem = ({ item = '' }) => (
+const DropdownCategory = ({ item = '' }) => (
   <Row className='header-search__item  pb-0 pt-0'>
     <Col>
       <span className='header-search__item--title'>{item}</span>
@@ -9,4 +9,4 @@ const SearchTimeItem = ({ item = '' }) => (
   </Row>
 )
 
-export default SearchTimeItem
+export default DropdownCategory

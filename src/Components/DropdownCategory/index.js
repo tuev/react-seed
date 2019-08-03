@@ -3,29 +3,30 @@ import { Container, Row, Col } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import useOnOutsideClick from '../../Hooks/UseOnOutsideClick'
-import DropdownList from '../SearchDropdownList/'
-import DropdownItem from './SearchTimeItem'
+import DropdownList from '../DropdownList'
+import DropdownItem from './DropdownCategory'
 
 const OnLists = [
-  'Today',
-  'Tomorrow',
-  'This weekend',
-  'This week',
-  'Next week',
-  'This month',
-  'Pick a date'
+  'Auto, Boat & Air',
+  'Business',
+  'Charity & Causes',
+  'Community',
+  'Family & Education',
+  'Fashion',
+  'Auto, Boat & Air',
+  'Film & Media',
+  'Food & Drink',
+  'Government',
+  'Health'
 ]
 
-const SearchTime = () => {
+const DropdownCategory = () => {
   const [isOpen, setOpen] = useState(false)
-  const [inputOn, setInput] = useState('Any date')
+  const [inputOn, setInput] = useState('Any category')
   const { innerBorderRef } = useOnOutsideClick(() => setOpen(false))
 
   return (
     <Container className='search-on'>
-      <Row>
-        <div>On</div>
-      </Row>
       <Row>
         <div
           className='header-search__input-wrapper '
@@ -50,7 +51,7 @@ const SearchTime = () => {
           <Row>
             <DropdownList
               DropdownItem={DropdownItem}
-              headerDropdown={'Any date'}
+              headerDropdown={'Any category'}
               items={OnLists}
               setInput={setInput}
               setOpen={setOpen}
@@ -62,4 +63,4 @@ const SearchTime = () => {
   )
 }
 
-export default SearchTime
+export default DropdownCategory
