@@ -3,6 +3,7 @@ import { isEmpty } from 'lodash'
 import { connect } from 'react-redux'
 import { requestEvent } from 'Redux/Event/event.action'
 import EventList from 'Components/EventList'
+import SliderList from 'Components/SliderList'
 import eventData from './event'
 
 class HomePage extends Component {
@@ -13,6 +14,9 @@ class HomePage extends Component {
   render () {
     return (
       <div>
+
+        <SliderList />
+
         {!isEmpty(eventData) &&
           eventData.map((itemsList = {}, idx) => (
             <EventList key={idx} {...itemsList} />

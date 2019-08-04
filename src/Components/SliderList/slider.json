@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "title": "APPLICATION 1",
+    "image": "https://cdn.evbstatic.com/s3-build/perm_001/23c7af/django/images/homepage/standard/Desktop/bg-desktop-rapoport-food.jpg",
+    "alt": "Card image cap 1"
+  },
+  {
+    "id": "2",
+    "title": "APPLICATION 2",
+    "image": "https://cdn.evbstatic.com/s3-build/perm_001/d4f3f4/django/images/homepage/standard/Desktop/bg-desktop-rapoport-music.jpg",
+    "alt": "Card image cap 2"
+  },
+  {
+    "id": "3",
+    "title": "APPLICATION 3",
+    "image": "https://cdn.evbstatic.com/s3-build/perm_001/d9caee/django/images/homepage/standard/Desktop/bg-desktop-rapoport-yoga.jpg",
+    "alt": "Card image cap 3"
+  }
+]
