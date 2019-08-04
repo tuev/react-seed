@@ -17,10 +17,12 @@
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-slick": "^0.24.0",
     "react-spring": "^8.0.27",
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^4.3.2",
     "styled-tools": "^1.7.1"
   },
