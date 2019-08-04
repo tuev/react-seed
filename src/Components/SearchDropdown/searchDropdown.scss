@@ -1,0 +1,42 @@
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints';
+
+.search {
+	&__wrapper {
+		&:last-child > div {
+			border-right: 0;
+		}
+	}
+
+	&__item {
+		border-right: 1px solid #1e0a3c;
+		height: 100px;
+		padding: 16px;
+		width: 100%;
+
+		@include media-breakpoint-up(lg) {
+			border-right: 1px solid #f8f7fa;
+		}
+	}
+
+	&__button {
+		height: 100px;
+		padding-bottom: 20px;
+		padding-top: 20px;
+
+		&--content {
+			height: 100%;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+
+		&--icon {
+			background-color: #d1410c;
+			border-radius: 5px;
+			cursor: pointer;
+			height: 100%;
+			width: 100%;
+		}
+	}
+}
