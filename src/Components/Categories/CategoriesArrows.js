@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import './categories.scss'
 
-const Arrows = ({ className, style, onClick, icon, arrow }) => {
+const Arrows = ({ className, onClick, icon, arrow }) => {
   const _className = classNames(
     className,
     ' categories-event__arrow',
@@ -20,7 +20,6 @@ const Arrows = ({ className, style, onClick, icon, arrow }) => {
   return (
     <div
       className={_className}
-      style={{ ...style }}
       onClick={onClick}
     >
       <div className='categories-event__arrow--content d-flex align-items-center justify-content-center'>

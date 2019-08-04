@@ -93,12 +93,14 @@ $background-main: #fff;
 	&__arrow {
 		align-items: center !important;
 		background: #e5e5e5 !important;
-		height: 80px !important;
+		border-radius: 40px;
+		height: 48px !important;
 		top: calc(#{$height-item} / 2) !important;
-		width: 32px !important;
+		width: 48px !important;
 
 		:hover {
 			background: #9fb3b6 !important;
+			border-radius: 40px;
 		}
 
 		&--content {
