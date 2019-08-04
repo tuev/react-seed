@@ -7,24 +7,28 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import './categories.scss'
 
-const Arrows = ({ className, style, onClick, icon, arrow }) => (
-  <div
-    className={classNames(
-      className,
-      ' categories-event__arrow',
-      {
-        'categories-event__arrow--prev': arrow === 'left',
-        'categories-event__arrow--next': arrow === 'right'
-      }
-    )}
-    style={{ ...style }}
-    onClick={onClick}
-  >
-    <div className='categories-event__arrow--content d-flex align-items-center justify-content-center'>
-      <FontAwesomeIcon icon={icon} />
+const Arrows = ({ className, style, onClick, icon, arrow }) => {
+  const _className = classNames(
+    className,
+    ' categories-event__arrow',
+    {
+      'categories-event__arrow--prev': arrow === 'left',
+      'categories-event__arrow--next': arrow === 'right'
+    }
+  )
+
+  return (
+    <div
+      className={_className}
+      style={{ ...style }}
+      onClick={onClick}
+    >
+      <div className='categories-event__arrow--content d-flex align-items-center justify-content-center'>
+        <FontAwesomeIcon icon={icon} />
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 const PrevArrow = (_props) =>
   <Arrows {..._props} icon={faChevronLeft} arrow={'left'} />
