@@ -15,7 +15,6 @@ const requestEventHandler = ({ options = {}, endpoint = '' }) => ({
 })
 
 const requestEvent = ({ endpoint, options = {} }) => (dispatch, getState) => {
-  console.log(getState(), 'The current state tree of application')
   return dispatch(requestEventHandler({ endpoint, options }))
 }
 
