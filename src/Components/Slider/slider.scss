@@ -1,0 +1,23 @@
+.slider {
+	color: #fff;
+	left: -15px;
+	position: relative;
+	width: calc(100% + 30px);
+
+	&-button {
+		background: black;
+		border-radius: 7px;
+		cursor: pointer;
+		height: 32px;
+		position: absolute;
+		right: 8px;
+		top: 5px;
+		width: 32px;
+		z-index: 10;
+
+		&:hover {
+			background: rgb(68, 68, 68);
+			border: solid 2px #fff;
+		}
+	}
+}
