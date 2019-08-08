@@ -1,0 +1,51 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins/_breakpoints";
+
+$min-height: 143px;
+
+.event-banner {
+	background-color: #3150cc;
+	color: #fff;
+	left: -15px;
+	position: relative;
+	width: calc(100% + 30px);
+
+	&__content {
+		min-height: $min-height;
+
+		&-create-event {
+			font-size: 32px;
+			font-weight: 800;
+			letter-spacing: 1px;
+			line-height: 40px;
+			margin-right: -1px;
+
+			.event-text {
+				color: #fff58c;
+			}
+
+			@include media-breakpoint-up(lg) {
+				font-size: 52px;
+			}
+		}
+
+		&-learn-more {
+			cursor: pointer;
+			display: inline-flex;
+			font-size: 24px;
+			line-height: 24px;
+			transition: transform 240ms ease-out, -webkit-transform 240ms ease-out;
+
+			&:active {
+				transform: scale(0.8);
+			}
+
+			.icon {
+				height: 24px;
+				margin-left: 8px;
+				width: 24px;
+			}
+		}
+	}
+}
