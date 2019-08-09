@@ -1,11 +1,17 @@
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints';
+
 .slider {
 	color: #fff;
 	left: -15px;
+	margin-bottom: 16px;
 	position: relative;
 	width: calc(100% + 30px);
+	$slider-height: calc(width);
 
 	&-button {
-		background: black;
+		background: transparent;
 		border-radius: 7px;
 		cursor: pointer;
 		height: 32px;
@@ -17,7 +23,32 @@
 
 		&:hover {
 			background: rgb(68, 68, 68);
-			border: solid 2px #fff;
+			border: solid 1px #fff;
+		}
+	}
+
+	&-custom-paging {
+		bottom: 0;
+		position: absolute;
+		right: 16px;
+
+		@include media-breakpoint-down(sm) {
+			visibility: hidden;
+		}
+
+		li {
+			cursor: pointer;
+			list-style: none;
+			margin-right: 7px;
+		}
+
+		img {
+			height: 30px;
+			width: 60px;
+		}
+
+		.slick-active {
+			border: 3px solid #fff;
 		}
 	}
 }
