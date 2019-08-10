@@ -26,21 +26,23 @@ export default class Sliders extends Component {
     this.slider.slickPause()
   }
 
-  _togglePlay () {
+  _togglePlay = () => {
     this.state.isPlay ? this.pause() : this.play()
 
     this.setState(state => {
       return { isPlay: !state.isPlay }
     })
-  }
+  };
 
   render () {
+    const renderSliderItem = sliderData
+      .filter(item => item && item.image)
+      .map((item, idx) => <SliderItem key={idx} {...item} />)
+
     return (
       <div className='slider position-relative'>
         <Slider ref={slider => (this.slider = slider)} {...SliderConfig}>
-          {sliderData.map((item, idx) => (
-            <SliderItem key={idx} {...item} />
-          ))}
+          {renderSliderItem}
         </Slider>
         <div
           className='slider-button d-flex justify-content-center align-items-center'

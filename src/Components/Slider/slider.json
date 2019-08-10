@@ -40,5 +40,12 @@
     "title": "Girl 7",
     "image": "https://live.staticflickr.com/65535/48495678001_24ecc333f6_h.jpg",
     "alt": "Card image cap 7"
-  }
+  },
+  {
+    "id": "",
+    "title": "",
+    "image": "",
+    "alt": "image empty"
+  },
+  {}
 ]
