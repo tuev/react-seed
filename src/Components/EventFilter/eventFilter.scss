@@ -1,0 +1,26 @@
+.event-filter {
+	&__input {
+		background: #eeedf2;
+		border: #eeedf2;
+		border-radius: 5px;
+		color: black;
+
+		&:hover {
+			background: #bcbbbe;
+			color: black;
+		}
+	}
+
+	&__item {
+		background: #fff !important;
+
+		&:hover {
+			background: #bcbbbe !important;
+		}
+
+		&--disabled {
+			background: rgb(175, 175, 175) !important;
+			border-radius: 0 !important;
+		}
+	}
+}
