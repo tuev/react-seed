@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { isEmpty } from 'lodash'
 import { connect } from 'react-redux'
 import { requestEvent } from 'Redux/Event/event.action'
+import EventFilters from 'Containers/FiltersNav'
 import EventList from 'Components/EventList'
 import EventBanner from 'Components/EventBanner'
 import Search from 'Containers/SearchNav'
@@ -17,6 +18,7 @@ class HomePage extends Component {
     return (
       <div>
         <Search />
+        <EventFilters />
         {!isEmpty(eventData) &&
           eventData.map((itemsList = {}, idx) => (
             <EventList key={idx} {...itemsList} />
