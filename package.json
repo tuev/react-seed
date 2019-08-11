@@ -38,7 +38,7 @@
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
     "prebuild": "npm run build:clean",
-    "start": "NODE_ENV=development && react-scripts start",
+    "start": "react-scripts start",
     "stylelint": "stylelint \"**/*.scss\"",
     "stylelint:fix": "stylelint \"**/*.scss\" --fix",
     "test": "react-scripts test --watchAll=false",

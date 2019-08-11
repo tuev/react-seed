@@ -13,7 +13,7 @@ export default function main () {
     <div className='position-relative'>
       <HashRouter>
         <Header />
-        <MainWrapper className='container-fluid'>
+        <MainWrapper className='container-fluid pt-0'>
           <Switch>
             {_renderPage()}
             <Route component={Page404} />
