@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { chooseItemAction } from 'Redux/SearchEvent/search.action'
 import DropdownEvent from 'Components/SearchDropdown'
 import { Container, Row, Col } from 'reactstrap'
 import SearchIcon from './SearchIcon'
@@ -6,7 +8,7 @@ import searchList from './searchList'
 import './search.scss'
 import mockData from './mock'
 
-const renderSearchList = (searchList, searchListColDiv) =>
+const renderSearchList = (searchList, searchListColDiv, data) =>
   searchList.map(({ component, searchType, ...restProps }, idx) => (
     <Col
       lg={searchListColDiv}
@@ -19,7 +21,7 @@ const renderSearchList = (searchList, searchListColDiv) =>
           dropdownItem={component}
           {...restProps}
           searchType={searchType}
-          items={mockData[searchType]}
+          items={data[searchType]}
         />
       </div>
     </Col>
@@ -32,7 +34,10 @@ const HeaderSearch = props => {
     listRender = searchList.slice(3)
   }
   const searchListColDiv = 12 / listRender.length
-
+  const data = {
+    ...mockData,
+    event: props.searchEvent
+  }
   return (
     <Container className='p-0'>
       <div className='header-search'>
@@ -40,7 +45,7 @@ const HeaderSearch = props => {
           <Row className='p-0 m-0'>
             <Col lg='11' md='12' className='p-0'>
               <Row className='p-0 m-0'>
-                {renderSearchList(listRender, searchListColDiv)}
+                {renderSearchList(listRender, searchListColDiv, data)}
               </Row>
             </Col>
             <Col lg='1' md='12' className='px-0'>
@@ -53,4 +58,17 @@ const HeaderSearch = props => {
   )
 }
 
-export default HeaderSearch
+const mapStateToProps = state => {
+  // console.log(state, 'state in HEADER SEARCH')
+  // const { searchEvent } = state
+  return state
+}
+
+const mapDispatchToProps = dispatch => ({
+  getEvent: item => dispatch(chooseItemAction(item))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HeaderSearch)

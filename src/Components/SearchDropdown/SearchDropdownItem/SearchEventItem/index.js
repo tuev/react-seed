@@ -1,10 +1,13 @@
 import React from 'react'
 import { Row, Col } from 'reactstrap'
+
+import { connect } from 'react-redux'
+import { chooseItemAction } from 'Redux/SearchEvent/search.action'
 import './searchEventItem.scss'
 
-const SearchEventItem = ({ onClick, onMouseEnter, ...data }) => {
+const SearchEventItem = ({ onClick, onMouseEnter, getEvent, ...data }) => {
   const { image = '', alt = '', title = '', content = '', address = '' } = data
-  const _onClick = e => onClick(data)
+  const _onClick = e => getEvent(data)
   const _onMouseEnter = e => onMouseEnter(title)
   return (
     <div onClick={_onClick} onMouseEnter={_onMouseEnter}>
@@ -26,4 +29,11 @@ const SearchEventItem = ({ onClick, onMouseEnter, ...data }) => {
   )
 }
 
-export default SearchEventItem
+const mapDispatchToProps = dispatch => ({
+  getEvent: data => dispatch(chooseItemAction(data))
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SearchEventItem)
