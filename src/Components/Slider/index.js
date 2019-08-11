@@ -28,6 +28,8 @@ export default class Sliders extends Component {
     })
   }
 
+  _slickToGo = index => this.slider.slickGoTo(index)
+
   render () {
     const renderSliderItem = sliderData
       .filter(item => item && item.image)
@@ -35,7 +37,10 @@ export default class Sliders extends Component {
 
     return (
       <div className='slider position-relative'>
-        <Slider ref={slider => (this.slider = slider)} {...SliderConfig}>
+        <Slider
+          ref={slider => (this.slider = slider)}
+          {...SliderConfig({ slickGoto: this._slickToGo })}
+        >
           {renderSliderItem}
         </Slider>
         <div

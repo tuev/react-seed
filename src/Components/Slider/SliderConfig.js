@@ -1,6 +1,7 @@
+// import React from 'react'
 import CustomPaging from './SliderCustomPaging'
 
-const SliderConfig = {
+const SliderConfig = (options = {}) => ({
   customPaging: CustomPaging,
   dots: true,
   dotsClass:
@@ -15,6 +16,5 @@ const SliderConfig = {
   // fade : true,
   slidesToShow: 1,
   slidesToScroll: 1
-}
-
+})
 export default SliderConfig
