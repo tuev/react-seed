@@ -11,10 +11,10 @@ const CategoriesItem = ({ title = '', image = '', subtitle = '' }) => (
           </div>
         </div>
       </Row>
-      <Row className='categories-event__item--title d-flex justify-content-center '>
+      <Row className='categories-event__item--title d-flex pt-2 justify-content-center '>
         <h4>{title}</h4>
       </Row>
-      <Row className='categories-event__item--subtitle d-flex justify-content-center'>
+      <Row className='categories-event__item--subtitle justify-content-center'>
         <p>{subtitle}</p>
       </Row>
     </Container>
