@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import event from './Event/event.reducer'
+import slider from './Slider/slider.reducer'
 
-const appReducer = combineReducers({ event })
+const appReducer = combineReducers({ sliderData: slider })
 
 export default appReducer
