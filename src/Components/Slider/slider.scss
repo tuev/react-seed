@@ -42,9 +42,16 @@
 			margin-right: 7px;
 		}
 
-		img {
+		&__image {
+			background-position: center;
+			background-size: cover;
 			height: 30px;
 			width: 60px;
+		}
+
+		img {
+			height: 100%;
+			width: auto;
 		}
 
 		.slick-active {

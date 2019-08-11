@@ -10,19 +10,13 @@ import SliderItem from './SliderItem'
 import './slider.scss'
 
 export default class Sliders extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { isPlay: true }
-    this.play = this.play.bind(this)
-    this.pause = this.pause.bind(this)
-    this._togglePlay = this._togglePlay.bind(this)
-  }
+  state = { isPlay: true }
 
-  play () {
+  play = () => {
     this.slider.slickPlay()
   }
 
-  pause () {
+  pause = () => {
     this.slider.slickPause()
   }
 
@@ -32,7 +26,7 @@ export default class Sliders extends Component {
     this.setState(state => {
       return { isPlay: !state.isPlay }
     })
-  };
+  }
 
   render () {
     const renderSliderItem = sliderData
