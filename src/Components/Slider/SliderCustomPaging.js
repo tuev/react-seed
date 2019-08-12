@@ -1,13 +1,29 @@
 import React from 'react'
-import sliderData from './slider.json'
+import { connect } from 'react-redux'
+import { slickGoTo } from 'Redux/Slider/slider.action'
 
-const SliderCustomPaging = index => (
+const CustomPaging = ({ index, onClick, data, slickGoTo }) => (
   <div
     className='slider-custom-paging__image'
+    onClick={onClick}
+    onMouseEnter={() => slickGoTo(index)}
     style={{
-      backgroundImage: `url(${sliderData[index].image || ''})`
+      backgroundImage: `url(${data[index].image || ''})`
     }}
   />
 )
 
-export default SliderCustomPaging
+const mapStateToProps = state => {
+  const { sliderData } = state
+  const { data } = sliderData
+  return { data }
+}
+
+const mapDispatchToProps = dispacth => ({
+  slickGoTo: index => dispacth(slickGoTo(index))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CustomPaging)
