@@ -4,26 +4,20 @@ import FilterItem from './EventFilterItem'
 import './eventFilter.scss'
 
 export default class Example extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      dropdownOpen: false,
-      value: ''
-    }
-  }
+  state = {
+    dropdownOpen: false,
+    value: ''
+  };
 
   _toggle = () => {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
-    }))
-  }
-
-  _setInput = (val) => {
-    this.setState((state) => {
-      return { value: val }
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
     })
-  }
+  };
+
+  _setInput = val => {
+    this.setState({ value: val })
+  };
 
   render () {
     const { items, placeHolder } = this.props
