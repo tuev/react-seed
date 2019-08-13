@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { requestEvent } from 'Redux/Event/event.action'
 import EventList from 'Components/EventList'
 import EventBanner from 'Components/EventBanner'
+import Slider from 'Components/Slider'
 import Search from 'Containers/SearchNav'
 import Filters from 'Containers/FilterNav'
 import Catagories from 'Components/Categories'
@@ -17,6 +18,7 @@ class HomePage extends Component {
   render () {
     return (
       <div>
+        <Slider />
         <Search />
         <Filters />
         {!isEmpty(eventData) &&
@@ -37,5 +39,7 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { requestEvent }
+  {
+    requestEvent
+  }
 )(HomePage)
