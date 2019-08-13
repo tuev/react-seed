@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from 'reactstrap'
+import { Container, Row } from 'reactstrap'
 import FilterItem from 'Components/EventFilter'
 import filterList from './FilterList'
 import mockData from './mock'
@@ -15,7 +15,9 @@ const renderFilterList = () =>
 const FilterNav = () => (
   <Container className='position-relative'>
     <div className='event-filter'>
-      <div className='event-filter__content d-flex'>{renderFilterList()}</div>
+      <div className='event-filter__content d-flex'>
+        <Row className='m-0'>{renderFilterList()}</Row>
+      </div>
     </div>
   </Container>
 )
