@@ -15,9 +15,7 @@ const renderFilterList = () =>
 const FilterNav = () => (
   <Container className='position-relative'>
     <div className='event-filter'>
-      <div className='d-flex justify-content-end'>
-        {renderFilterList()}
-      </div>
+      <div className='event-filter__content d-flex'>{renderFilterList()}</div>
     </div>
   </Container>
 )

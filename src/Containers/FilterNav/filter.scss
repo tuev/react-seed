@@ -5,6 +5,16 @@
 .event-filter {
 	margin-top: 10px;
 
+	&__content {
+		justify-content: space-around;
+	}
+
+	@include media-breakpoint-up(md) {
+		.event-filter__content {
+			justify-content: flex-end;
+		}
+	}
+
 	@include media-breakpoint-up(lg) {
 		position: absolute;
 		right: 0;
