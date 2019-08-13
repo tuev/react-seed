@@ -1,8 +1,8 @@
 import initSliderStore from './slider.store'
-import { TOGGLE_PLAY, INIT_SLIDER, SLICKGOTO } from './slider.actionTypes'
+import * as actionTypes from './slider.actionTypes'
 
 const SliderReducer = (state = initSliderStore, action) => {
-  if (action.type === TOGGLE_PLAY) {
+  if (action.type === actionTypes.TOGGLE_PLAY) {
     const play = slider => {
       slider.slickPlay()
     }
@@ -16,14 +16,14 @@ const SliderReducer = (state = initSliderStore, action) => {
     return { ...state, isPlay: !state.isPlay }
   }
 
-  if (action.type === INIT_SLIDER) {
+  if (action.type === actionTypes.INIT_SLIDER) {
     return {
       ...state,
       slider: action.payload
     }
   }
 
-  if (action.type === SLICKGOTO) {
+  if (action.type === actionTypes.SLICKGOTO) {
     const _goToIndex = (slider, index) => slider.slickGoTo(index, true)
     _goToIndex(state.slider, action.payload)
 
