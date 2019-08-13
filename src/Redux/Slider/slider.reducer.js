@@ -25,10 +25,9 @@ const SliderReducer = (state = initSliderStore, action) => {
 
   if (action.type === SLICKGOTO) {
     const _goToIndex = (slider, index) => slider.slickGoTo(index, true)
-    // const _goToIndex = (slider, index) => slider.slickGoTo(index);
     _goToIndex(state.slider, action.payload)
 
-    return { ...state, sliderSpeed: 100 }
+    return { ...state }
   }
 
   return state

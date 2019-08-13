@@ -32,8 +32,8 @@ const Sliders = ({ data, togglePlay, isPlay, initSlider }) => {
 
 const mapStoretoProps = state => {
   const { sliderData } = state
-  const { data, isPlay, slider, sliderSpeed } = sliderData
-  return { data, isPlay, slider, sliderSpeed }
+  const { data, isPlay, slider } = sliderData
+  return { data, isPlay, slider }
 }
 
 const mapDispacthToProps = dispatch => ({

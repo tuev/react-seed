@@ -1,7 +1,6 @@
 const initSliderStore = {
   isPlay: true,
   slider: null,
-  sliderSpeed: 1000,
   data: [
     {
       id: '1',

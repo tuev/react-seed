@@ -2,10 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { slickGoTo } from 'Redux/Slider/slider.action'
 
-const CustomPaging = ({ index, onClick, data, slickGoTo }) => (
+const CustomPaging = ({ index, data, slickGoTo }) => (
   <div
     className='slider-custom-paging__image'
-    onClick={onClick}
     onMouseEnter={() => slickGoTo(index)}
     style={{
       backgroundImage: `url(${data[index].image || ''})`
