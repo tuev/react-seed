@@ -31,8 +31,7 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { event } = state
-  return event
+  return state
 }
 
 export default connect(
