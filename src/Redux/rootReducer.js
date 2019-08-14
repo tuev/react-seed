@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
-import event from './Event/event.reducer'
+import eventReducer from './Event/event.reducer'
 
-const appReducer = combineReducers({ event })
+const appReducer = combineReducers({
+  events: eventReducer
+})
 
 export default appReducer
