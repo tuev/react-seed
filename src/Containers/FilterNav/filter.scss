@@ -1,0 +1,32 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins/_breakpoints";
+
+.event-filter {
+	margin-top: 10px;
+
+	&__content {
+		justify-content: space-around;
+	}
+
+	@include media-breakpoint-up(md) {
+		.event-filter__content {
+			justify-content: flex-end;
+		}
+	}
+
+	@include media-breakpoint-up(lg) {
+		position: absolute;
+		right: 0;
+	}
+
+	&__item {
+		background: #eeedf2;
+		border-radius: 5px;
+		margin-right: 16px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}

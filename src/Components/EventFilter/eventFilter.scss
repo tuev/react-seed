@@ -1,0 +1,25 @@
+.event-filter {
+	&__input {
+		background-color: #1e0a3c !important;
+		border-color: #1e0a3c !important;
+		border-radius: 8px;
+		color: #fff;
+
+		&:hover {
+			background: #eaf5f8;
+		}
+	}
+
+	&__item {
+		background: #fff !important;
+		border-radius: 0 !important;
+
+		&:hover {
+			color: dodgerblue;
+		}
+
+		&--disabled {
+			background: rgb(211, 210, 210) !important;
+		}
+	}
+}

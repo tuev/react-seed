@@ -6,6 +6,7 @@ import EventList from 'Components/EventList'
 import EventBanner from 'Components/EventBanner'
 import Slider from 'Components/Slider'
 import Search from 'Containers/SearchNav'
+import Filters from 'Containers/FilterNav'
 import Catagories from 'Components/Categories'
 import eventData from './event'
 
@@ -19,6 +20,7 @@ class HomePage extends Component {
       <div>
         <Slider />
         <Search />
+        <Filters />
         {!isEmpty(eventData) &&
           eventData.map((itemsList = {}, idx) => (
             <EventList key={idx} {...itemsList} />

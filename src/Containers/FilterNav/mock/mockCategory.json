@@ -1,0 +1,58 @@
+[
+  {
+    "label": "Any category",
+    "value": ""
+  },
+  {
+    "label": "Auto, Boat & Air",
+    "value": "EventbriteCategory/118"
+  },
+  {
+    "label": "Business",
+    "value": "EventbriteCategory/101"
+  },
+  {
+    "label": "Charity & Causes",
+    "value": "EventbriteCategory/111"
+  },
+  {
+    "label": "Community",
+    "value": "EventbriteCategory/113"
+  },
+  {
+    "label": "Family & Education",
+    "value": "EventbriteCategory/115"
+  },
+  {
+    "label": "Fashion",
+    "value": "EventbriteCategory/106"
+  },
+  {
+    "label": "Film & Media",
+    "value": "EventbriteCategory/104"
+  },
+  {
+    "label": "Food & Drink",
+    "value": "EventbriteCategory/110"
+  },
+  {
+    "label": "Government",
+    "value": "EventbriteCategory/112"
+  },
+  {
+    "label": "Health",
+    "value": "EventbriteCategory/107"
+  },
+  {
+    "label": "Hobbies",
+    "value": "select-option"
+  },
+  {
+    "label": "Holiday",
+    "value": "EventbriteCategory/116"
+  },
+  {
+    "label": "Home & Lifestyle",
+    "value": "EventbriteCategory/117"
+  }
+]
