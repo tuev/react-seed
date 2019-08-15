@@ -7,22 +7,38 @@ import EventBanner from 'Components/EventBanner'
 import Slider from 'Components/Slider'
 import Search from 'Containers/SearchNav'
 import Catagories from 'Components/Categories'
-import eventData from './event'
+import Spinner from 'Components/Spinner'
+import EventEmpty from 'Components/EventEmpty'
+import EventError from 'Components/EventError'
 
 class HomePage extends Component {
   componentDidMount () {
-    // this.props.requestEvent({ endpoint: 'test' })
+    this.props.requestEvent({
+      endpoint: 'https://express-event.herokuapp.com/api/v1/event'
+    })
   }
 
   render () {
+    const {
+      data,
+      isLoading,
+      isLoadSuccess,
+      isLoadError,
+      errorMessage
+    } = this.props
+
     return (
       <div>
         <Slider />
         <Search />
-        {!isEmpty(eventData) &&
-          eventData.map((itemsList = {}, idx) => (
-            <EventList key={idx} {...itemsList} />
+        {isLoading && <Spinner />}
+        {isLoadSuccess &&
+          (!isEmpty(data.data.data) ? (
+            <EventList items={data.data.data} />
+          ) : (
+            <EventEmpty />
           ))}
+        {isLoadError && <EventError error={errorMessage} />}
         <EventBanner />
         <Catagories />
       </div>
@@ -31,12 +47,17 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return state
+  const { events } = state
+  const { eventData, errorMessage } = events
+  const { data, isLoading, isLoadSuccess, isLoadError } = eventData
+  return { errorMessage, data, isLoading, isLoadSuccess, isLoadError }
 }
+
+const mapDispatchToProps = dispatch => ({
+  requestEvent: (endpoint, option) => dispatch(requestEvent(endpoint, option))
+})
 
 export default connect(
   mapStateToProps,
-  {
-    requestEvent
-  }
+  mapDispatchToProps
 )(HomePage)

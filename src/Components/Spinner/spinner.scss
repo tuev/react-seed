@@ -1,0 +1,21 @@
+.spinner {
+	padding-bottom: 16px;
+	padding-top: 16px;
+
+	&__icon {
+		animation: loading-spinner infinite 2s linear;
+		color: deepskyblue;
+		height: 64px !important;
+		width: auto !important;
+	}
+
+	@keyframes loading-spinner {
+		from {
+			transform: rotate(0deg);
+		}
+
+		to {
+			transform: rotate(360deg);
+		}
+	}
+}

@@ -1,21 +1,33 @@
-import { REQUEST_API } from 'Middlewares/api'
+import axios from 'axios'
 import * as actionTypes from './actionType'
 
-// Relies on the custom API middleware defined in Middleware/api.js.
-const requestEventHandler = ({ options = {}, endpoint = '' }) => ({
-  [REQUEST_API]: {
-    types: [
-      actionTypes.EVENT_REQUEST,
-      actionTypes.EVENT_SUCCESS,
-      actionTypes.EVENT_FAILURE
-    ],
-    endpoint,
-    options
-  }
+export const getData = () => ({
+  type: actionTypes.EVENT_REQUEST
 })
 
-const requestEvent = ({ endpoint, options = {} }) => (dispatch, getState) => {
-  return dispatch(requestEventHandler({ endpoint, options }))
-}
+export const getDataResetError = () => ({
+  type: actionTypes.RESET_ERROR_MESSAGE
+})
 
-export { requestEvent }
+export const getDataSuccess = data => ({
+  type: actionTypes.EVENT_SUCCESS,
+  payload: data
+})
+
+export const getDataFailure = error => ({
+  type: actionTypes.EVENT_FAILURE,
+  error: error.message
+})
+
+export const requestEvent = ({ endpoint = '', option = {} }) => {
+  return async dispatch => {
+    try {
+      dispatch(getData())
+      dispatch(getDataResetError())
+      const response = await axios.get(endpoint)
+      dispatch(getDataSuccess(response))
+    } catch (error) {
+      dispatch(getDataFailure(error))
+    }
+  }
+}
