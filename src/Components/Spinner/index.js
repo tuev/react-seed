@@ -5,12 +5,10 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import './spinner.scss'
 
 const Spinner = () => (
-  <Container className='spinner'>
-    <div className='d-flex justify-content-center'>
-      <Row>
-        <FontAwesomeIcon icon={faSpinner} className='spinner__icon' />
-      </Row>
-    </div>
+  <Container className='spinner d-flex align-items-center justify-content-center'>
+    <Row>
+      <FontAwesomeIcon icon={faSpinner} className='spinner__icon' />
+    </Row>
   </Container>
 )
 
