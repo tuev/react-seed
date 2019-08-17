@@ -38,7 +38,7 @@ const EventDetail = ({
             name={name}
             image={image}
           />
-          <EventTicket price={priceFormat} />
+          <EventTicket price={priceFormat} name={name} date={date} />
           <EventDescription
             description={description}
             location={location}

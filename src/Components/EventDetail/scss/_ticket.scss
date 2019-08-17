@@ -75,4 +75,26 @@
 			}
 		}
 	}
+
+	p {
+		color: #00597c;
+		font-size: 0.9rem;
+		line-height: 1.25rem;
+		margin: 0;
+		padding: 0;
+
+		@include media-breakpoint-down($range-device) {
+			display: none !important;
+		}
+	}
+
+	.title {
+		&__name {
+			font-weight: 600;
+		}
+
+		&__time {
+			font-size: 0.8rem;
+		}
+	}
 }

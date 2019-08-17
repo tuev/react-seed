@@ -10,7 +10,7 @@ import {
 import moment from 'moment'
 
 const EventDescription = ({ date = '', location = '', description = '' }) => {
-  const eventTime = moment(date).format('YYYY/MM/DD hh:mm A')
+  const eventTime = moment(date).format('LLLL')
 
   return (
     <Row className='event-detail__description'>
