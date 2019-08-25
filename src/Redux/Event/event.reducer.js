@@ -3,7 +3,7 @@ import { combineReducers } from 'redux'
 import * as actionTypes from './actionType'
 
 // Updates error message to notify about the failed fetches.
-const errorMessage = (state = null, action) => {
+const errorMessage = (state = null, action = {}) => {
   const { type, error } = action
 
   if (type === actionTypes.RESET_ERROR_MESSAGE) {
@@ -15,8 +15,21 @@ const errorMessage = (state = null, action) => {
   return state
 }
 
+const search = (state = {}, action = {}) => {
+  const { type, payload = {} } = action
+  const { type: searchType, value } = payload
+  if (type === actionTypes.EVENT_SEARCH) {
+    return {
+      ...state,
+      [searchType]: value
+    }
+  }
+
+  return state
+}
+
 // Updates the pagination data for different actions.
-const eventData = paginate({
+const data = paginate({
   types: [
     actionTypes.EVENT_REQUEST,
     actionTypes.EVENT_SUCCESS,
@@ -25,8 +38,9 @@ const eventData = paginate({
 })
 
 const eventReducers = combineReducers({
-  eventData,
-  errorMessage
+  data,
+  errorMessage,
+  search
 })
 
 export default eventReducers

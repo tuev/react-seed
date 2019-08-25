@@ -12,7 +12,7 @@ const callApi = async (endpoint, options = {}) => {
       url: fullUrl,
       ...options
     })
-    return result.body
+    return result
   } catch (error) {
     return error
   }

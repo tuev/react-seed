@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container, Row } from 'reactstrap'
 import { get } from 'lodash'
-import useOnOutsideClick from 'Hooks/UseOnOutsideClick'
+import useOnOutsideClick from 'Hooks/useOnOutsideClick'
 import DropdownList from './SearchDropdownList'
 import DropdownTrigger from './SearchDropdownTrigger/DropdownTrigger'
 import './searchDropdown.scss'

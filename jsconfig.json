@@ -1,6 +1,14 @@
 {
   "compilerOptions": {
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "Components": ["/Components/"],
+      "Containers": ["/Containers/"],
+      "Hooks": ["/Hooks/"],
+      "Middlewares": ["/Middlewares/"],
+      "Redux": ["/Redux/"],
+      "Stores": ["/Stores/"]
+    }
   },
   "include": ["src"]
 }

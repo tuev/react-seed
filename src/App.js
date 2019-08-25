@@ -3,14 +3,10 @@ import React from 'react'
 import './App.scss'
 import Main from './Template/main'
 
-class App extends React.Component {
-  render () {
-    return (
-      <div className='App'>
-        <Main />
-      </div>
-    )
-  }
-}
+const App = () => (
+  <div className='App'>
+    <Main />
+  </div>
+)
 
 export default App

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import './event.scss'
 
-const Item = ({ image, alt, month, date, title, content, address, price }) => (
+const Item = ({ image = '', alt, month, date, title, content, address, price } = {}) => (
   <Col lg='4' md='6' sm='12' className='event-item pl-0 pr-3 pb-3'>
     <div className='item'>
       <Row className='item__image mx-0'>

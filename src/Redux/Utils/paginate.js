@@ -1,11 +1,11 @@
-import { isArray, isString, union, get } from 'lodash'
+import { isArray, isString, get } from 'lodash'
 
 const initPaginationState = {
   isFetching: false,
   skip: 0,
-  limit: process.env.LIMIT_PAGE || 10,
+  limit: process.env.REACT_APP_PAGE_LIMIT,
   total: 0,
-  ids: [],
+  items: [],
   error: null
 }
 
@@ -18,12 +18,13 @@ const updatePagination = ({ state = initPaginationState, action, types }) => {
       isFetching: true
     }
   case successType:
+    const { data = [], ...responseInfo } = action || {}
     return {
       ...state,
       isFetching: false,
-      skip: get(action, 'response.skip', 0),
-      total: get(action, 'response.total', 0),
-      ids: union(get(state, 'ids'), action.response.data)
+      skip: get(state, 'items.length', 0) + data.length,
+      total: get(responseInfo, 'headers.x-total-count', 0),
+      items: data
     }
   case failureType:
     return {
