@@ -8,14 +8,16 @@ export const useGetPagination = paginateSelector => {
         skip = 0,
         limit = process.env.REACT_APP_PAGE_LIMIT,
         total = 0,
-        items = []
+        items = [],
+        isFetching
       } = {}
     } = get(state, [paginateSelector, 'data'], {})
     return {
       skip,
       limit,
       total,
-      items
+      items,
+      isFetching
     }
   })
 
