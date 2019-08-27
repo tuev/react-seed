@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { Container, Row } from 'reactstrap'
 import { useDispatch } from 'react-redux'
-import { requestEventHandler } from 'Redux/Event/event.action'
+import { requestEventHandler } from 'Redux/EventList/event.action'
 import useGetPagination from 'Hooks/useGetPagination'
 import { isEmpty } from 'lodash'
 import EventItem from 'Components/EventItem'

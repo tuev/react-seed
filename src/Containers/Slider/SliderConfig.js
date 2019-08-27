@@ -1,8 +1,8 @@
-// import React from 'react'
+import React from 'react'
 import CustomPaging from './SliderCustomPaging'
 
-const SliderConfig = (options = {}) => ({
-  customPaging: CustomPaging,
+const SliderConfig = {
+  customPaging: index => <CustomPaging index={index} />,
   dots: true,
   dotsClass:
     'slider-custom-paging d-flex align-items-center justify-content-end',
@@ -16,5 +16,6 @@ const SliderConfig = (options = {}) => ({
   // fade : true,
   slidesToShow: 1,
   slidesToScroll: 1
-})
+}
+
 export default SliderConfig

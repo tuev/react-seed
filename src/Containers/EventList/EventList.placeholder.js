@@ -9,7 +9,7 @@ const EventListPlaceholder = () => {
         {Array(9)
           .fill(0)
           .map((_, index) => (
-            <EventItemPlaceHolder />
+            <EventItemPlaceHolder key={index} />
           ))}
       </Row>
     </Container>
