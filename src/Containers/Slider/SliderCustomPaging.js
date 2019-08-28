@@ -1,6 +1,6 @@
-import React, { useContext, useCallback } from 'react'
+import React, { useContext, useCallback, useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { get } from 'lodash'
+import { get, uniqBy } from 'lodash'
 import { SliderContext } from './Slider'
 
 const SliderCustomPaging = ({ index }) => {
@@ -13,11 +13,12 @@ const SliderCustomPaging = ({ index }) => {
     },
     [index, sliderRef]
   )
+  const items = useMemo(() => uniqBy(sliderItems, 'banner'), [sliderItems])
   return (
     <div
       className='slider-custom-paging__image'
       style={{
-        backgroundImage: `url(${sliderItems[index].image || ''})`
+        backgroundImage: `url(${items[index].banner || ''})`
       }}
       onMouseEnter={_slickToGo}
       onClick={_slickToGo}

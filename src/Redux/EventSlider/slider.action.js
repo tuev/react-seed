@@ -2,7 +2,7 @@ import { REQUEST_API } from 'Middlewares/api'
 import * as eventSliderActionType from './actionType'
 
 const requestEventSliderHandler = ({
-  options = { params: { limit: 10, select: ['_id', 'image'] } },
+  options = { params: { limit: 10, select: ['_id', 'image', 'banner'] } },
   endpoint = ''
 }) => ({
   [REQUEST_API]: {

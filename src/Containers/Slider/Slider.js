@@ -11,7 +11,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useDispatch, useSelector } from 'react-redux'
-import { get } from 'lodash'
+import { get, uniqBy } from 'lodash'
 
 import { requestEventSliderHandler } from 'Redux/EventSlider/slider.action'
 import { faPauseCircle, faPlayCircle } from '@fortawesome/free-solid-svg-icons'
@@ -52,8 +52,9 @@ const Sliders = () => {
   )
   const sliderItems = useSelector(state => get(state, 'eventSlider.items'))
   const isFetching = useSelector(state => get(state, 'eventSlider.isFetching'))
-  const renderSliderItem = sliderItems.map((item, idx) => (
-    <SliderItem key={idx} {...item} />
+  const items = useMemo(() => uniqBy(sliderItems, 'banner'), [sliderItems])
+  const renderSliderItem = items.map(item => (
+    <SliderItem key={item._id} {...item} />
   ))
 
   return isFetching ? (
