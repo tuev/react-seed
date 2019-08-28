@@ -10,15 +10,20 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useDispatch, useSelector } from 'react-redux'
+import { get } from 'lodash'
+
+import { requestEventSliderHandler } from 'Redux/EventSlider/slider.action'
 import { faPauseCircle, faPlayCircle } from '@fortawesome/free-solid-svg-icons'
 import sliderConfig from './SliderConfig'
-import sliderData from './slider.json'
 import SliderItem from './SliderItem'
 import './slider.scss'
+import SliderPlaceHolder from './Slider.placeholder'
 
 export const SliderContext = createContext(null)
 
 const Sliders = () => {
+  const dispatch = useDispatch()
   const sliderRef = useRef(null)
   const [isPlay, togglePlay] = useState(false)
   const playIcon = useMemo(() => (isPlay ? faPauseCircle : faPlayCircle), [
@@ -36,23 +41,35 @@ const Sliders = () => {
     [_onPause, _onPlay, isPlay]
   )
 
-  const renderSliderItem = sliderData
-    .filter(item => item && item.image)
-    .map((item, idx) => <SliderItem key={idx} {...item} />)
+  useEffect(
+    () => {
+      async function getEvent () {
+        dispatch(requestEventSliderHandler({ endpoint: 'event' }))
+      }
+      getEvent()
+    },
+    [dispatch]
+  )
+  const sliderItems = useSelector(state => get(state, 'eventSlider.items'))
+  const isFetching = useSelector(state => get(state, 'eventSlider.isFetching'))
+  const renderSliderItem = sliderItems.map((item, idx) => (
+    <SliderItem key={idx} {...item} />
+  ))
 
-  return (
-    <SliderContext.Provider
-      className='slider position-relative'
-      value={sliderRef}
-    >
-      <Slider ref={sliderRef} {...sliderConfig}>
-        {renderSliderItem}
-      </Slider>
-      <div
-        className='slider-button d-flex justify-content-center align-items-center'
-        onClick={_togglePlay}
-      >
-        <FontAwesomeIcon icon={playIcon} />
+  return isFetching ? (
+    <SliderPlaceHolder />
+  ) : (
+    <SliderContext.Provider value={sliderRef}>
+      <div className='slider position-relative'>
+        <Slider ref={sliderRef} {...sliderConfig}>
+          {renderSliderItem}
+        </Slider>
+        <div
+          className='slider-button d-flex justify-content-center align-items-center'
+          onClick={_togglePlay}
+        >
+          <FontAwesomeIcon icon={playIcon} />
+        </div>
       </div>
     </SliderContext.Provider>
   )

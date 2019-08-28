@@ -30,9 +30,9 @@ const Arrows = ({ className, onClick, icon, arrow }) => {
 }
 
 const PrevArrow = (_props) =>
-  <Arrows {..._props} icon={faChevronLeft} arrow={'left'} />
+  <Arrows {..._props} icon={faChevronLeft} arrow='left' />
 
 const NextArrow = (_props) =>
-  <Arrows {..._props} icon={faChevronRight} arrow={'right'} />
+  <Arrows {..._props} icon={faChevronRight} arrow='right' />
 
 export { NextArrow, PrevArrow }

@@ -7,7 +7,7 @@ const SliderControl = ({ isPlay }) => {
   return (
     <div
       className='slider-button d-flex justify-content-center align-items-center'
-      onClick={this._togglePlay}
+      // onClick={handlePlay}
     >
       <FontAwesomeIcon icon={icon} />
     </div>

@@ -11,6 +11,8 @@ const initPaginationState = {
 
 const updatePagination = ({ state = initPaginationState, action, types }) => {
   const [requestType, successType, failureType] = types
+  const { data = [], ...responseInfo } = action || {}
+
   switch (action.type) {
   case requestType:
     return {
@@ -18,7 +20,6 @@ const updatePagination = ({ state = initPaginationState, action, types }) => {
       isFetching: true
     }
   case successType:
-    const { data = [], ...responseInfo } = action || {}
     return {
       ...state,
       isFetching: false,
