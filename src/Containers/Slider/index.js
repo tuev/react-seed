@@ -1,5 +1,5 @@
 import Loadable from 'react-loadable'
-import Loading from './Slider.placeholder'
+import Loading from './Placeholder'
 
 const LoadableSlider = Loadable({
   loader: () => import('./Slider'),

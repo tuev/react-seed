@@ -1,5 +1,5 @@
 import React from 'react'
-import CustomPaging from './SliderCustomPaging'
+import CustomPaging from './CustomPaging'
 
 const SliderConfig = {
   customPaging: index => <CustomPaging index={index} />,

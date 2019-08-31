@@ -1,5 +1,5 @@
 import Loadable from 'react-loadable'
-import Loading from './EventList.placeholder'
+import Loading from './Placeholder'
 
 const LoadableEventList = Loadable({
   loader: () => import('./EventList'),

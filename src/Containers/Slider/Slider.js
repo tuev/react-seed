@@ -15,10 +15,10 @@ import { get, uniqBy } from 'lodash'
 
 import { requestEventSliderHandler } from 'Redux/EventSlider/slider.action'
 import { faPauseCircle, faPlayCircle } from '@fortawesome/free-solid-svg-icons'
-import sliderConfig from './SliderConfig'
-import SliderItem from './SliderItem'
+import sliderConfig from './config'
+import SliderItem from './Item'
 import './slider.scss'
-import SliderPlaceHolder from './Slider.placeholder'
+import SliderPlaceHolder from './Placeholder'
 
 export const SliderContext = createContext(null)
 

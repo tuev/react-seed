@@ -5,7 +5,7 @@ import { requestEventHandler } from 'Redux/EventList/event.action'
 import useGetPagination from 'Hooks/useGetPagination'
 import { isEmpty } from 'lodash'
 import EventItem from 'Components/EventItem'
-import EventListPlaceHolder from './EventList.placeholder'
+import EventListPlaceHolder from './Placeholder'
 
 import './eventList.scss'
 
