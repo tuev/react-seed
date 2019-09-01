@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import AppPagination from 'Components/Pagination'
 import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash'
-import { requestEventHandler } from 'Redux/EventList/event.action'
+import { requestEventHandler } from 'Redux/Event/event.action'
 
 const EventPagination = () => {
   const dispatch = useDispatch()

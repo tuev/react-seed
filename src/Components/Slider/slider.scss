@@ -1,7 +1,7 @@
 $height-item: 245px;
 $background-main: #fff;
 
-.categories-event {
+.slider-event {
 	background: $background-main !important;
 	color: black !important;
 	left: -15px;
@@ -53,7 +53,7 @@ $background-main: #fff;
 			border-radius: 20px;
 			color: black;
 
-			.categories-event__item--frame {
+			.slider-event__item--frame {
 				border-radius: 0;
 				border-top-left-radius: 20px;
 				border-top-right-radius: 20px;
