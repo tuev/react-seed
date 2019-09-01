@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useCallback } from 'react'
 import { Row, Col } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
@@ -15,7 +15,7 @@ const EventTicket = () => {
   const name = useSelector(state => get(state, 'eventDetail.data.name'))
   const price = useSelector(state => get(state, 'eventDetail.data.price'))
 
-  const _stickyStyle = useMemo(
+  const _stickyStyle = useCallback(
     ({ isSticky }) => ({
       zIndex: '1000',
       boxShadow: isSticky ? '0 8px 20px -9px rgba(0,0,0,0.3)' : 'none'
