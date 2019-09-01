@@ -15,7 +15,7 @@ const EventList = ({ subject = '', ...props }) => {
   useEffect(
     () => {
       async function getEvent () {
-        dispatch(requestEventHandler({ endpoint: 'event' }))
+        dispatch(requestEventHandler())
       }
       getEvent()
     },

@@ -2,7 +2,7 @@ import { isArray, isString, get } from 'lodash'
 
 const initPaginationState = {
   isFetching: false,
-  skip: 0,
+  options: null,
   limit: process.env.REACT_APP_PAGE_LIMIT,
   total: 0,
   items: [],
@@ -23,7 +23,7 @@ const updatePagination = ({ state = initPaginationState, action, types }) => {
     return {
       ...state,
       isFetching: false,
-      skip: get(state, 'items.length', 0) + data.length,
+      options: get(responseInfo, 'options.params', {}),
       total: get(responseInfo, 'headers.x-total-count', 0),
       items: data
     }

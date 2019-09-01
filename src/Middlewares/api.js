@@ -53,7 +53,7 @@ export default store => next => async action => {
   next(actionWith({ type: requestType }))
   try {
     const response = await callApi(endpoint, options)
-    return next(actionWith({ ...response, type: successType }))
+    return next(actionWith({ ...response, type: successType, options }))
   } catch (error) {
     return next(
       actionWith({
