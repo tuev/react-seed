@@ -2,9 +2,9 @@ import React from 'react'
 import EventList from 'Containers/EventList'
 import EventBanner from 'Components/EventBanner'
 import EventPagination from 'Containers/EventPagination'
-import Slider from 'Containers/Slider'
+import Slider from 'Containers/EventBanner'
+import EventMember from 'Containers/EventMember'
 // import Search from 'Containers/SearchNav'
-// import Catagories from 'Components/Categories'
 
 const HomePage = () => (
   <div>
@@ -13,7 +13,7 @@ const HomePage = () => (
     <EventList />
     <EventPagination />
     <EventBanner />
-    {/* <Catagories /> */}
+    <EventMember />
   </div>
 )
 

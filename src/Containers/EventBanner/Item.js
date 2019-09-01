@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SlideItem = ({ image = '', alt = '', banner = '' } = {}) => (
+const BannerItem = ({ image = '', alt = '', banner = '' } = {}) => (
   <div
     style={{
       width: '100%',
@@ -12,4 +12,4 @@ const SlideItem = ({ image = '', alt = '', banner = '' } = {}) => (
   />
 )
 
-export default SlideItem
+export default BannerItem

@@ -1,7 +1,7 @@
 import React from 'react'
 import ContentLoader from 'react-content-loader'
 
-const SliderPlaceholder = () => {
+const BannerPlaceholder = () => {
   return (
     <div style={{ width: '100%', minHeight: 300, overflow: 'hidden' }}>
       <ContentLoader
@@ -17,4 +17,4 @@ const SliderPlaceholder = () => {
   )
 }
 
-export default SliderPlaceholder
+export default BannerPlaceholder
