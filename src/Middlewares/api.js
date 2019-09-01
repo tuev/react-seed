@@ -6,16 +6,12 @@ const SERVER_BASE_URL = process.env.REACT_APP_SERVER_URL || 'tesr'
 // Fetches an API response
 const callApi = async (endpoint, options = {}) => {
   const fullUrl = `${SERVER_BASE_URL}/${endpoint}`
-  try {
-    const result = await axios({
-      method: 'get',
-      url: fullUrl,
-      ...options
-    })
-    return result
-  } catch (error) {
-    return error
-  }
+  const result = await axios({
+    method: 'get',
+    url: fullUrl,
+    ...options
+  })
+  return result
 }
 
 export const REQUEST_API = 'REQUEST_API'

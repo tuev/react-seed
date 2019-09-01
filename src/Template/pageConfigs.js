@@ -1,5 +1,6 @@
 import Page404 from './Pages/404'
 import HomePage from './Pages/Home'
+import EventDetail from './Pages/EventDetail'
 import LoginPage from './Pages/Login'
 
 const pageConfigs = [
@@ -12,6 +13,10 @@ const pageConfigs = [
     path: '/',
     component: HomePage,
     exact: true
+  },
+  {
+    path: '/:id',
+    component: EventDetail
   },
   {
     path: '/login',

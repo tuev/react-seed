@@ -1,17 +1,34 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useCallback } from 'react'
 import { Row, Col } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { get } from 'lodash'
+import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 import { faShareAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import './event.scss'
 
-const Item = ({ image = '', alt, date, location, price, name } = {}) => {
+const Item = ({
+  history,
+  image = '',
+  alt,
+  date,
+  locationData,
+  price,
+  name,
+  ...restInfo
+} = {}) => {
   const month = useMemo(() => moment(date).format('MMM'), [date])
   const day = useMemo(() => moment(date).format('DD'), [date])
   const time = useMemo(() => moment(date).format('YYYY/MM/DD hh:mm A'), [date])
+
+  const _handleOnItemSelect = useCallback(
+    () => history.push(`/${get(restInfo, '_id', '')}`),
+    [history, restInfo]
+  )
+
   return (
     <Col lg='4' md='6' sm='12' className='event-item pl-0 pr-3 pb-3'>
-      <div className='item'>
+      <div className='item' onClick={_handleOnItemSelect}>
         <Row className='item__image mx-0'>
           <img src={image} alt={alt} />
           {price === 'Free' && (
@@ -28,7 +45,7 @@ const Item = ({ image = '', alt, date, location, price, name } = {}) => {
           <Col xs='10' className='d-flex flex-column align-items-start'>
             <p className='item__info item__info--title'>{name}</p>
             <p className='item__info item__info--time'>{time}</p>
-            <p className='item__info item__info--address'>{location}</p>
+            <p className='item__info item__info--address'>{locationData}</p>
             <p className='item__info item__info--price'>{price}</p>
           </Col>
           <div className='item__action d-flex position-absolute'>
@@ -49,4 +66,4 @@ const Item = ({ image = '', alt, date, location, price, name } = {}) => {
   )
 }
 
-export default Item
+export default withRouter(Item)

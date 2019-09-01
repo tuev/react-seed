@@ -1,0 +1,13 @@
+&__header {
+	height: 400px;
+	position: absolute;
+	width: 100vw;
+
+	&--image {
+		background-position: center;
+		background-size: cover;
+		filter: blur(10px);
+		height: 100%;
+		width: 100%;
+	}
+}

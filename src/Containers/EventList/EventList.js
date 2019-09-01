@@ -21,11 +21,13 @@ const EventList = ({ subject = '', ...props }) => {
     },
     [dispatch]
   )
-  const eventList = useMemo(() => items.slice(skip - limit, limit), [
-    items,
-    limit,
-    skip
-  ])
+  const eventList = useMemo(
+    () =>
+      items
+        .slice(skip - limit, limit)
+        .map((item = {}) => ({ ...item, locationData: item.location })),
+    [items, limit, skip]
+  )
   return isFetching ? (
     <EventListPlaceHolder />
   ) : (
