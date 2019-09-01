@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Row, Col } from 'reactstrap'
 import moment from 'moment'
+import { useSelector } from 'react-redux'
+import { get } from 'lodash'
+import eventImage from './defaultBanner.jpg'
 
-const EventBanner = ({ date = '', price = '', image = '', name = '' }) => {
-  const eventMonth = moment(date).format('MMM')
-  const eventDay = moment(date).format('DD')
+const EventBanner = () => {
+  const image = useSelector(state =>
+    get(state, 'eventDetail.data.image', eventImage)
+  )
+  const timeInfo = useSelector(state => get(state, 'eventDetail.data.date'))
+  const name = useSelector(state => get(state, 'eventDetail.data.name'))
+  const price = useSelector(state => get(state, 'eventDetail.data.price'))
+
+  const eventMonth = useMemo(() => moment(timeInfo).format('MMM'), [timeInfo])
+  const eventDay = useMemo(() => moment(timeInfo).format('DD'), [timeInfo])
 
   return (
     <Row className='event-detail__banner'>

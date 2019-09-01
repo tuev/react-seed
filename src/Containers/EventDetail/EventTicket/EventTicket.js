@@ -1,17 +1,27 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Row, Col } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { Sticky } from 'react-sticky'
+import { useSelector } from 'react-redux'
 import moment from 'moment'
+import { get } from 'lodash'
 
-const EventTicket = ({ price = '', name = '', date = '' }) => {
-  const _stickyStyle = ({ isSticky }) => ({
-    zIndex: '1000',
-    boxShadow: isSticky ? '0 8px 20px -9px rgba(0,0,0,0.3)' : 'none'
+const EventTicket = () => {
+  const eventTime = useSelector(state => {
+    const time = get(state, 'eventDetail.data.time')
+    return moment(time).format('LLLL')
   })
-  const eventTime = moment(date).format('LLLL')
+  const name = useSelector(state => get(state, 'eventDetail.data.name'))
+  const price = useSelector(state => get(state, 'eventDetail.data.price'))
 
+  const _stickyStyle = useMemo(
+    ({ isSticky }) => ({
+      zIndex: '1000',
+      boxShadow: isSticky ? '0 8px 20px -9px rgba(0,0,0,0.3)' : 'none'
+    }),
+    []
+  )
   return (
     <Sticky topOffset={300} bottomOffset={400}>
       {({ style, isSticky, ...restProps }) => (

@@ -8,8 +8,8 @@ import { requestEvent } from 'Redux/Event/event.action'
 // import Search from 'Containers/SearchNav'
 // import Catagories from 'Components/Categories'
 // import eventData from './event'
-import EventDetail from 'Components/EventDetail'
-import itemDetail from './eventDetail.json'
+// import EventDetail from 'Components/EventDetail'
+// import itemDetail from './eventDetail.json'
 
 class HomePage extends Component {
   componentDidMount () {
@@ -27,7 +27,8 @@ class HomePage extends Component {
           ))}
         <EventBanner />
         <Catagories /> */}
-        <EventDetail {...itemDetail} />
+        {/* <EventDetail {...itemDetail} /> */}
+        homepage
       </div>
     )
   }

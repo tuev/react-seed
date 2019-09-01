@@ -2,6 +2,7 @@ import React from 'react'
 import { Row } from 'reactstrap'
 
 const EventMap = () => {
+  // TODO: ADD GOOGLE MAP API
   return (
     <Row className='event-map'>
       <div>Google Map</div>

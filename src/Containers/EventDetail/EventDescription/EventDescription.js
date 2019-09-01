@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Row, Col } from 'reactstrap'
+import { useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faTwitterSquare,
@@ -8,16 +9,28 @@ import {
   faLinkedin
 } from '@fortawesome/free-brands-svg-icons'
 import moment from 'moment'
+import { get } from 'lodash'
 
-const EventDescription = ({ date = '', location = '', description = '' }) => {
-  const eventTime = moment(date).format('LLLL')
+const EventDescription = () => {
+  const description = useSelector(state =>
+    get(state, 'eventDetail.data.description')
+  )
+  const timeInfo = useSelector(state => get(state, 'eventDetail.data.time'))
+  const location = useSelector(state => get(state, 'eventDetail.data.location'))
+
+  const eventTimeDate = useMemo(() => moment(timeInfo).format('DD/MM/YYYY'), [
+    timeInfo
+  ])
+  const eventTimeHour = useMemo(() => moment(timeInfo).format('hh:mm'), [
+    timeInfo
+  ])
 
   return (
     <Row className='event-detail__description'>
       <Col md='9' xs='12'>
         <div className='event-detail__description--description'>
-          <h4>Description</h4>
-          <p>
+          <h4 className='my-2'>Description</h4>
+          <p className='text-left'>
             <span>{description}</span>
           </p>
           <div className='share-event'>
@@ -49,7 +62,8 @@ const EventDescription = ({ date = '', location = '', description = '' }) => {
         <Row className='event-detail__description--info text-left'>
           <Col md='12' xs='6' className='info__date'>
             <h5>Date And Time</h5>
-            <span>{eventTime}</span>
+            <h6>{eventTimeDate}</h6>
+            <h7>{eventTimeHour}</h7>
           </Col>
           <Col md='12' xs='6' className='info__location'>
             <h5>Location</h5>
