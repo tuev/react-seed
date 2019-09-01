@@ -1,0 +1,93 @@
+// Event Banner
+&__banner {
+	background: rgba(255, 255, 255, 0.9);
+	border-bottom: $border-pannel;
+	position: relative;
+
+	&--image,
+	&--info {
+		height: 300px;
+		padding: 0;
+	}
+
+	&--info {
+		@include media-breakpoint-down($range-device) {
+			height: auto;
+		}
+	}
+
+	.image-background {
+		background-position: center;
+		background-size: cover;
+		height: 100%;
+		width: auto;
+	}
+
+	.event-info {
+		flex-direction: column;
+		height: 100%;
+		padding: 16px;
+
+		@include media-breakpoint-down($range-device) {
+			flex-direction: row !important;
+
+			h1 {
+				padding: 0;
+			}
+
+			&__time {
+				padding-right: 24px;
+				padding-top: 8px;
+			}
+		}
+
+		&__month,
+		&__day {
+			font-size: 13px;
+			font-weight: 600;
+			letter-spacing: 0.5px;
+			line-height: 15px;
+			text-transform: uppercase;
+		}
+
+		&__name {
+			color: #1e0a3c;
+			font-size: 20px;
+			font-weight: 600;
+			line-height: 21px;
+			padding-bottom: 2px;
+			padding-top: 20px;
+			text-align: left;
+		}
+
+		&__organizer {
+			color: #6f7287;
+			margin-bottom: 5px !important;
+			margin-right: 5px !important;
+		}
+
+		&__follow {
+			height: 24px;
+			padding-left: 9px;
+			padding-right: 9px;
+
+			button {
+				background: #fff;
+				border: solid 2px dodgerblue;
+				border-radius: 4px;
+				color: dodgerblue;
+				font-size: 12px;
+				font-weight: 600;
+				line-height: 16px;
+			}
+		}
+
+		&__price {
+			font-weight: 400;
+
+			@include media-breakpoint-down($range-device) {
+				display: none !important;
+			}
+		}
+	}
+}

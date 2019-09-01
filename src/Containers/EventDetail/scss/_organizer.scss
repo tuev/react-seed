@@ -1,0 +1,30 @@
+.organizer {
+	max-width: 800px;
+	padding: 24px;
+
+	&--button {
+		height: 44px;
+	}
+
+	button {
+		background: #fff;
+		border: 2px solid #a9a8b3;
+		border-color: #3659e3;
+		border-radius: 4px;
+		font-size: 16px;
+		font-weight: 600;
+		height: 40px;
+		margin-right: 16px;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.3, 1);
+		width: 120px;
+
+		&:hover {
+			border: 2px solid rgb(0, 79, 124);
+			color: rgb(0, 79, 124);
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}

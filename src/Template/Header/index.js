@@ -29,7 +29,7 @@ export default class Example extends Component {
   render () {
     const { isOpen } = this.state
     return (
-      <div>
+      <div className='bg-white position-relative' style={{ zIndex: 2 }}>
         <HeaderNav color='light' light expand='md'>
           <NavbarBrand href='/'>JiptJipt</NavbarBrand>
           <NavbarToggler onClick={this._toggle} />

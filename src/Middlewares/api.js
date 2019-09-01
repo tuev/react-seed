@@ -1,21 +1,17 @@
 import axios from 'axios'
-import { isArray, isString } from 'lodash'
+import { isArray, isString, get } from 'lodash'
 
 const SERVER_BASE_URL = process.env.REACT_APP_SERVER_URL || 'tesr'
 
 // Fetches an API response
 const callApi = async (endpoint, options = {}) => {
   const fullUrl = `${SERVER_BASE_URL}/${endpoint}`
-  try {
-    const result = await axios({
-      method: 'get',
-      url: fullUrl,
-      ...options
-    })
-    return result.body
-  } catch (error) {
-    return error
-  }
+  const result = await axios({
+    method: 'get',
+    url: fullUrl,
+    ...options
+  })
+  return result
 }
 
 export const REQUEST_API = 'REQUEST_API'
@@ -53,7 +49,8 @@ export default store => next => async action => {
   next(actionWith({ type: requestType }))
   try {
     const response = await callApi(endpoint, options)
-    return next(actionWith({ ...response, type: successType }))
+    const body = get(response, 'data', {})
+    return next(actionWith({ ...body, type: successType }))
   } catch (error) {
     return next(
       actionWith({
