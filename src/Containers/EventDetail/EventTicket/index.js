@@ -1,3 +1,9 @@
-import EventTicket from './EventTicket'
+import Loadable from 'react-loadable'
+import Loading from './Placeholder'
 
-export default EventTicket
+const LoadableEventTicket = Loadable({
+  loader: () => import('./EventTicket'),
+  loading: Loading
+})
+
+export default LoadableEventTicket

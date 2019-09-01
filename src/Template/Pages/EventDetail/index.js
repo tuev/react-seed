@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import EventDetail from 'Containers/EventDetail'
+import Placeholder from 'Containers/EventDetail/Placeholder'
+
 import { withRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash'
@@ -28,7 +30,7 @@ const PageEventDetail = ({ history, match = {} }) => {
     [error, history]
   )
 
-  return isFetching ? <div>loading ...</div> : <EventDetail />
+  return isFetching ? <Placeholder /> : <EventDetail />
 }
 
 export default withRouter(PageEventDetail)

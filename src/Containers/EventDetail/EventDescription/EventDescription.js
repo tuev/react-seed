@@ -63,7 +63,7 @@ const EventDescription = () => {
           <Col md='12' xs='6' className='info__date'>
             <h5>Date And Time</h5>
             <h6>{eventTimeDate}</h6>
-            <h7>{eventTimeHour}</h7>
+            <h6>{eventTimeHour}</h6>
           </Col>
           <Col md='12' xs='6' className='info__location'>
             <h5>Location</h5>

@@ -9,6 +9,7 @@
 			box-shadow:
 			7px 20px 20px 13px rgba(40, 44, 53, 0.1),
 			0 2px 2px 0 rgba(40, 44, 53, 0.1);
+			cursor: pointer;
 			transition:
 			all 0.35s ease-in,
 			background-color 0.24s cubic-bezier(0.4, 0, 0.3, 1);
@@ -59,7 +60,7 @@
 				line-height: 1.5rem;
 			}
 
-			&--content {
+			&--time {
 				color: #6f7287;
 				font-size: 0.75rem;
 				line-height: 1rem;

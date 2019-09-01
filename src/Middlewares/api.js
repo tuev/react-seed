@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { isArray, isString, get } from 'lodash'
+import { isArray, isString } from 'lodash'
 
 const SERVER_BASE_URL = process.env.REACT_APP_SERVER_URL || 'tesr'
 
@@ -49,8 +49,7 @@ export default store => next => async action => {
   next(actionWith({ type: requestType }))
   try {
     const response = await callApi(endpoint, options)
-    const body = get(response, 'data', {})
-    return next(actionWith({ ...body, type: successType }))
+    return next(actionWith({ ...response, type: successType, options }))
   } catch (error) {
     return next(
       actionWith({

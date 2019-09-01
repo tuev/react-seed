@@ -11,7 +11,6 @@ import EventDescription from './EventDescription'
 // import EventMap from './EventMap'
 // TODO: ADD RELATED EVENT DATA FOR RELACEEDEVENT COMPONENT
 // import EventOther from './RelatedEvent'
-import './scss/eventDetail.scss'
 
 const EventDetail = () => {
   return (

@@ -1,11 +1,11 @@
 import React from 'react'
-import CustomPaging from './SliderCustomPaging'
+import CustomPaging from './CustomPaging'
 
-const SliderConfig = {
+const BannerConfig = {
   customPaging: index => <CustomPaging index={index} />,
   dots: true,
   dotsClass:
-    'slider-custom-paging d-flex align-items-center justify-content-end',
+    'banner-custom-paging d-flex align-items-center justify-content-end',
   pauseOnDotsHover: true,
   arrows: false,
   pauseOnHover: false,
@@ -13,8 +13,9 @@ const SliderConfig = {
   speed: 1000,
   autoplay: true,
   autoplaySpeed: 3000,
+  // fade : true,
   slidesToShow: 1,
   slidesToScroll: 1
 }
 
-export default SliderConfig
+export default BannerConfig

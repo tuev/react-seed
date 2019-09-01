@@ -1,7 +1,7 @@
 import React from 'react'
-import { NextArrow, PrevArrow } from './CategoriesArrows'
+import { NextArrow, PrevArrow } from './SliderArrows'
 
-const CategoriesConfig = {
+const SliderConfig = {
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
   dots: true,
@@ -40,4 +40,4 @@ const CategoriesConfig = {
   ]
 }
 
-export default CategoriesConfig
+export default SliderConfig

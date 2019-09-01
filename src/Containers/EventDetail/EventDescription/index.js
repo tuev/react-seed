@@ -1,3 +1,9 @@
-import EventDescription from './EventDescription'
+import Loadable from 'react-loadable'
+import Loading from './Placeholder'
 
-export default EventDescription
+const LoadableEventDescription = Loadable({
+  loader: () => import('./EventDescription'),
+  loading: Loading
+})
+
+export default LoadableEventDescription

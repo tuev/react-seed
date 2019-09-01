@@ -1,3 +1,4 @@
+import { get } from 'lodash'
 import * as actionTypes from './actionType'
 
 const initState = {
@@ -8,6 +9,7 @@ const initState = {
 
 const eventDetailReducer = (state = initState, action = {}) => {
   const { type, ...restInfo } = action
+  const data = get(restInfo, 'data', [])
   switch (action.type) {
   case actionTypes.EVENT_DETAIL_REQUEST:
     return {
@@ -26,7 +28,7 @@ const eventDetailReducer = (state = initState, action = {}) => {
       ...state,
       isFetching: false,
       error: false,
-      data: restInfo
+      data
     }
   default:
     return state

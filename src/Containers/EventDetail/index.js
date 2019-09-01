@@ -1,3 +1,10 @@
-import EventDetail from './EventDetail'
+import Loadable from 'react-loadable'
+import Loading from './Placeholder'
+import './scss/eventDetail.scss'
 
-export default EventDetail
+const LoadableEventDetail = Loadable({
+  loader: () => import('./EventDetail'),
+  loading: Loading
+})
+
+export default LoadableEventDetail

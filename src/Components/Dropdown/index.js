@@ -14,15 +14,15 @@ export default class Dropdown extends Component {
 
   _hideDropdown = () => this.setState({ isOpen: false })
 
-  _toggleDropdown = () => this.setState({ isOpen: !this.state.isOpen })
+  handleDropdown = () => this.setState({ isOpen: !this.state.isOpen })
 
   componentDidMount () {
     this.setState({ width: window.innerWidth })
   }
 
-  _handleMouseEnter = () => this.state.width > 768 && this._showDropdown()
+  handleMouseEnter = () => this.state.width > 768 && this._showDropdown()
 
-  _handleMouseLeave = () => this.state.width > 768 && this._hideDropdown()
+  handleMouseLeave = () => this.state.width > 768 && this._hideDropdown()
 
   render () {
     const { isOpen } = this.state
@@ -30,9 +30,9 @@ export default class Dropdown extends Component {
     return (
       <div
         className='position-relative'
-        onMouseEnter={this._handleMouseEnter}
-        onMouseLeave={this._handleMouseLeave}
-        onClick={this._toggleDropdown}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+        onClick={this.handleDropdown}
       >
         <DropdownTitle
           className='d-flex align-items-center pr-2'

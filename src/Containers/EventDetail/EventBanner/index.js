@@ -1,3 +1,9 @@
-import EventBanner from './EventBanner'
+import Loadable from 'react-loadable'
+import Loading from './Placeholder'
 
-export default EventBanner
+const LoadableEventBanner = Loadable({
+  loader: () => import('./EventBanner'),
+  loading: Loading
+})
+
+export default LoadableEventBanner

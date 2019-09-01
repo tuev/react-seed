@@ -14,7 +14,10 @@
     "import/newline-after-import": "error",
     "indent": ["error", 2],
     "quotes": ["error", "single"],
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-fragments": 0
   },
   "globals": {
     "window": true,

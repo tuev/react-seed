@@ -11,7 +11,7 @@ export default class Example extends Component {
     isOpen: false
   }
 
-  _toggle = () =>
+  handleToggle = () =>
     this.setState({
       isOpen: !this.state.isOpen
     })
@@ -32,7 +32,7 @@ export default class Example extends Component {
       <div className='bg-white position-relative' style={{ zIndex: 2 }}>
         <HeaderNav color='light' light expand='md'>
           <NavbarBrand href='/'>JiptJipt</NavbarBrand>
-          <NavbarToggler onClick={this._toggle} />
+          <NavbarToggler onClick={this.handleToggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className='ml-auto' navbar>
               {HeaderConfigs.map(this._renderHeaderItem)}
