@@ -22,7 +22,7 @@ const Item = ({
   const time = useMemo(() => moment(date).format('YYYY/MM/DD hh:mm A'), [date])
 
   const _handleOnItemSelect = useCallback(
-    () => history.push(`/${get(restInfo, '_id', '')}`),
+    () => history.push(`/event/${get(restInfo, '_id', '')}`),
     [history, restInfo]
   )
 

@@ -1,22 +1,26 @@
-import React, { Component } from 'react'
-import { Collapse, NavbarToggler, NavbarBrand, Nav } from 'reactstrap'
+import React, { useState, useCallback, useEffect } from 'react'
+import {
+  Collapse,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  Modal,
+  ModalBody
+} from 'reactstrap'
+import { auth as firebaseAuth } from 'firebase/app'
+
 import { get } from 'lodash'
+import Authorization from 'Containers/Authorization'
 import HeaderConfigs from './header'
 import HeaderDropdown from './HeaderDropdown'
 import HeaderItem from './HeaderItem'
-import { HeaderNav } from './header.style'
+import { HeaderNav, NavItemText } from './header.style'
 
-export default class Example extends Component {
-  state = {
-    isOpen: false
-  }
+const Header = () => {
+  const [dropdownVisible, toggleDropdown] = useState(false)
+  const [signinFormVisible, toggleSigninForm] = useState(false)
 
-  handleToggle = () =>
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-
-  _renderHeaderItem = (item, idx) => {
+  const _renderHeaderItem = useCallback((item, idx) => {
     const isDropdown = get(item, 'items')
     const childProps = { ...item, key: idx }
     return isDropdown ? (
@@ -24,23 +28,52 @@ export default class Example extends Component {
     ) : (
       <HeaderItem {...childProps} />
     )
-  }
+  }, [])
 
-  render () {
-    const { isOpen } = this.state
-    return (
-      <div className='bg-white position-relative' style={{ zIndex: 2 }}>
-        <HeaderNav color='light' light expand='md'>
-          <NavbarBrand href='/'>JiptJipt</NavbarBrand>
-          <NavbarToggler onClick={this.handleToggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className='ml-auto' navbar>
-              {HeaderConfigs.map(this._renderHeaderItem)}
-              <HeaderItem label='Signin' href='/login' />
-            </Nav>
-          </Collapse>
-        </HeaderNav>
-      </div>
-    )
-  }
+  const handleToggleDropdown = useCallback(
+    () => toggleDropdown(visible => !visible),
+    []
+  )
+
+  const handleToggleSigninForm = useCallback(
+    () => toggleSigninForm(visible => !visible),
+    []
+  )
+
+  useEffect(() => {
+    firebaseAuth().onAuthStateChanged(user => {
+      if (user) {
+        // User is signed in.
+        console.log(user, '------------------user info')
+      } else {
+        // No user is signed in.
+      }
+    })
+  }, [])
+
+  return (
+    <div className='bg-white position-relative' style={{ zIndex: 2 }}>
+      <HeaderNav color='light' light expand='md'>
+        <NavbarBrand href='/'>JiptJipt</NavbarBrand>
+        <NavbarToggler onClick={handleToggleDropdown} />
+        <Collapse isOpen={dropdownVisible} navbar>
+          <Nav className='ml-auto' navbar>
+            {HeaderConfigs.map(_renderHeaderItem)}
+            <NavItemText onClick={handleToggleSigninForm}>Signin</NavItemText>
+          </Nav>
+        </Collapse>
+      </HeaderNav>
+      <Modal
+        isOpen={signinFormVisible}
+        toggle={handleToggleSigninForm}
+        centered
+      >
+        <ModalBody>
+          <Authorization />
+        </ModalBody>
+      </Modal>
+    </div>
+  )
 }
+
+export default Header

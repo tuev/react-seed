@@ -15,8 +15,9 @@ const pageConfigs = [
     exact: true
   },
   {
-    path: '/:id',
-    component: EventDetail
+    path: '/event/:id',
+    component: EventDetail,
+    exact: true
   },
   {
     path: '/login',
