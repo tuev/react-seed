@@ -4,10 +4,10 @@ import { isArray, isString } from 'lodash'
 const SERVER_BASE_URL = process.env.REACT_APP_SERVER_URL || 'tesr'
 
 // Fetches an API response
-const callApi = async (endpoint, options = {}) => {
+const callApi = async (endpoint, options = {}, method = 'get') => {
   const fullUrl = `${SERVER_BASE_URL}/${endpoint}`
   const result = await axios({
-    method: 'get',
+    method,
     url: fullUrl,
     ...options
   })
@@ -25,7 +25,7 @@ export default store => next => async action => {
     return next(action)
   }
 
-  const { endpoint, types, options = {} } = requestAPI
+  const { endpoint, types, options = {}, method = 'get' } = requestAPI
   // Expect type of requestApi action consist of: start fetch action, get success action, get fail action
   if (!isArray(types) || types.length !== 3) {
     throw new Error('Expected an array of three action types.')
@@ -48,7 +48,7 @@ export default store => next => async action => {
   const [requestType, successType, failureType] = types
   next(actionWith({ type: requestType }))
   try {
-    const response = await callApi(endpoint, options)
+    const response = await callApi(endpoint, options, method)
     return next(actionWith({ ...response, type: successType, options }))
   } catch (error) {
     return next(
