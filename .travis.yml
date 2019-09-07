@@ -63,14 +63,16 @@ sudo: false
 before_deploy:
   - rm -rf node_modules
 deploy:
-  provider: heroku
-  api_key:
-    secure: GA0Gw5A3XcCm7JkFi21VqAqxGXkl5QWrRPOSzY/IQl5ya/PBGQ+ZQld5pwTKkO7bzSeUvJNoyf4NM3hErPR4nGQhFyyCMSuhJ/lD+SaUOs+pZOq6UhGro1CHB7+q5Vww9kd7h/oCQdLca0+ZNkyWV1G3C4yax6FntG3VNh76O/55GMucLF3Xo4u/yx2UXyKMKV+sAtuZL/GwbQuytq9WFrtCrr1Wjxn6ub6IeTdybMCIIwaompzLYVfNXIjK6b6VAZiHUcmoudAwR+oDQYiBc4TjpScqwrVbLLLhEeNL4C6xRuBtMdVUznLcysdbnKze42TgUuW3tvv3ZNgtKwLJw6xuicWPZfYOnqGKcySgsMDiEjAWlFKI1uImddOd43Xdu80csQ61WtNVRfoXZOCOI7GRibUe+arNYE53UzWrbytu0XgDjdfjlC4B432Mq8Dl9bFkmPr3zU03TMw0ggDd+0/s7Sesyqpcol0qtVR0Cvq8wWH+/HcLHAhloZn9NqgaFrQpELEnGPeBPJX+Z7tydZRY2WvXt0DzhX/tFhfH3nioABezbFVwpiHVEHXPCB7Jc0Y7B1N1XJAx5inBthZBQdUCD/EFCTkf3sKvypPBBoDHvPFzetLoRgzdf49zNUmKAv5WyYsWbp7IfgwSSs88QyhxfF0/rPEx+AY/VSLsGIQ=
-  app: react-seed-starter
-  skip_cleanup: true
-  provider: firebase
-    project: "bright-smile"
-    before_deploy: "npm run build"
+  - provider: heroku
+    api_key:
+      secure: GA0Gw5A3XcCm7JkFi21VqAqxGXkl5QWrRPOSzY/IQl5ya/PBGQ+ZQld5pwTKkO7bzSeUvJNoyf4NM3hErPR4nGQhFyyCMSuhJ/lD+SaUOs+pZOq6UhGro1CHB7+q5Vww9kd7h/oCQdLca0+ZNkyWV1G3C4yax6FntG3VNh76O/55GMucLF3Xo4u/yx2UXyKMKV+sAtuZL/GwbQuytq9WFrtCrr1Wjxn6ub6IeTdybMCIIwaompzLYVfNXIjK6b6VAZiHUcmoudAwR+oDQYiBc4TjpScqwrVbLLLhEeNL4C6xRuBtMdVUznLcysdbnKze42TgUuW3tvv3ZNgtKwLJw6xuicWPZfYOnqGKcySgsMDiEjAWlFKI1uImddOd43Xdu80csQ61WtNVRfoXZOCOI7GRibUe+arNYE53UzWrbytu0XgDjdfjlC4B432Mq8Dl9bFkmPr3zU03TMw0ggDd+0/s7Sesyqpcol0qtVR0Cvq8wWH+/HcLHAhloZn9NqgaFrQpELEnGPeBPJX+Z7tydZRY2WvXt0DzhX/tFhfH3nioABezbFVwpiHVEHXPCB7Jc0Y7B1N1XJAx5inBthZBQdUCD/EFCTkf3sKvypPBBoDHvPFzetLoRgzdf49zNUmKAv5WyYsWbp7IfgwSSs88QyhxfF0/rPEx+AY/VSLsGIQ=
+    app: react-seed-starter
+    skip_cleanup: true
+  - provider: firebase
+    project: 'bright-smile'
+    before_deploy: 'npm run build'
+    on:
+      branch: staging
     token:
       secure: Yw798WOC792MBVwxod6o5ucoPhS9kJhUFkMeSp4OhFK5q4u70pboZ/5X/WWZcWYOVqXz9XNnRokNsRhvDwEjBgc+2EGmxstjTC1GjJE6BSLZtxdLosCvkafZ2ocCemjwjq5rWFEbcchJmoDoLyUX1ex/owfXdjN6DdRPEW21+aflS7sufwVrTrpfn/XlsaJ4oX4cZr/So8igDHqOVaDKpXuXV968w04zfW5TNq/LUxdwVjtlsLifSKYoQ1nMCjo8ugnHopwTanG68qJBfD3qypMAvZFU5mRCdm7+WqPsXKCdiz3LhDuvN1x/8CM7ZAhOeGApqAZvUXwOUbvhm9ge8YCujma3UO8vl/tQdg0RmnUb46lMXpPjUlbiJjEy0GrEfWSNmSOFhXp+9fKnAzQDnJX6KLqIf031+nR8jY4zqjI/sXyRteqqs3nlbmuZMykKV4vDoMQBrN1D0O5v+M7Gepq0UwA7P0r1P6MYaMCmmArcEk0Z5mMQp7PKSKxi020l1Hi9jjU6UBCYUeDysOxlxWg/Nck1YOHOSI9ZNzDnEjlBY0IzLprGy0zxxTCMOTB1Mq10hdees7oQHhVBJzyI4YCOjXYrPw0Niquqr2x5A7dNurJixm5ajUpwfYn6YZ4ozYK9l+2vWDr/EZqIvOVqPYtr2w9p5Zu6IULXGn16fXM=
 notifications:
