@@ -15,7 +15,7 @@ const AppSlider = ({ title = '', items = [], config = {} } = {}) => {
         <h2 className='slider-event__title'>{title}</h2>
         <Slider {...sliderConfig}>
           {sliderItems.map((item = {}, idx) => (
-            <SliderItem key={item._id} {...item} />
+            <SliderItem key={item._id || idx} {...item} />
           ))}
         </Slider>
       </Container>

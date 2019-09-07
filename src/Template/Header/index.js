@@ -1,22 +1,17 @@
-import React, { Component } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Collapse, NavbarToggler, NavbarBrand, Nav } from 'reactstrap'
+
 import { get } from 'lodash'
 import HeaderConfigs from './header'
 import HeaderDropdown from './HeaderDropdown'
 import HeaderItem from './HeaderItem'
 import { HeaderNav } from './header.style'
+import Avatar from './Avatar'
 
-export default class Example extends Component {
-  state = {
-    isOpen: false
-  }
+const Header = () => {
+  const [dropdownVisible, toggleDropdown] = useState(false)
 
-  handleToggle = () =>
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-
-  _renderHeaderItem = (item, idx) => {
+  const _renderHeaderItem = useCallback((item, idx) => {
     const isDropdown = get(item, 'items')
     const childProps = { ...item, key: idx }
     return isDropdown ? (
@@ -24,23 +19,27 @@ export default class Example extends Component {
     ) : (
       <HeaderItem {...childProps} />
     )
-  }
+  }, [])
 
-  render () {
-    const { isOpen } = this.state
-    return (
-      <div className='bg-white position-relative' style={{ zIndex: 2 }}>
-        <HeaderNav color='light' light expand='md'>
-          <NavbarBrand href='/'>JiptJipt</NavbarBrand>
-          <NavbarToggler onClick={this.handleToggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className='ml-auto' navbar>
-              {HeaderConfigs.map(this._renderHeaderItem)}
-              <HeaderItem label='Signin' href='/login' />
-            </Nav>
-          </Collapse>
-        </HeaderNav>
-      </div>
-    )
-  }
+  const handleToggleDropdown = useCallback(
+    () => toggleDropdown(visible => !visible),
+    []
+  )
+
+  return (
+    <div className='bg-white position-relative' style={{ zIndex: 2 }}>
+      <HeaderNav color='light' light expand='md'>
+        <NavbarBrand href='/'>JiptJipt</NavbarBrand>
+        <NavbarToggler onClick={handleToggleDropdown} />
+        <Collapse isOpen={dropdownVisible} navbar>
+          <Nav className='ml-auto' navbar>
+            {HeaderConfigs.map(_renderHeaderItem)}
+          </Nav>
+          <Avatar />
+        </Collapse>
+      </HeaderNav>
+    </div>
+  )
 }
+
+export default Header
