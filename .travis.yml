@@ -1,17 +1,14 @@
 stages:
-  - lint
-  - test
-
+- lint
+- test
 language: node_js
 node_js:
-  - 'stable'
+- stable
 addons:
   apt:
     packages:
-      - libnotify-bin
-
+    - libnotify-bin
 install: npm ci --ignore-scripts
-
 before_script: npm install -g npm@5.8.0
 before_install: |
   [[ ! -x ~/npm/node_modules/.bin/npm ]] && {
@@ -19,61 +16,62 @@ before_install: |
     cd -
   } || true
   export PATH=~/npm/node_modules/.bin:$PATH
-
 cache:
   directories:
-    - ~/.npm # cache npm's cache
-    - ~/npm # cache latest npm
-
+  - "~/.npm"
+  - "~/npm"
 jobs:
   include:
-    - stage: test
-      install: &1
-        - npm install
-      script: npm run test
-      before_install: true
-      after_success: npm run coverage
-      cache: &2
-        directories:
-          - '~/.npm'
-          - node_modules
-    - stage: test
-      install: *1
-      script: npm run test
-      before_install: true
-      after_success: npm run coverage
-      cache: *2
-      node_js: '8'
-      if: branch != master
-    - stage: test
-      install: *1
-      script: npm run test
-      before_install: true
-      after_success: npm run coverage
-      cache: *2
-      node_js: '10'
-      if: branch != master
-    - stage: lint
-      script: npm run lint
-      before_install: true
-      install:
-        - npm install
+  - stage: test
+    install: &1
+    - npm install
+    script: npm run test
+    before_install: true
+    after_success: npm run coverage
+    cache: &2
+      directories:
+      - "~/.npm"
+      - node_modules
+  - stage: test
+    install: *1
+    script: npm run test
+    before_install: true
+    after_success: npm run coverage
+    cache: *2
+    node_js: '8'
+    if: branch != master
+  - stage: test
+    install: *1
+    script: npm run test
+    before_install: true
+    after_success: npm run coverage
+    cache: *2
+    node_js: '10'
+    if: branch != master
+  - stage: lint
+    script: npm run lint
+    before_install: true
+    install:
+    - npm install
 after_success: npm run coverage
 sudo: false
 before_deploy:
-  - rm -rf node_modules
+- rm -rf node_modules
 deploy:
-  - provider: heroku
-    api_key:
-      secure: GA0Gw5A3XcCm7JkFi21VqAqxGXkl5QWrRPOSzY/IQl5ya/PBGQ+ZQld5pwTKkO7bzSeUvJNoyf4NM3hErPR4nGQhFyyCMSuhJ/lD+SaUOs+pZOq6UhGro1CHB7+q5Vww9kd7h/oCQdLca0+ZNkyWV1G3C4yax6FntG3VNh76O/55GMucLF3Xo4u/yx2UXyKMKV+sAtuZL/GwbQuytq9WFrtCrr1Wjxn6ub6IeTdybMCIIwaompzLYVfNXIjK6b6VAZiHUcmoudAwR+oDQYiBc4TjpScqwrVbLLLhEeNL4C6xRuBtMdVUznLcysdbnKze42TgUuW3tvv3ZNgtKwLJw6xuicWPZfYOnqGKcySgsMDiEjAWlFKI1uImddOd43Xdu80csQ61WtNVRfoXZOCOI7GRibUe+arNYE53UzWrbytu0XgDjdfjlC4B432Mq8Dl9bFkmPr3zU03TMw0ggDd+0/s7Sesyqpcol0qtVR0Cvq8wWH+/HcLHAhloZn9NqgaFrQpELEnGPeBPJX+Z7tydZRY2WvXt0DzhX/tFhfH3nioABezbFVwpiHVEHXPCB7Jc0Y7B1N1XJAx5inBthZBQdUCD/EFCTkf3sKvypPBBoDHvPFzetLoRgzdf49zNUmKAv5WyYsWbp7IfgwSSs88QyhxfF0/rPEx+AY/VSLsGIQ=
-    app: react-seed-starter
-    skip_cleanup: true
-  - provider: firebase
-    project: 'bright-smile'
-    before_deploy: 'npm run build'
-    on:
-      branch: staging
-    token:
-      secure: RL2/f8a1NoYgaj0/0tJrrtstgfAmddtH7GKSMSMv4XdJcgapNwDKjsVjqpAeYcuCWsDIM7fpCuCjsGwCd6aywW9eBGVJhCgNwqQOUxo+hsdFG0FcTliPcI7kjWLv/srYtMRRSa0zqwa5W3nw0Pq5NhPNNCQTyHFWyYtaswMsstM3wOoKpPsUFKw3UDB3V+DNrBGqKW+timIkUZTJOPqhqN0yXmp4bHnlk+avbvgiKczZ55bhvoRptnVg6prR7Q/R/6rL4AHAW980S+airfI0QQ6koJ/+gQSPGfA27fzXcmhOSVvqibMXiyluOzRztFQ31ZxeeVw0w0zynr6tPC49XOFYwSfEm4zj+x4bXp2YCJFmynLLJraqGQT+zVfhK5OTqzs612x/4Td3WNdF8tbQH1NiyNR6YOuCX2zGNFb3PPoivGSzRU/vc20TH6OnL2hyhF7H+UBHPOdf/55NfLob3WDTG/nzYWdAlJXQpzTLuS3OOymAuz/6CcK+0M1y9e9HIEjQwEskBgkGDRkN9nFLZh/o2E5MCmU4ls2pWleGjGoY/eByLn6rRlBPU5N1tHpw5H6lZvBJEnML4mrZ0FuSulvSMqaZfde53pG+n+sci3XZlzq+sraVnGn0QGlKXFyimDuxfTkFKva18KtEIw2UYbfslViQmlxg1qmf54V0Coc=
+- provider: heroku
+  api_key:
+    secure: GA0Gw5A3XcCm7JkFi21VqAqxGXkl5QWrRPOSzY/IQl5ya/PBGQ+ZQld5pwTKkO7bzSeUvJNoyf4NM3hErPR4nGQhFyyCMSuhJ/lD+SaUOs+pZOq6UhGro1CHB7+q5Vww9kd7h/oCQdLca0+ZNkyWV1G3C4yax6FntG3VNh76O/55GMucLF3Xo4u/yx2UXyKMKV+sAtuZL/GwbQuytq9WFrtCrr1Wjxn6ub6IeTdybMCIIwaompzLYVfNXIjK6b6VAZiHUcmoudAwR+oDQYiBc4TjpScqwrVbLLLhEeNL4C6xRuBtMdVUznLcysdbnKze42TgUuW3tvv3ZNgtKwLJw6xuicWPZfYOnqGKcySgsMDiEjAWlFKI1uImddOd43Xdu80csQ61WtNVRfoXZOCOI7GRibUe+arNYE53UzWrbytu0XgDjdfjlC4B432Mq8Dl9bFkmPr3zU03TMw0ggDd+0/s7Sesyqpcol0qtVR0Cvq8wWH+/HcLHAhloZn9NqgaFrQpELEnGPeBPJX+Z7tydZRY2WvXt0DzhX/tFhfH3nioABezbFVwpiHVEHXPCB7Jc0Y7B1N1XJAx5inBthZBQdUCD/EFCTkf3sKvypPBBoDHvPFzetLoRgzdf49zNUmKAv5WyYsWbp7IfgwSSs88QyhxfF0/rPEx+AY/VSLsGIQ=
+  app: react-seed-starter
+  skip_cleanup: true
+- provider: firebase
+  project: bright-smile
+  before_deploy: npm run build
+  on:
+    branch: staging
+  token:
+    secure: RL2/f8a1NoYgaj0/0tJrrtstgfAmddtH7GKSMSMv4XdJcgapNwDKjsVjqpAeYcuCWsDIM7fpCuCjsGwCd6aywW9eBGVJhCgNwqQOUxo+hsdFG0FcTliPcI7kjWLv/srYtMRRSa0zqwa5W3nw0Pq5NhPNNCQTyHFWyYtaswMsstM3wOoKpPsUFKw3UDB3V+DNrBGqKW+timIkUZTJOPqhqN0yXmp4bHnlk+avbvgiKczZ55bhvoRptnVg6prR7Q/R/6rL4AHAW980S+airfI0QQ6koJ/+gQSPGfA27fzXcmhOSVvqibMXiyluOzRztFQ31ZxeeVw0w0zynr6tPC49XOFYwSfEm4zj+x4bXp2YCJFmynLLJraqGQT+zVfhK5OTqzs612x/4Td3WNdF8tbQH1NiyNR6YOuCX2zGNFb3PPoivGSzRU/vc20TH6OnL2hyhF7H+UBHPOdf/55NfLob3WDTG/nzYWdAlJXQpzTLuS3OOymAuz/6CcK+0M1y9e9HIEjQwEskBgkGDRkN9nFLZh/o2E5MCmU4ls2pWleGjGoY/eByLn6rRlBPU5N1tHpw5H6lZvBJEnML4mrZ0FuSulvSMqaZfde53pG+n+sci3XZlzq+sraVnGn0QGlKXFyimDuxfTkFKva18KtEIw2UYbfslViQmlxg1qmf54V0Coc=
 notifications:
   webhooks: https://hooks.slack.com/services/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
+env:
+  global:
+    secure: IUFCTrmqwMCdvA1gX7VtD90QAgKS7yEA4KSupDOIAtO7pcrpW7266KCS8BIcrMwWHY83DID4pkaWe0hCAme/vCiC8mr01rGq3P7Y4W7whztI/7xsOUx//fuNBEdrlHKqsj2ZCMDu4I4Ooi/m9ld1HqS1Lf5BBj9wAgNZpWbuZBjlJzCbEiNWWeemYB0LB6XC73TeHLHH3AZY7EtBFTi/65o5pmJr66UKJbZAhjWYXb+qmEI/a6C55MrSAvcXME5VPHA7mKTOZ+Kf91ersTqXySj3BYJJ355v9Q4Elux3XE45VsaUEKBqRTDIWGtnSsKSsG1FLtTjF17UniGKZvnyrhM7aJHtT1xsiOEeZrkwyro2DsdzINK2KKuzlvkysZbrmMPnT28BpVXJ1VkySL6wPOY1iQuvWpV4XzG3n6mOMOlcfb2Qj/AQJbVHnvzG85Uym5uh57Eab/BcKvmOa2bBbQ6igtmOLWk+6JYAldTf5XAb0iiq0zA8uRT9LHsv0eCvExfotx+7mGnkkqF6UwYQmsshKkuL3H1MP2V5JQK9EPs9+x8Qztgze4a/SbXcRw2hl71eB8qa/GiiUFcrTwd7XAqch+Jvsibr7IRp4L3XusbLAnumd2G0bDZD0W41QScIRWXOJN+kmVTXeOfHFTyheSbMlmfOko8VUNjRHLiriro=
