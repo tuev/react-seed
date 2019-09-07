@@ -2,9 +2,12 @@ import React from 'react'
 import { auth as firebaseAuth } from 'firebase/app'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import { withRouter } from 'react-router-dom'
-import { Card } from 'reactstrap'
+import { useDispatch } from 'react-redux'
+import { updateProfileInfo } from 'Redux/Profile/profile.action'
+import { pick } from 'lodash'
 
 const Authorization = () => {
+  const dispatch = useDispatch()
   const uiConfig = {
     // Popup signin flow rather than redirect flow.
     signInFlow: 'popup',
@@ -15,17 +18,21 @@ const Authorization = () => {
     ],
     callbacks: {
       // Avoid redirects after sign-in.
-      signInSuccessWithAuthResult: async info => {
-        console.log(info, 'info -------------')
+      signInSuccessWithAuthResult: async (info = {}) => {
+        const data = pick(info.user, [
+          'displayName',
+          'email',
+          'photoURL',
+          'uid'
+        ])
+        await dispatch(updateProfileInfo({ data, endpoint: `oauth/${data.uid}` }))
       }
     }
   }
 
   return (
-    <div className='d-flex justify-content-center align-items-center flex-column'>
-      <Card className='p-3'>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth()} />
-      </Card>
+    <div className='d-flex justify-content-center align-items-center flex-column p-4'>
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth()} />
     </div>
   )
 }

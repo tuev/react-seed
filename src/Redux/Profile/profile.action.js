@@ -21,9 +21,11 @@ const updateProfileInfo = ({ data, endpoint = 'user' } = {}) => ({
       actionTypes.PROFILE_FAILURE
     ],
     endpoint,
-    method: 'post',
+    method: 'put',
     options: { data }
   }
 })
 
-export { requestProfileInfo, updateProfileInfo }
+const signOut = () => ({ type: actionTypes.PROFILE_SIGNOUT })
+
+export { requestProfileInfo, updateProfileInfo, signOut }

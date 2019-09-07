@@ -11,7 +11,6 @@ export const profileReducer = (state = initState, action = {}) => {
   switch (action.type) {
   case actionType.PROFILE_FAILURE:
     return { ...state, error: action.error, isFetching: false }
-
   case actionType.PROFILE_REQUEST:
     return { ...state, isFetching: true, error: false }
   case actionType.PROFILE_SUCCESS:
@@ -19,7 +18,12 @@ export const profileReducer = (state = initState, action = {}) => {
       ...state,
       error: false,
       isFetching: false,
-      data: merge(state.data, action.payload)
+      data: merge(state.data, action.data)
+    }
+  case actionType.PROFILE_SIGNOUT:
+    return {
+      ...state,
+      data: {}
     }
   default:
     return state
