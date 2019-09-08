@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { updateProfileInfo } from 'Redux/Profile/profile.action'
 import { pick } from 'lodash'
 
-const Authorization = () => {
+const Authorization = ({ history, location }) => {
   const dispatch = useDispatch()
   const uiConfig = {
     // Popup signin flow rather than redirect flow.
@@ -26,6 +26,9 @@ const Authorization = () => {
           'uid'
         ])
         await dispatch(updateProfileInfo({ data, endpoint: `oauth/${data.uid}` }))
+        if (location.pathname === 'login') {
+          history.push('/')
+        }
       }
     }
   }

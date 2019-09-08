@@ -12,6 +12,7 @@ import Placeholder from './Placeholder'
 
 import { NavItemText } from '../header.style'
 import { Avatar as AvatarImage } from './Avatar.style'
+import HeaderItem from '../HeaderItem'
 
 const Avatar = () => {
   const dispatch = useDispatch()
@@ -76,7 +77,10 @@ const Avatar = () => {
             {/* {items.map((item = {}, idx) => (
               <HeaderItem {...item} key={`${label}_${idx}`} />
             ))} */}
-            <NavItemText onClick={_signOut}>Logout</NavItemText>
+            <HeaderItem label='Create Event' href='/create' />
+            <NavItemText onClick={_signOut} className='text-left'>
+              Logout
+            </NavItemText>
           </div>
         </Dropdown>
       ) : (

@@ -28,7 +28,8 @@ const pageConfigs = [
   {
     path: '/create',
     component: EventCreate,
-    exact: true
+    exact: true,
+    private: true
   }
 ]
 
