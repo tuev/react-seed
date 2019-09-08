@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
-import { Row, Col, TextInputWrapper as TextInput } from 'Components'
+import { Row, Col, TextInput } from 'Components'
 import { EVENT_CHANGE, eventType, categories } from '../eventActionType'
 import EventSection from '../EventSection'
 
