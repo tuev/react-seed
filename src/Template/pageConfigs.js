@@ -2,6 +2,7 @@ import Page404 from './Pages/404'
 import HomePage from './Pages/Home'
 import EventDetail from './Pages/EventDetail'
 import LoginPage from './Pages/Login'
+import EventCreate from './Pages/EventCreate'
 
 const pageConfigs = [
   {
@@ -22,6 +23,11 @@ const pageConfigs = [
   {
     path: '/login',
     component: LoginPage,
+    exact: true
+  },
+  {
+    path: '/create',
+    component: EventCreate,
     exact: true
   }
 ]
