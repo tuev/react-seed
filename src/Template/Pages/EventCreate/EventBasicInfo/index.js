@@ -18,16 +18,16 @@ const EventBasicInfo = ({ values, dispatch }) => {
   return (
     <EventSection
       icon={faEdit}
-      title='Basic info'
+      name='Basic info'
       description=' Name your event and tell event-goers why they should come. Add
                 details that highlight what makes it unique.'
     >
       <Row px='15px' width='100%'>
         <TextInput
-          id='title'
-          label='Event title'
-          value={values.title}
-          onChange={handleChange('title')}
+          id='name'
+          label='Event name'
+          value={values.name}
+          onChange={handleChange('name')}
           margin='normal'
           fullWidth
           variant='outlined'

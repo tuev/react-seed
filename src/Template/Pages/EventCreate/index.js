@@ -10,7 +10,7 @@ import EventSubmit from './EventSubmit'
 
 const EventCreate = () => {
   const [values, dispatch] = useReducer(eventReducer, {
-    title: '',
+    name: '',
     type: 'tour',
     category: 'charity',
     organizer: '',

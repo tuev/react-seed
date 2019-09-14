@@ -1,7 +1,10 @@
+import { merge } from 'lodash'
 import { REQUEST_API } from 'Middlewares/api'
 import * as actionTypes from './actionType'
 
-const requestEventCreateHandler = ({ options = {}, id = '' }) => ({
+const defaultOptions = { params: { populate: 'author' } }
+
+const requestEventCreateHandler = ({ options = {}, id = '', token } = {}) => ({
   [REQUEST_API]: {
     types: [
       actionTypes.EVENT_CREATE_REQUEST,
@@ -9,11 +12,12 @@ const requestEventCreateHandler = ({ options = {}, id = '' }) => ({
       actionTypes.EVENT_CREATE_FAILURE
     ],
     endpoint: `event/${id}`,
-    options
+    headers: { Authorization: `Bearer ${token}` },
+    options: merge(defaultOptions, options)
   }
 })
 
-const postEventCreateHandler = ({ options = {} }) => ({
+const postEventCreateHandler = ({ options = {}, token } = {}) => ({
   [REQUEST_API]: {
     types: [
       actionTypes.EVENT_CREATE_REQUEST,
@@ -22,11 +26,12 @@ const postEventCreateHandler = ({ options = {} }) => ({
     ],
     endpoint: 'event',
     method: 'post',
-    options
+    headers: { Authorization: `Bearer ${token}` },
+    options: merge(defaultOptions, options)
   }
 })
 
-const updateEventCreateHandler = ({ options = {}, id = '' }) => ({
+const updateEventCreateHandler = ({ options = {}, id = '', token }) => ({
   [REQUEST_API]: {
     types: [
       actionTypes.EVENT_CREATE_REQUEST,
@@ -35,7 +40,8 @@ const updateEventCreateHandler = ({ options = {}, id = '' }) => ({
     ],
     endpoint: `event/${id}`,
     method: 'put',
-    options
+    headers: { Authorization: `Bearer ${token}` },
+    options: merge(defaultOptions, options)
   }
 })
 

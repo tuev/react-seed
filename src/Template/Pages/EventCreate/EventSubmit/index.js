@@ -2,27 +2,21 @@ import React, { useMemo } from 'react'
 import { useSpring, animated } from 'react-spring'
 import { Button, Snackbar } from '@material-ui/core'
 import { Row } from 'Components'
-import { useSelector, useDispatch } from 'react-redux'
-import useEventCallback from 'Hooks/useEventCallback'
+import { useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { get } from 'lodash'
 import { postEventCreateHandler } from 'Redux/EventCreate/eventCreate.action'
+import useAuthorizationRequest from 'Hooks/useAuthorizationRequest'
 
 const EventSubmit = ({ values }) => {
-  const dispatch = useDispatch()
   const isValid = useMemo(
     () => Object.keys(values).every(item => values[item]),
     [values]
   )
 
-  const _handleSubmit = useEventCallback(() => {
-    const submitEvent = async () => {
-      const data = values
-      await dispatch(postEventCreateHandler({ options: { data } }))
-      console.log('asdjkhkj')
-    }
-    submitEvent()
+  const [_handleSubmit] = useAuthorizationRequest(postEventCreateHandler, {
+    options: { data: values }
   })
 
   const isLoading = useSelector(state => get(state, 'eventCreate.isFetching'))
