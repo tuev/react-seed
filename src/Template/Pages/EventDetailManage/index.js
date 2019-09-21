@@ -42,7 +42,7 @@ const EventDetailManage = ({ match, history }) => {
   return (
     <Container>
       <Row>
-        <Col md='4' xs='0' display={['none', 'none', 'block', 'block']}>
+        <Col md='3' xs='0' display={['none', 'none', 'block', 'block']}>
           <EventTabs value={value} handleChange={handleChange} />
         </Col>
         <Col md='12' xs='0' display={['block', 'block', 'none', 'none']}>
@@ -56,7 +56,7 @@ const EventDetailManage = ({ match, history }) => {
             }}
           />
         </Col>
-        <Col md='8' xs='12'>
+        <Col md='9' xs='12'>
           <EventPanels value={value} setValue={setValue} />
         </Col>
       </Row>
