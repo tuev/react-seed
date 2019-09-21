@@ -3,7 +3,7 @@ import { HashRouter, Switch, Route } from 'react-router-dom'
 import PrivateRoute from 'Containers/PrivateRoute'
 import Page404 from './Pages/404'
 import Header from './Header'
-import Footer from './Footer'
+// import Footer from './Footer'
 import pageConfigs from './pageConfigs'
 import { MainWrapper } from './main.style'
 
@@ -26,7 +26,7 @@ export default function main () {
             <Route component={Page404} />
           </Switch>
         </MainWrapper>
-        <Footer />
+        {/* <Footer /> */}
       </HashRouter>
     </div>
   )

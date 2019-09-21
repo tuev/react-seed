@@ -8,10 +8,10 @@ const EventSection = ({ icon, title, description, children }) => {
     <EventSectionWrapper>
       <Row
         className='align-items-center'
-        px={['.5rem', '60px', '120px']}
+        px={['0', '.5rem', '1rem', '2rem']}
         display='flex'
       >
-        <Col xs={12} sm={2} py='16px' className='align-self-start'>
+        <Col xs={12} sm={2} py='16px' className='align-self-start text-left'>
           <FontAwesomeIcon icon={icon} size='lg' />
         </Col>
         <Col xs={12} sm={10} className='text-left'>

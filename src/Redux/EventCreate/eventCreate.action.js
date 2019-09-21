@@ -45,8 +45,17 @@ const updateEventCreateHandler = ({ options = {}, id = '', token }) => ({
   }
 })
 
+const changeEventCreateDataHandler = ({ data }) => ({
+  type: actionTypes.EVENT_CREATE_CHANGE,
+  payload: data
+})
+
+const clearError = () => ({ type: actionTypes.EVENT_CREATE_CLEAR_ERROR })
+
 export {
   requestEventCreateHandler,
   postEventCreateHandler,
-  updateEventCreateHandler
+  updateEventCreateHandler,
+  changeEventCreateDataHandler,
+  clearError
 }

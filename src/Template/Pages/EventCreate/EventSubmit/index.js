@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useCallback, useState } from 'react'
 import { useSpring, animated } from 'react-spring'
 import { Button, Snackbar } from '@material-ui/core'
 import { Row } from 'Components'
+import { withRouter } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
@@ -9,19 +10,30 @@ import { get } from 'lodash'
 import { postEventCreateHandler } from 'Redux/EventCreate/eventCreate.action'
 import useAuthorizationRequest from 'Hooks/useAuthorizationRequest'
 
-const EventSubmit = ({ values }) => {
+const EventSubmit = ({ values, history }) => {
+  const [errorMessage, toggleError] = useState(false)
   const isValid = useMemo(
     () => Object.keys(values).every(item => values[item]),
     [values]
   )
 
-  const [_handleSubmit] = useAuthorizationRequest(postEventCreateHandler, {
-    options: { data: values }
-  })
+  const _redirect = useCallback(
+    data => {
+      const isError = get(data, 'error')
+      if (isError) return toggleError(isError)
+      const id = get(data, ['data', '_id'])
+      history.push(`/manage/${id}`)
+    },
+    [history]
+  )
+
+  const [_handleSubmit] = useAuthorizationRequest(
+    postEventCreateHandler,
+    { options: { data: values } },
+    { callback: _redirect }
+  )
 
   const isLoading = useSelector(state => get(state, 'eventCreate.isFetching'))
-  const error = useSelector(state => get(state, 'eventCreate.error'))
-  console.log(error)
   const props = useSpring({
     transform: isValid ? 'translateY(0)' : 'translateY(58px)',
     position: 'fixed',
@@ -32,6 +44,13 @@ const EventSubmit = ({ values }) => {
     padding: '0 22%',
     zIndex: 2
   })
+
+  useEffect(
+    () => {
+      setTimeout(() => errorMessage && toggleError(false), 500)
+    },
+    [errorMessage]
+  )
 
   return (
     <>
@@ -57,8 +76,8 @@ const EventSubmit = ({ values }) => {
         </Row>
       </animated.div>
       <Snackbar
-        open={!!error}
-        message='Server error !'
+        open={!!errorMessage}
+        message={errorMessage || 'Server error !'}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         autoHideDuration={500}
         variant='error'
@@ -67,4 +86,4 @@ const EventSubmit = ({ values }) => {
   )
 }
 
-export default EventSubmit
+export default withRouter(EventSubmit)

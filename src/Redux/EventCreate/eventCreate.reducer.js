@@ -1,8 +1,20 @@
+import moment from 'moment'
 import { get } from 'lodash'
 import * as actionTypes from './actionType'
 
 const initState = {
-  data: {},
+  data: {
+    name: '',
+    type: 'tour',
+    category: 'charity',
+    organizer: '',
+    addressType: 'revenue',
+    address: '',
+    timeStart: new Date(),
+    timeEnd: moment()
+      .add('1', 'y')
+      .toDate()
+  },
   isFetching: false,
   error: false
 }
@@ -20,7 +32,7 @@ const eventCreateReducer = (state = initState, action = {}) => {
   case actionTypes.EVENT_CREATE_FAILURE:
     return {
       ...state,
-      error: true,
+      error: action.error || true,
       isFetching: false
     }
   case actionTypes.EVENT_CREATE_SUCCESS:
@@ -29,6 +41,19 @@ const eventCreateReducer = (state = initState, action = {}) => {
       isFetching: false,
       error: false,
       data
+    }
+  case actionTypes.EVENT_CREATE_CHANGE:
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        ...action.payload
+      }
+    }
+  case actionTypes.EVENT_CREATE_CLEAR_ERROR:
+    return {
+      ...state,
+      error: false
     }
   default:
     return state

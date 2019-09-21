@@ -7,7 +7,8 @@ import {
   background,
   border,
   shadow,
-  flexbox
+  flexbox,
+  typography
 } from 'styled-system'
 
 const AppCol = styled(Col)`
@@ -18,6 +19,7 @@ const AppCol = styled(Col)`
   ${border}
   ${flexbox}
   ${shadow}
+  ${typography}
 `
 
 export default AppCol

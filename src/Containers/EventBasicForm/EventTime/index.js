@@ -6,20 +6,15 @@ import {
   KeyboardDateTimePicker
 } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
-import { EVENT_CHANGE } from '../eventActionType'
 import EventSection from '../EventSection'
 
-const EventTime = ({ values, dispatch }) => {
-  const handleChange = useCallback(
-    property => value =>
-      dispatch({
-        type: EVENT_CHANGE,
-        property,
-        payload: value
-      }),
-    [dispatch]
+const EventTime = ({ values = {}, onChange }) => {
+  const onTimeChange = useCallback(
+    type => value => {
+      onChange(type)(value)
+    },
+    [onChange]
   )
-
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <EventSection
@@ -37,7 +32,7 @@ const EventTime = ({ values, dispatch }) => {
               fullWidth
               maxDate={values.timeEnd}
               value={values.timeStart}
-              onChange={handleChange('timeStart')}
+              onChange={onTimeChange('timeStart')}
               KeyboardButtonProps={{
                 'aria-label': 'change date'
               }}
@@ -52,7 +47,7 @@ const EventTime = ({ values, dispatch }) => {
               minDate={values.timeStart}
               fullWidth
               value={values.timeEnd}
-              onChange={handleChange('timeEnd')}
+              onChange={onTimeChange('timeEnd')}
               KeyboardButtonProps={{
                 'aria-label': 'change time'
               }}

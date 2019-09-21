@@ -5,7 +5,7 @@ const reducer = (state, action) => {
   case EVENT_CHANGE:
     return {
       ...state,
-      ...action.payload
+      [action.property]: action.payload
     }
   default:
     return state

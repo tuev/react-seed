@@ -1,12 +1,10 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useCallback } from 'react'
+import EventBasicForm from 'Containers/EventBasicForm'
 import { Container } from 'reactstrap'
 import moment from 'moment'
-import { Form } from 'Components'
-import eventReducer from './eventReducer'
-import EventBasicInfo from './EventBasicInfo'
-import EventLocation from './EventLocation'
-import EventTime from './EventTime'
 import EventSubmit from './EventSubmit'
+import eventReducer from './eventReducer'
+import { EVENT_CHANGE } from './eventActionType'
 
 const EventCreate = () => {
   const [values, dispatch] = useReducer(eventReducer, {
@@ -14,23 +12,26 @@ const EventCreate = () => {
     type: 'tour',
     category: 'charity',
     organizer: '',
-    locationType: 'revenue',
-    location: '',
+    addressType: 'revenue',
+    address: '',
     timeStart: new Date(),
     timeEnd: moment().add('1', 'y')
   })
-
-  // TODO: Should create a Form component atke a layout + items
-  // TODO: ADD FORM VALIDATION
+  const onChange = useCallback(
+    propObj =>
+      dispatch({
+        type: EVENT_CHANGE,
+        payload: propObj
+      }),
+    []
+  )
   return (
-    <Container>
-      <Form width='100%'>
-        <EventBasicInfo values={values} dispatch={dispatch} />
-        <EventLocation values={values} dispatch={dispatch} />
-        <EventTime values={values} dispatch={dispatch} />
-      </Form>
-      <EventSubmit values={values} dispatch={dispatch} />
-    </Container>
+    <>
+      <Container>
+        <EventBasicForm values={values} onChange={onChange} />
+      </Container>
+      <EventSubmit values={values} />
+    </>
   )
 }
 
