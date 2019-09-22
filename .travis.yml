@@ -1,17 +1,14 @@
 stages:
   - lint
   - test
-
 language: node_js
 node_js:
-  - 'stable'
+  - stable
 addons:
   apt:
     packages:
       - libnotify-bin
-
 install: npm ci --ignore-scripts
-
 before_script: npm install -g npm@5.8.0
 before_install: |
   [[ ! -x ~/npm/node_modules/.bin/npm ]] && {
@@ -19,12 +16,10 @@ before_install: |
     cd -
   } || true
   export PATH=~/npm/node_modules/.bin:$PATH
-
 cache:
   directories:
-    - ~/.npm # cache npm's cache
-    - ~/npm # cache latest npm
-
+    - '~/.npm'
+    - '~/npm'
 jobs:
   include:
     - stage: test
@@ -63,10 +58,22 @@ sudo: false
 before_deploy:
   - rm -rf node_modules
 deploy:
-  provider: heroku
-  api_key:
-    secure: GA0Gw5A3XcCm7JkFi21VqAqxGXkl5QWrRPOSzY/IQl5ya/PBGQ+ZQld5pwTKkO7bzSeUvJNoyf4NM3hErPR4nGQhFyyCMSuhJ/lD+SaUOs+pZOq6UhGro1CHB7+q5Vww9kd7h/oCQdLca0+ZNkyWV1G3C4yax6FntG3VNh76O/55GMucLF3Xo4u/yx2UXyKMKV+sAtuZL/GwbQuytq9WFrtCrr1Wjxn6ub6IeTdybMCIIwaompzLYVfNXIjK6b6VAZiHUcmoudAwR+oDQYiBc4TjpScqwrVbLLLhEeNL4C6xRuBtMdVUznLcysdbnKze42TgUuW3tvv3ZNgtKwLJw6xuicWPZfYOnqGKcySgsMDiEjAWlFKI1uImddOd43Xdu80csQ61WtNVRfoXZOCOI7GRibUe+arNYE53UzWrbytu0XgDjdfjlC4B432Mq8Dl9bFkmPr3zU03TMw0ggDd+0/s7Sesyqpcol0qtVR0Cvq8wWH+/HcLHAhloZn9NqgaFrQpELEnGPeBPJX+Z7tydZRY2WvXt0DzhX/tFhfH3nioABezbFVwpiHVEHXPCB7Jc0Y7B1N1XJAx5inBthZBQdUCD/EFCTkf3sKvypPBBoDHvPFzetLoRgzdf49zNUmKAv5WyYsWbp7IfgwSSs88QyhxfF0/rPEx+AY/VSLsGIQ=
-  app: react-seed-starter
-  skip_cleanup: true
+  - provider: heroku
+    api_key:
+      secure: GA0Gw5A3XcCm7JkFi21VqAqxGXkl5QWrRPOSzY/IQl5ya/PBGQ+ZQld5pwTKkO7bzSeUvJNoyf4NM3hErPR4nGQhFyyCMSuhJ/lD+SaUOs+pZOq6UhGro1CHB7+q5Vww9kd7h/oCQdLca0+ZNkyWV1G3C4yax6FntG3VNh76O/55GMucLF3Xo4u/yx2UXyKMKV+sAtuZL/GwbQuytq9WFrtCrr1Wjxn6ub6IeTdybMCIIwaompzLYVfNXIjK6b6VAZiHUcmoudAwR+oDQYiBc4TjpScqwrVbLLLhEeNL4C6xRuBtMdVUznLcysdbnKze42TgUuW3tvv3ZNgtKwLJw6xuicWPZfYOnqGKcySgsMDiEjAWlFKI1uImddOd43Xdu80csQ61WtNVRfoXZOCOI7GRibUe+arNYE53UzWrbytu0XgDjdfjlC4B432Mq8Dl9bFkmPr3zU03TMw0ggDd+0/s7Sesyqpcol0qtVR0Cvq8wWH+/HcLHAhloZn9NqgaFrQpELEnGPeBPJX+Z7tydZRY2WvXt0DzhX/tFhfH3nioABezbFVwpiHVEHXPCB7Jc0Y7B1N1XJAx5inBthZBQdUCD/EFCTkf3sKvypPBBoDHvPFzetLoRgzdf49zNUmKAv5WyYsWbp7IfgwSSs88QyhxfF0/rPEx+AY/VSLsGIQ=
+    app: react-seed-starter
+    skip_cleanup: true
+  - provider: firebase
+    project: bright-smile
+    before_deploy: npm run build
+    on:
+      branch: staging
+    token:
+      secure: fWS3+uJXPuzxuvS2CgFKN8QBt9PO+DGVWsL1bHvc8sF8XFy2C62XCbI3HjiQlqnaonyzemUHA/GNiR237IR/pQhM4SsJ0vPH73FdP338bEEbuLryfJ+4PRwRwBBCI+nJ1YG5JsOm0+X9W6WOpr5UEXMRkh0BBsEKUbecEI6vcpS5In8eCQT/OVfawcWVQRarc/WCzxkqnpvh3E0hCIWlF4cHUNQxI2z4R2fvGHFY4a4ey+GT9iUBa3M+DUxfMx/dAX0xI2DjIatJ+CFhGXwSQOZetHNOOvXmXIYldroo0VL2//5BmX2tlbm5aGrZW4wfFAqRE3kuxCSDDK42N+R0A3sXzg+8KTvmG6mZylu+vNVHAX89y+KG2/MwbDFZN3kzQHn6lGkl/FtGx6O4bnqjppZue6icuSlVYg2SAZxS2lQSQ4D4ub8eF3BZbaw/1vcoxG6XTIfQziBaI1JOkTAiTsSeCrA/xNiSCPWm/J0v6rXUxEiieFXXYe2dAO3KSzmv/pa+t2Csc4C8KJxlMRKlsDQl++5++RZbLI3LKaKJMpeXLOx0phidedH6tAOR3jlILEngGXQUiX3Bm6ZvWe+oqg3NSHwv2YlJtSkNGxekpk4rvVsYQGmR2YWLWAPyLHeN56cEApmWUxxChnl7LnjJ9Hxnsy/vdEMIAC0OSS/aoEo=
 notifications:
   webhooks: https://hooks.slack.com/services/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
+env:
+  global:
+    - secure: IUFCTrmqwMCdvA1gX7VtD90QAgKS7yEA4KSupDOIAtO7pcrpW7266KCS8BIcrMwWHY83DID4pkaWe0hCAme/vCiC8mr01rGq3P7Y4W7whztI/7xsOUx//fuNBEdrlHKqsj2ZCMDu4I4Ooi/m9ld1HqS1Lf5BBj9wAgNZpWbuZBjlJzCbEiNWWeemYB0LB6XC73TeHLHH3AZY7EtBFTi/65o5pmJr66UKJbZAhjWYXb+qmEI/a6C55MrSAvcXME5VPHA7mKTOZ+Kf91ersTqXySj3BYJJ355v9Q4Elux3XE45VsaUEKBqRTDIWGtnSsKSsG1FLtTjF17UniGKZvnyrhM7aJHtT1xsiOEeZrkwyro2DsdzINK2KKuzlvkysZbrmMPnT28BpVXJ1VkySL6wPOY1iQuvWpV4XzG3n6mOMOlcfb2Qj/AQJbVHnvzG85Uym5uh57Eab/BcKvmOa2bBbQ6igtmOLWk+6JYAldTf5XAb0iiq0zA8uRT9LHsv0eCvExfotx+7mGnkkqF6UwYQmsshKkuL3H1MP2V5JQK9EPs9+x8Qztgze4a/SbXcRw2hl71eB8qa/GiiUFcrTwd7XAqch+Jvsibr7IRp4L3XusbLAnumd2G0bDZD0W41QScIRWXOJN+kmVTXeOfHFTyheSbMlmfOko8VUNjRHLiriro=
+    - secure: pb94WQx/l1FYbp0OJ2EmCF0z/6fhkrRtRzr8YnQ7HA4F9z1xUEF5Zv0IsgjHpRBWPt62aJyYT5nF+GTS10ADrSTcpp27P5gL9C584oASvL/yUHggkYsudTmeEr7/vTMdP0dkrzt3s7gLkuatY1c1fy+GWOGSvX9pZ7S1SuyrVDHwIjFzinqbBVAAyMvfPMjMJOssJhy9jvUN9iAg/FGkoQcvH7LPEK8VAU5bMXv8YcH2LKsM/DQoPX+K/W5FTMIACNbo2XnehNHBbIvnb/7cFYEmKakXeYER6QxnFPzx1RvYX//bMTORfLMtAVtAQbDLQU59wGldXtlQJgZuFoABs6SMuAduN6Bt9rGNS1EqnxycN2d1e/YRvJdokbBLiK66CYAWDvX7QG6x6yAook9XiEPMjYsail7a6ZAZQCcqgAJX3a2gC0EJItWTufgxzKMs/cI+pmyxCJ+PbsZB/Is9eBsKEKKYTVjhIR8CjkRjeVA6aQVNYB/v+FGU4yQigpUwG0nRrdSaQeuCnhXnTbmUHmTQ6A4gp5/dRWZZ/8vIPrVTRj8iZATypGII79H2anskIp+M8f9mjVUD9dQuOkeYReOkCtm/uCNGii6sspV0yW3qluooLLuBCSDRjwfgB57w2P4JT7kaeypGjm5TTORHHAW7l9ypr38ctwz+B6f5HxQ=
+    - secure: I3EQbXbAj17SbJBpKtlonO1y61LCaq1uFjdKwb5AiI+nBLCK1Gvd2xn1wbHLLY2HEtyDtxh6HcfISypq61POHIz4tjK4HkgPq8PEwQA1/b/9uUg8McYJ7s/AOOUDYzLErEmchjC+1m5Szs6c8ArlxQ3aJ3J1L2ek0/KMrF81vNEQ7dsvShgku5fODbNasOgh5a1Znn09Xw4XH0SvYgvc4LPL911q8yIoPvOb3HbP5PwFABacGtB/KfwKhDN5/eVQumMLe1aTZyleF/4R7g3V1kLygrTbNj+tl7onmEwpJo6ZexuLgZiN2qwIupW//rL1y2r94EUV+t/SlnrxQqKnb2ZEq+XFR8R7DT5sdwLmbPV5echK5jUvpwP9F9uD6dXp1SRMoE7IBVOoBEWMOFkBdC/3XBHagJOeiKDw7TmDc39Jgw5aEW6jptLAeXcYl9hlYsbzXK+mbs0jdUF8R2ry+b+llAY0DhrsA/a1K03csdnak7LrXLBusRwAifSoCTKZQ+waqnbock5NfRuhCCQQowyeRgF0VFx1s5ovH4xdk7dRCqlbB1UU3xp9oaczRuhNxmmLvXmNMMVn/Nsn92GoO/CYfysWk/+BCRZnTCVZSPIDEmy9I+Ss+HsRnZx+t6VR/s70MUKrqbWsNyevBz2Pm6gynMA7XfDnBVIqOWZjsS8=
