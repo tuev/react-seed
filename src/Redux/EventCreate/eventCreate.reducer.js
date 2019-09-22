@@ -50,6 +50,8 @@ const eventCreateReducer = (state = initState, action = {}) => {
         ...action.payload
       }
     }
+  case actionTypes.EVENT_CREATE_CLEAR:
+    return initState
   case actionTypes.EVENT_CREATE_CLEAR_ERROR:
     return {
       ...state,

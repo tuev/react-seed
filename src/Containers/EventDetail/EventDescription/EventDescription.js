@@ -25,13 +25,17 @@ const EventDescription = () => {
     timeInfo
   ])
 
+  const createMarkup = () => {
+    return { __html: description }
+  }
+
   return (
     <Row className='event-detail__description'>
       <Col md='9' xs='12'>
         <div className='event-detail__description--description'>
           <h4 className='my-2'>Description</h4>
           <p className='text-left'>
-            <span>{description}</span>
+            <div dangerouslySetInnerHTML={createMarkup()} />
           </p>
           <div className='share-event'>
             <h5>Share With Friends</h5>

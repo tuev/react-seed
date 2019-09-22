@@ -11,10 +11,10 @@ const EventSection = ({ icon, title, description, children }) => {
         px={['0', '.5rem', '1rem', '2rem']}
         display='flex'
       >
-        <Col xs={12} sm={2} py='16px' className='align-self-start text-left'>
+        <Col xs={12} sm={1} py='16px' className='align-self-start text-left'>
           <FontAwesomeIcon icon={icon} size='lg' />
         </Col>
-        <Col xs={12} sm={10} className='text-left'>
+        <Col xs={12} sm={11} className='text-left'>
           <Text
             color='#1e0a3c'
             fontSize='1.875rem'

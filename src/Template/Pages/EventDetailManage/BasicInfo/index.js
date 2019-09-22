@@ -18,11 +18,7 @@ const BasicInfo = () => {
     [dispatch]
   )
 
-  return (
-    <div>
-      <EventBasicForm values={basicInfoValue} onChange={onChange} />
-    </div>
-  )
+  return <EventBasicForm values={basicInfoValue} onChange={onChange} />
 }
 
 export default BasicInfo

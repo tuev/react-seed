@@ -1,19 +1,47 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import Stepper from '@material-ui/core/Stepper'
+import { Step, StepLabel, StepContent, Divider } from '@material-ui/core'
 import { Container } from 'reactstrap'
-import { requestEventCreateHandler } from 'Redux/EventCreate/eventCreate.action'
-import { get } from 'lodash'
-import { withRouter } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col } from 'Components'
-
 import useAuthorizationRequest from 'Hooks/useAuthorizationRequest'
-import EventTabs from './EventTabs'
-import EventPanels from './EventPanels'
+import { requestEventCreateHandler } from 'Redux/EventCreate/eventCreate.action'
+import { useDispatch, useSelector } from 'react-redux'
+import { get } from 'lodash'
+import { Text } from 'Components'
+import { withRouter } from 'react-router-dom'
+import BasicInfo from './BasicInfo'
+import EventDescription from './EventDescription'
+import StepController from './StepController'
+
+function getSteps () {
+  return ['Basic info', 'Description']
+}
+
+function getStepContent (step) {
+  switch (step) {
+  case 0:
+    return <BasicInfo />
+  case 1:
+    return <EventDescription />
+    // todo: add social publish
+    // case 2:
+    //   return (
+    //     <div>
+    //         asdas
+    //       <h1>asdas</h1>
+    //     </div>
+    //   )
+  default:
+    return 'Unknown step'
+  }
+}
 
 const EventDetailManage = ({ match, history }) => {
-  const [value, setValue] = useState(0)
+  const [activeStep, setActiveStep] = React.useState(1)
+  const steps = getSteps()
+  const _handleNext = () => setActiveStep(prevActiveStep => prevActiveStep + 1)
+  const _handleBack = () => setActiveStep(prevActiveStep => prevActiveStep - 1)
+
   const dispatch = useDispatch()
-  const handleChange = useCallback((_, newValue) => setValue(newValue), [])
   const error = useSelector(state => get(state, ['eventCreate', 'error']))
   const id = get(match, 'params.id')
 
@@ -31,7 +59,7 @@ const EventDetailManage = ({ match, history }) => {
     () => {
       !eventId && getEventData()
     },
-    [dispatch, eventId, getEventData, match]
+    [dispatch, eventId, getEventData]
   )
   useEffect(() => {
     if (error && (error.indexOf('404') > 0 || error.indexOf('403'))) {
@@ -41,25 +69,37 @@ const EventDetailManage = ({ match, history }) => {
 
   return (
     <Container>
-      <Row>
-        <Col md='3' xs='0' display={['none', 'none', 'block', 'block']}>
-          <EventTabs value={value} handleChange={handleChange} />
-        </Col>
-        <Col md='12' xs='0' display={['block', 'block', 'none', 'none']}>
-          <EventTabs
-            value={value}
-            handleChange={handleChange}
-            tabProps={{
-              orientation: 'horizontal',
-              center: 1,
-              variant: 'fullWidth'
-            }}
-          />
-        </Col>
-        <Col md='9' xs='12'>
-          <EventPanels value={value} setValue={setValue} />
-        </Col>
-      </Row>
+      <div style={{ paddingBottom: 70 }}>
+        <Stepper activeStep={activeStep} orientation='vertical'>
+          {steps.map((label, index) => (
+            <Step key={label}>
+              <StepLabel>
+                <div className='position-relative'>
+                  <Divider absolute variant='inset' style={{ top: '50%' }} />
+                  <Text
+                    fontSize={24}
+                    fontWeight={500}
+                    p='4'
+                    bg='white'
+                    className='position-relative'
+                  >
+                    {label}
+                  </Text>
+                </div>
+              </StepLabel>
+              <StepContent className='position-relative'>
+                {getStepContent(index)}
+                <StepController
+                  activeStep={activeStep}
+                  handleBack={_handleBack}
+                  handleNext={_handleNext}
+                  steps={steps}
+                />
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+      </div>
     </Container>
   )
 }

@@ -51,11 +51,13 @@ const changeEventCreateDataHandler = ({ data }) => ({
 })
 
 const clearError = () => ({ type: actionTypes.EVENT_CREATE_CLEAR_ERROR })
+const clearData = () => ({ type: actionTypes.EVENT_CREATE_CLEAR })
 
 export {
   requestEventCreateHandler,
   postEventCreateHandler,
   updateEventCreateHandler,
   changeEventCreateDataHandler,
-  clearError
+  clearError,
+  clearData
 }

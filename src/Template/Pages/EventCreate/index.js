@@ -1,12 +1,15 @@
-import React, { useReducer, useCallback } from 'react'
+import React, { useReducer, useCallback, useEffect } from 'react'
 import EventBasicForm from 'Containers/EventBasicForm'
 import { Container } from 'reactstrap'
 import moment from 'moment'
+import { clearData } from 'Redux/EventCreate/eventCreate.action'
+import { useDispatch } from 'react-redux'
 import EventSubmit from './EventSubmit'
 import eventReducer from './eventReducer'
 import { EVENT_CHANGE } from './eventActionType'
 
 const EventCreate = () => {
+  const globalDispatch = useDispatch()
   const [values, dispatch] = useReducer(eventReducer, {
     name: '',
     type: 'tour',
@@ -25,6 +28,10 @@ const EventCreate = () => {
       }),
     []
   )
+  useEffect(() => {
+    globalDispatch(clearData())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <>
       <Container>
