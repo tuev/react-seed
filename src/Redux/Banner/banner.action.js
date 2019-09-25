@@ -5,7 +5,11 @@ import * as eventBannerActionType from './actionType'
 const defaultFieldSelect = ['_id', 'image', 'banner']
 
 const defaultOption = {
-  params: { limit: 10, select: JSON.stringify(defaultFieldSelect) }
+  params: {
+    limit: 10,
+    select: JSON.stringify(defaultFieldSelect),
+    populate: JSON.stringify([{ path: 'author' }, { path: 'banner' }])
+  }
 }
 
 const requestEventBannerHandler = ({ options = {}, endpoint = '' }) => ({

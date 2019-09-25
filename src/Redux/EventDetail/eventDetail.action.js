@@ -1,5 +1,12 @@
 import { REQUEST_API } from 'Middlewares/api'
+import { merge } from 'lodash'
 import * as actionTypes from './actionType'
+
+const defaultOptions = {
+  params: {
+    populate: JSON.stringify([{ path: 'author' }, { path: 'banner' }])
+  }
+}
 
 const requestEventDetailHandler = ({ options = {}, id = '' }) => ({
   [REQUEST_API]: {
@@ -9,7 +16,7 @@ const requestEventDetailHandler = ({ options = {}, id = '' }) => ({
       actionTypes.EVENT_DETAIL_FAILURE
     ],
     endpoint: `event/${id}`,
-    options
+    options: merge(defaultOptions, options)
   }
 })
 

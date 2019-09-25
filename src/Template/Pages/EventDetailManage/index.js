@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import Stepper from '@material-ui/core/Stepper'
+import useAuthorizationRequest from 'Hooks/useAuthorizationRequest'
 import { Step, StepLabel, StepContent, Divider } from '@material-ui/core'
 import { Container } from 'reactstrap'
-import useAuthorizationRequest from 'Hooks/useAuthorizationRequest'
 import { requestEventCreateHandler } from 'Redux/EventCreate/eventCreate.action'
 import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash'
@@ -11,9 +11,10 @@ import { withRouter } from 'react-router-dom'
 import BasicInfo from './BasicInfo'
 import EventDescription from './EventDescription'
 import StepController from './StepController'
+import BannerUpload from './BannerUpload'
 
 function getSteps () {
-  return ['Basic info', 'Description']
+  return ['Basic info', 'Description', 'Banner Upload']
 }
 
 function getStepContent (step) {
@@ -23,13 +24,8 @@ function getStepContent (step) {
   case 1:
     return <EventDescription />
     // todo: add social publish
-    // case 2:
-    //   return (
-    //     <div>
-    //         asdas
-    //       <h1>asdas</h1>
-    //     </div>
-    //   )
+  case 2:
+    return <BannerUpload />
   default:
     return 'Unknown step'
   }

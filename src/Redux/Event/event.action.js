@@ -16,7 +16,8 @@ const defaultOptions = {
   params: {
     limit: process.env.REACT_APP_PAGE_LIMIT,
     skip: 0,
-    select: JSON.stringify(defaultFieldSelect)
+    select: JSON.stringify(defaultFieldSelect),
+    populate: JSON.stringify([{ path: 'author' }, { path: 'banner' }])
   }
 }
 

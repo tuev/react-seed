@@ -2,7 +2,9 @@ import { merge } from 'lodash'
 import { REQUEST_API } from 'Middlewares/api'
 import * as actionTypes from './actionType'
 
-const defaultOptions = { params: { populate: 'author' } }
+const defaultOptions = {
+  params: { populate: JSON.stringify([{ path: 'author' }, { path: 'banner' }]) }
+}
 
 const requestEventCreateHandler = ({ options = {}, id = '', token } = {}) => ({
   [REQUEST_API]: {
@@ -38,7 +40,7 @@ const updateEventCreateHandler = ({ options = {}, id = '', token }) => ({
       actionTypes.EVENT_CREATE_SUCCESS,
       actionTypes.EVENT_CREATE_FAILURE
     ],
-    endpoint: `event/${id}`,
+    endpoint: `evt/${id}`,
     method: 'put',
     headers: { Authorization: `Bearer ${token}` },
     options: merge(defaultOptions, options)

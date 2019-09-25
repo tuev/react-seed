@@ -9,7 +9,7 @@ import './event.scss'
 
 const Item = ({
   history,
-  image = '',
+  banner = {},
   alt,
   date,
   locationData,
@@ -26,11 +26,13 @@ const Item = ({
     [history, restInfo]
   )
 
+  const url = useMemo(() => get(banner, 'url'), [banner])
+
   return (
     <Col lg='4' md='6' sm='12' className='event-item pl-0 pr-3 pb-3'>
       <div className='item' onClick={_handleOnItemSelect}>
         <Row className='item__image mx-0'>
-          <img src={image} alt={alt} />
+          <img src={url} alt={alt} />
           {price === 'Free' && (
             <div className='item__image--free d-flex position-absolute justify-content-center align-items-center'>
               <span>Free</span>

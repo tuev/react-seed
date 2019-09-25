@@ -5,7 +5,7 @@ import defaultBanner from './defaultBanner.jpg'
 
 const EventHeader = () => {
   const image = useSelector(state =>
-    get(state, 'eventDetail.data.banner', defaultBanner)
+    get(state, 'eventDetail.data.banner.url', defaultBanner)
   )
 
   return (

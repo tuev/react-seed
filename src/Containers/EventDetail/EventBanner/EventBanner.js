@@ -7,7 +7,7 @@ import eventImage from './defaultBanner.jpg'
 
 const EventBanner = () => {
   const image = useSelector(state =>
-    get(state, 'eventDetail.data.image', eventImage)
+    get(state, 'eventDetail.data.banner.url', eventImage)
   )
   const timeInfo = useSelector(state => get(state, 'eventDetail.data.date'))
   const name = useSelector(state => get(state, 'eventDetail.data.name'))

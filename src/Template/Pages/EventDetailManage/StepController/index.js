@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowCircleLeft,
@@ -8,15 +8,22 @@ import {
 import { useSelector } from 'react-redux'
 import { updateEventCreateHandler } from 'Redux/EventCreate/eventCreate.action'
 import useAuthorizationRequest from 'Hooks/useAuthorizationRequest'
-import { get } from 'lodash'
+import { get, keys } from 'lodash'
 import { Button } from '@material-ui/core'
+
+const _calculateForm = values => {
+  const form = new FormData()
+  keys(values).forEach(i => form.append(i, values[i]))
+  return form
+}
 
 const StepController = ({ activeStep, handleBack, handleNext, steps }) => {
   const values = useSelector(state => get(state, ['eventCreate', 'data']))
   const isLoading = useSelector(state => get(state, 'eventCreate.isFetching'))
   const isPublish = useSelector(state => values.status === 'published')
+  const formData = useMemo(() => _calculateForm(values), [values])
   const [_handleSubmit] = useAuthorizationRequest(updateEventCreateHandler, {
-    options: { data: values },
+    options: { data: formData },
     id: values._id
   })
 
@@ -72,17 +79,14 @@ const StepController = ({ activeStep, handleBack, handleNext, steps }) => {
           Submit
         </Button>
       )}
-      <Button
-        color='success'
-        size='large'
-        variant='contained'
-        onClick={_handlePublish}
-      >
-        {isLoading && (
-          <FontAwesomeIcon icon={faSpinner} spin size='xs' className='mr-2' />
-        )}
-        {!isPublish ? 'Publish' : 'Unpublish'}
-      </Button>
+      {activeStep === steps.length - 1 && (
+        <Button size='large' variant='contained' onClick={_handlePublish}>
+          {isLoading && (
+            <FontAwesomeIcon icon={faSpinner} spin size='xs' className='mr-2' />
+          )}
+          {!isPublish ? 'Publish' : 'Unpublish'}
+        </Button>
+      )}
     </div>
   )
 }
