@@ -2,7 +2,7 @@ import { merge } from 'lodash'
 import * as actionType from './actionType'
 
 const initState = {
-  isFetching: false,
+  isFetching: true,
   data: {},
   error: false
 }

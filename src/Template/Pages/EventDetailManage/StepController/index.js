@@ -20,12 +20,15 @@ const _calculateForm = values => {
 const StepController = ({ activeStep, handleBack, handleNext, steps }) => {
   const values = useSelector(state => get(state, ['eventCreate', 'data']))
   const isLoading = useSelector(state => get(state, 'eventCreate.isFetching'))
-  const isPublish = useSelector(state => values.status === 'published')
+  const isPublish = useSelector(
+    state => get(state, ['eventCreate', 'data', 'status']) === 'published'
+  )
   const formData = useMemo(() => _calculateForm(values), [values])
   const [_handleSubmit] = useAuthorizationRequest(updateEventCreateHandler, {
     options: { data: formData },
     id: values._id
   })
+  console.log(isPublish, 'isPu')
 
   const [_handlePublish] = useAuthorizationRequest(updateEventCreateHandler, {
     options: { data: { status: isPublish ? 'draft' : 'published' } },

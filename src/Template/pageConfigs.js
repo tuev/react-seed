@@ -19,7 +19,8 @@ const pageConfigs = [
   {
     path: '/manage/:id',
     component: EventDetailManage,
-    exact: true
+    exact: true,
+    private: true
   },
   {
     path: '/event/:id',
