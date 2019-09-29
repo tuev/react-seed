@@ -4,6 +4,7 @@ import EventDetail from './Pages/EventDetail'
 import LoginPage from './Pages/Login'
 import EventCreate from './Pages/EventCreate'
 import EventDetailManage from './Pages/EventDetailManage'
+import EventManage from './Pages/EventsManage'
 
 const pageConfigs = [
   {
@@ -15,6 +16,12 @@ const pageConfigs = [
     path: '/404',
     component: Page404,
     exact: true
+  },
+  {
+    path: '/manage',
+    component: EventManage,
+    exact: true,
+    private: true
   },
   {
     path: '/manage/:id',
@@ -35,12 +42,6 @@ const pageConfigs = [
   {
     path: '/create',
     component: EventCreate,
-    exact: true,
-    private: true
-  },
-  {
-    path: '/manage/event/:id',
-    component: EventDetailManage,
     exact: true,
     private: true
   }

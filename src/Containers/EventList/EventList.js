@@ -1,26 +1,13 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { Container, Row } from 'reactstrap'
-import { useDispatch } from 'react-redux'
-import { requestEventHandler } from 'Redux/Event/event.action'
 import useGetPagination from 'Hooks/useGetPagination'
 import { isEmpty } from 'lodash'
 import EventItem from 'Components/EventItem'
 import EventListPlaceHolder from './Placeholder'
-
 import './eventList.scss'
 
-const EventList = ({ subject = '', ...props }) => {
-  const dispatch = useDispatch()
+const EventList = ({ subject = '', history, ...props }) => {
   const { skip, limit, items, isFetching } = useGetPagination('event')
-  useEffect(
-    () => {
-      async function getEvent () {
-        dispatch(requestEventHandler())
-      }
-      getEvent()
-    },
-    [dispatch]
-  )
   const eventList = useMemo(
     () =>
       items
@@ -28,6 +15,7 @@ const EventList = ({ subject = '', ...props }) => {
         .map((item = {}) => ({ ...item, locationData: item.location })),
     [items, limit, skip]
   )
+
   return isFetching ? (
     <EventListPlaceHolder />
   ) : (
@@ -37,7 +25,13 @@ const EventList = ({ subject = '', ...props }) => {
       </Row>
       <Row>
         {!isEmpty(eventList) &&
-          eventList.map((item = {}) => <EventItem key={item._id} {...item} />)}
+          eventList.map((item = {}) => (
+            <EventItem
+              key={item._id}
+              redirect={props.redirect(item._id)}
+              {...item}
+            />
+          ))}
       </Row>
     </Container>
   )

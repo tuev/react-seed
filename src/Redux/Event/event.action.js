@@ -22,17 +22,25 @@ const defaultOptions = {
 }
 
 // Relies on the custom API middleware defined in Middleware/api.js.
-const requestEventHandler = ({ options = {}, endpoint = 'event' } = {}) => ({
-  [REQUEST_API]: {
-    types: [
-      actionTypes.EVENT_REQUEST,
-      actionTypes.EVENT_SUCCESS,
-      actionTypes.EVENT_FAILURE
-    ],
-    endpoint,
-    options: merge(defaultOptions, options)
+const requestEventHandler = ({
+  options = {},
+  endpoint = 'event',
+  token
+} = {}) => {
+  console.log(options, 'options')
+  return {
+    [REQUEST_API]: {
+      types: [
+        actionTypes.EVENT_REQUEST,
+        actionTypes.EVENT_SUCCESS,
+        actionTypes.EVENT_FAILURE
+      ],
+      endpoint,
+      headers: { Authorization: `Bearer ${token}` },
+      options: merge(defaultOptions, options)
+    }
   }
-})
+}
 
 const searchEvent = ({ type, value }) => ({
   type: actionTypes.EVENT_SEARCH,

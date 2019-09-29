@@ -27,12 +27,12 @@ const Authorization = ({ history, location }) => {
         ])
         await dispatch(updateProfileInfo({ data, endpoint: `oauth/${data.uid}` }))
         if (location.pathname === 'login') {
-          history.push('/')
+          history.back()
         }
       }
     }
   }
-
+  console.log('render author')
   return (
     <div className='d-flex justify-content-center align-items-center flex-column p-4'>
       <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth()} />

@@ -1,59 +1,80 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useCallback, useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowCircleLeft,
   faArrowCircleRight,
   faSpinner
 } from '@fortawesome/free-solid-svg-icons'
+import { EVENT_REQUIRED_FIELDS } from 'Config/constant'
 import { useSelector } from 'react-redux'
 import { updateEventCreateHandler } from 'Redux/EventCreate/eventCreate.action'
 import useAuthorizationRequest from 'Hooks/useAuthorizationRequest'
-import { get, keys } from 'lodash'
-import { Button } from '@material-ui/core'
+import { get, keys, isEmpty } from 'lodash'
+import { Button, Snackbar } from '@material-ui/core'
+import './step-controller.scss'
 
 const _calculateForm = values => {
   const form = new FormData()
-  keys(values).forEach(i => form.append(i, values[i]))
+  keys(values).forEach(i => {
+    const value = get(values[i], '_id', values[i])
+    form.append(i, value)
+  })
   return form
+}
+
+const _getErrorMessage = (items = []) => {
+  return items.map((item, index) =>
+    index === items.length - 1 ? item : `${item}`
+  )
 }
 
 const StepController = ({ activeStep, handleBack, handleNext, steps }) => {
   const values = useSelector(state => get(state, ['eventCreate', 'data']))
   const isLoading = useSelector(state => get(state, 'eventCreate.isFetching'))
-  const isPublish = useSelector(
-    state => get(state, ['eventCreate', 'data', 'status']) === 'published'
-  )
+
+  const [error, toggleError] = useState(false)
+
   const formData = useMemo(() => _calculateForm(values), [values])
-  const [_handleSubmit] = useAuthorizationRequest(updateEventCreateHandler, {
+  const [_submitEvent] = useAuthorizationRequest(updateEventCreateHandler, {
     options: { data: formData },
     id: values._id
   })
-  console.log(isPublish, 'isPu')
 
-  const [_handlePublish] = useAuthorizationRequest(updateEventCreateHandler, {
-    options: { data: { status: isPublish ? 'draft' : 'published' } },
-    id: values._id
-  })
+  const isInvalid = useMemo(
+    () => EVENT_REQUIRED_FIELDS.some(item => !values[item]),
+    [values]
+  )
+
+  const _handleSubmit = useCallback(
+    () => {
+      if (isInvalid) {
+        return toggleError(EVENT_REQUIRED_FIELDS.filter(item => !values[item]))
+      }
+      _submitEvent()
+    },
+    [_submitEvent, isInvalid, values]
+  )
+
+  const errorMessage = useMemo(
+    () => (isEmpty(error) ? '' : `Please fill ${_getErrorMessage(error)}`),
+    [error]
+  )
+
+  useEffect(
+    () => {
+      setTimeout(() => error && toggleError(false), 2000)
+    },
+    [error]
+  )
 
   return (
-    <div
-      className='position-fixed d-flex justify-content-end align-items-center'
-      style={{
-        bottom: 0,
-        left: 0,
-        background: 'white',
-        padding: '16px 32px',
-        width: '100%',
-        height: 70,
-        boxShadow: '0 8px 20px -9px rgba(0, 0, 0, 0.3)'
-      }}
-    >
+    <div className='step-controller__wrapper'>
       {activeStep !== 0 && (
         <div style={{ cursor: 'pointer' }}>
           <FontAwesomeIcon
             icon={faArrowCircleLeft}
-            size='lg'
-            className='mx-2'
+            size='2px'
+            className='mx-2 fa-2x'
             onClick={handleBack}
           />
         </div>
@@ -62,8 +83,8 @@ const StepController = ({ activeStep, handleBack, handleNext, steps }) => {
         <div style={{ cursor: 'pointer' }}>
           <FontAwesomeIcon
             icon={faArrowCircleRight}
-            size='lg'
-            className='mx-2'
+            size='2px'
+            className='mx-2 fa-2x'
             onClick={handleNext}
           />
         </div>
@@ -82,14 +103,13 @@ const StepController = ({ activeStep, handleBack, handleNext, steps }) => {
           Submit
         </Button>
       )}
-      {activeStep === steps.length - 1 && (
-        <Button size='large' variant='contained' onClick={_handlePublish}>
-          {isLoading && (
-            <FontAwesomeIcon icon={faSpinner} spin size='xs' className='mr-2' />
-          )}
-          {!isPublish ? 'Publish' : 'Unpublish'}
-        </Button>
-      )}
+      <Snackbar
+        variant='error'
+        message={errorMessage}
+        open={!!error}
+        autoHideDuration={4000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      />
     </div>
   )
 }

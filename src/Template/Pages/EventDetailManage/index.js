@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import Stepper from '@material-ui/core/Stepper'
 import useAuthorizationRequest from 'Hooks/useAuthorizationRequest'
 import { Step, StepLabel, StepContent, Divider } from '@material-ui/core'
@@ -12,9 +12,11 @@ import BasicInfo from './BasicInfo'
 import EventDescription from './EventDescription'
 import StepController from './StepController'
 import BannerUpload from './BannerUpload'
+import EventStatus from './EventStatus'
+import EventStepperIcon from './StepIcon'
 
 function getSteps () {
-  return ['Basic info', 'Description', 'Banner Upload']
+  return ['Basic info', 'Description', 'Banner Upload', 'Event Status']
 }
 
 function getStepContent (step) {
@@ -26,6 +28,8 @@ function getStepContent (step) {
     // todo: add social publish
   case 2:
     return <BannerUpload />
+  case 3:
+    return <EventStatus />
   default:
     return 'Unknown step'
   }
@@ -36,6 +40,10 @@ const EventDetailManage = ({ match, history }) => {
   const steps = getSteps()
   const _handleNext = () => setActiveStep(prevActiveStep => prevActiveStep + 1)
   const _handleBack = () => setActiveStep(prevActiveStep => prevActiveStep - 1)
+  const _toggleStep = useCallback(
+    activeStep => e => setActiveStep(activeStep),
+    []
+  )
 
   const dispatch = useDispatch()
   const error = useSelector(state => get(state, ['eventCreate', 'error']))
@@ -49,7 +57,7 @@ const EventDetailManage = ({ match, history }) => {
   const [getEventData] = useAuthorizationRequest(
     requestEventCreateHandler,
     { id },
-    { errorHandler: _redirect }
+    { errorHandler: _redirect, author: true }
   )
   useEffect(
     () => {
@@ -69,7 +77,11 @@ const EventDetailManage = ({ match, history }) => {
         <Stepper activeStep={activeStep} orientation='vertical'>
           {steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel>
+              <StepLabel
+                onClick={_toggleStep(index)}
+                style={{ cursor: 'pointer' }}
+                StepIconComponent={EventStepperIcon}
+              >
                 <div className='position-relative'>
                   <Divider absolute variant='inset' style={{ top: '50%' }} />
                   <Text

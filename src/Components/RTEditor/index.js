@@ -11,8 +11,6 @@ const editorConfig = {
     'link',
     '|',
     'insertTable',
-    'indent',
-    'alignment',
     '|',
     'bulletedList',
     'numberedList',

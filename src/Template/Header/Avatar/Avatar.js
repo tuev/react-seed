@@ -1,12 +1,10 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react'
-import { Modal, ModalBody } from 'reactstrap'
+import React, { useCallback, useMemo } from 'react'
 import { auth as firebaseAuth } from 'firebase/app'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { pick, isEmpty } from 'lodash'
-import { updateProfileInfo, signOut } from 'Redux/Profile/profile.action'
-import useEventCallback from 'Hooks/useEventCallback'
-import Authorization from 'Containers/Authorization'
+import { get, isEmpty } from 'lodash'
+import { signOut } from 'Redux/Profile/profile.action'
+import { withRouter } from 'react-router-dom'
 import Dropdown from 'Components/Dropdown'
 import Placeholder from './Placeholder'
 
@@ -14,32 +12,17 @@ import { NavItemText } from '../header.style'
 import { Avatar as AvatarImage } from './Avatar.style'
 import HeaderItem from '../HeaderItem'
 
-const Avatar = () => {
+const Avatar = ({ history, location }) => {
   const dispatch = useDispatch()
   const profile = useSelector((state = {}) => state.profile) || {}
   const isFetching = useSelector((state = {}) => state.profile.isFetching)
-  const [signinFormVisible, toggleSigninForm] = useState(false)
 
-  const handleToggleSigninForm = useEventCallback(
-    isShow => toggleSigninForm(visible => !visible),
-    []
-  )
-
-  useEffect(
+  const handleToggleSigninForm = useCallback(
     () => {
-      firebaseAuth().onAuthStateChanged(async user => {
-        if (user) {
-          // User is signed in.
-          const data = pick(user, ['displayName', 'email', 'photoURL', 'uid'])
-          toggleSigninForm(false)
-
-          await dispatch(
-            updateProfileInfo({ data, endpoint: `oauth/${data.uid}` })
-          )
-        }
-      })
+      const isLoginPage = get(location, 'pathname') === '/login'
+      !isLoginPage && history.push('/login')
     },
-    [dispatch, handleToggleSigninForm]
+    [history, location]
   )
 
   const isShowProfileAvatar = useMemo(() => !isEmpty(profile.data), [profile])
@@ -58,6 +41,7 @@ const Avatar = () => {
     },
     [dispatch]
   )
+
   return (
     <>
       {isFetching && <Placeholder />}
@@ -74,9 +58,7 @@ const Avatar = () => {
           caret
         >
           <div className='d-flex flex-column'>
-            {/* {items.map((item = {}, idx) => (
-              <HeaderItem {...item} key={`${label}_${idx}`} />
-            ))} */}
+            <HeaderItem label='Manage Events' href='/manage' />
             <HeaderItem label='Create Event' href='/create' />
             <NavItemText onClick={_signOut} className='text-left'>
               Logout
@@ -88,20 +70,11 @@ const Avatar = () => {
           onClick={handleToggleSigninForm}
           className='d-block text-left'
         >
-          Signin
+          Sign in
         </NavItemText>
       )}
-      <Modal
-        isOpen={signinFormVisible}
-        toggle={handleToggleSigninForm}
-        centered
-      >
-        <ModalBody>
-          <Authorization />
-        </ModalBody>
-      </Modal>
     </>
   )
 }
 
-export default Avatar
+export default withRouter(Avatar)

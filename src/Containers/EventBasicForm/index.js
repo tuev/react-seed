@@ -5,7 +5,7 @@ import EventBasicInfo from './EventBasicInfo'
 import EventLocation from './EventLocation'
 import EventTime from './EventTime'
 
-const EventCreate = ({ onChange, values }) => {
+const EventCreate = ({ onChange, values, error = {} }) => {
   // TODO: Should create a Form component atke a layout + items
   // TODO: ADD FORM VALIDATION
   const handleChange = useCallback(
@@ -14,9 +14,9 @@ const EventCreate = ({ onChange, values }) => {
   )
   return (
     <Form width='100%'>
-      <EventBasicInfo values={values} onChange={handleChange} />
-      <EventLocation values={values} onChange={handleChange} />
-      <EventTime values={values} onChange={handleChange} />
+      <EventBasicInfo values={values} onChange={handleChange} error={error} />
+      <EventLocation values={values} onChange={handleChange} error={error} />
+      <EventTime values={values} onChange={handleChange} error={error} />
     </Form>
   )
 }

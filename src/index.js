@@ -12,6 +12,16 @@ import App from './App'
 const store = configureStore()
 firebase.initializeApp(firebaseConfig)
 
+if (process.env.NODE_ENV !== 'development') {
+  if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === 'object') {
+    for (const [key, value] of Object.entries(
+      window.__REACT_DEVTOOLS_GLOBAL_HOOK__
+    )) {
+      window.__REACT_DEVTOOLS_GLOBAL_HOOK__[key] =
+        typeof value === 'function' ? () => {} : null
+    }
+  }
+}
 ReactDOM.render(
   <Provider store={store}>
     <App />

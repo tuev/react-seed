@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 import { faShareAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import './event.scss'
+import defaultImage from './default-image.jpg'
 
 const Item = ({
   history,
@@ -20,13 +21,18 @@ const Item = ({
   const month = useMemo(() => moment(date).format('MMM'), [date])
   const day = useMemo(() => moment(date).format('DD'), [date])
   const time = useMemo(() => moment(date).format('YYYY/MM/DD hh:mm A'), [date])
-
-  const _handleOnItemSelect = useCallback(
+  const redirect = get(restInfo, 'redirect')
+  const _defaultItemSelect = useCallback(
     () => history.push(`/event/${get(restInfo, '_id', '')}`),
     [history, restInfo]
   )
 
-  const url = useMemo(() => get(banner, 'url'), [banner])
+  const _handleOnItemSelect = useCallback(
+    () => (redirect ? redirect() : _defaultItemSelect()),
+    [_defaultItemSelect, redirect]
+  )
+
+  const url = useMemo(() => get(banner, 'url', defaultImage), [banner])
 
   return (
     <Col lg='4' md='6' sm='12' className='event-item pl-0 pr-3 pb-3'>

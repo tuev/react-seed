@@ -23,6 +23,8 @@ export const profileReducer = (state = initState, action = {}) => {
   case actionType.PROFILE_SIGNOUT:
     return {
       ...state,
+      isFetching: false,
+      error: false,
       data: {}
     }
   default:

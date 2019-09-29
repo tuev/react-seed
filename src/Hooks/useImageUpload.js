@@ -1,12 +1,29 @@
 import { useCallback, useRef, useEffect, useState } from 'react'
-import { get } from 'lodash'
+import { get, isString } from 'lodash'
 
 const useImageUpload = (onChange, initImage) => {
   const imgRef = useRef()
   const [error, toggleError] = useState('')
   useEffect(() => {
-    if (get(imgRef, 'current')) {
-      imgRef.current.src = initImage
+    if (get(imgRef, 'current') && initImage) {
+      let result = initImage
+      if (isString(result)) {
+        imgRef.current.src = result
+        return
+      }
+      const file = new FileReader()
+      try {
+        file.readAsDataURL(result)
+        file.onloadend = () => {
+          result = file.result
+          imgRef.current.src = result
+        }
+      } catch (error) {
+        console.error(error)
+        result = initImage
+      }
+
+      imgRef.current.src = result
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -26,7 +43,7 @@ const useImageUpload = (onChange, initImage) => {
         toggleError(msg)
         return
       }
-      if (data.size > 150000) {
+      if (data.size > 5000000) {
         const msg = `'${data.name}' is too large, please pick a smaller file`
         toggleError(msg)
         return

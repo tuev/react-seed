@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect, useCallback, useState } from 'react'
 import { useSpring, animated } from 'react-spring'
 import { Button, Snackbar } from '@material-ui/core'
-import { Row } from 'Components'
+import { Container } from 'reactstrap'
 import { withRouter } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -41,7 +41,6 @@ const EventSubmit = ({ values, history }) => {
     background: 'white',
     width: '100%',
     left: 0,
-    padding: '0 22%',
     zIndex: 2
   })
 
@@ -55,25 +54,27 @@ const EventSubmit = ({ values, history }) => {
   return (
     <>
       <animated.div style={props}>
-        <Row p='8px' display='flex' className='justify-content-end'>
-          <Button
-            color='primary'
-            size='large'
-            variant='contained'
-            disabled={!isValid}
-            onClick={_handleSubmit}
-          >
-            {isLoading && (
-              <FontAwesomeIcon
-                icon={faSpinner}
-                spin
-                size='xs'
-                className='mr-2'
-              />
-            )}
-            Submit
-          </Button>
-        </Row>
+        <Container>
+          <div className='d-flex justify-content-end px-5'>
+            <Button
+              color='primary'
+              size='large'
+              variant='contained'
+              disabled={!isValid}
+              onClick={_handleSubmit}
+            >
+              {isLoading && (
+                <FontAwesomeIcon
+                  icon={faSpinner}
+                  spin
+                  size='xs'
+                  className='mr-2'
+                />
+              )}
+              Submit
+            </Button>
+          </div>
+        </Container>
       </animated.div>
       <Snackbar
         open={!!errorMessage}
