@@ -29,19 +29,24 @@ const Main = () => {
   useEffect(
     () => {
       if (isEmpty(profile)) {
-        console.log('login')
-        firebaseAuth().onAuthStateChanged(async user => {
-          if (user) {
-            // User is signed in.
-            const data = pick(user, ['displayName', 'email', 'photoURL', 'uid'])
+        firebaseAuth &&
+          firebaseAuth().onAuthStateChanged(async user => {
+            if (user) {
+              // User is signed in.
+              const data = pick(user, [
+                'displayName',
+                'email',
+                'photoURL',
+                'uid'
+              ])
 
-            await dispatch(
-              updateProfileInfo({ data, endpoint: `oauth/${data.uid}` })
-            )
-          } else {
-            dispatch(signOut())
-          }
-        })
+              await dispatch(
+                updateProfileInfo({ data, endpoint: `oauth/${data.uid}` })
+              )
+            } else {
+              dispatch(signOut())
+            }
+          })
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
