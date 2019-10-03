@@ -1,0 +1,55 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins/_breakpoints";
+
+.events-manage {
+	&__create-event {
+		&--title {
+			align-items: center;
+			display: flex;
+			justify-content: flex-start;
+			margin-top: 20px;
+
+			@include media-breakpoint-down(md) {
+				justify-content: center;
+			}
+		}
+
+		&--button {
+			align-items: center;
+			display: flex;
+			justify-content: flex-end;
+			margin-top: 20px;
+
+			@include media-breakpoint-down(md) {
+				justify-content: center;
+			}
+		}
+	}
+
+	&__search {
+		&--item {
+			height: 56px;
+			width: 100%;
+		}
+
+		&--search-event {
+			border: 1px solid rgb(169, 169, 169);
+			border-radius: 4px;
+			display: flex;
+			justify-content: flex-start;
+			margin-bottom: 8px;
+			margin-top: 16px;
+
+			button {
+				height: 56px;
+				width: 56px;
+			}
+
+			.input-enter {
+				padding-right: 24px;
+				width: 100%;
+			}
+		}
+	}
+}
