@@ -5,6 +5,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import Checkbox from '@material-ui/core/Checkbox'
 import EnhancedTableHead from './EnhancedTableHead'
+import EditEvent from './EditEvent'
 
 const TableEvent = ({
   classes,
@@ -13,7 +14,7 @@ const TableEvent = ({
   orderBy,
   handleSelectAllClick,
   handleRequestSort,
-  rows,
+  eventList,
   stableSort,
   getSorting,
   page,
@@ -23,6 +24,8 @@ const TableEvent = ({
   emptyRows,
   headCells
 }) => {
+  const [anchorEl, setAnchorEl] = React.useState(null)
+
   return (
     <div className={classes.tableWrapper}>
       <Table
@@ -37,11 +40,11 @@ const TableEvent = ({
           orderBy={orderBy}
           onSelectAllClick={handleSelectAllClick}
           onRequestSort={handleRequestSort}
-          rowCount={rows.length}
+          rowCount={eventList.length}
           headCells={headCells}
         />
         <TableBody>
-          {stableSort(rows, getSorting(order, orderBy))
+          {stableSort(eventList, getSorting(order, orderBy))
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row, index) => {
               const isItemSelected = isSelected(row.name)
@@ -71,10 +74,9 @@ const TableEvent = ({
                   >
                     {row.name}
                   </TableCell>
-                  <TableCell align='right'>{row.calories}</TableCell>
-                  <TableCell align='right'>{row.fat}</TableCell>
-                  <TableCell align='right'>{row.carbs}</TableCell>
-                  <TableCell align='right'>{row.protein}</TableCell>
+                  <TableCell align='right'>
+                    <EditEvent anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
+                  </TableCell>
                 </TableRow>
               )
             })}

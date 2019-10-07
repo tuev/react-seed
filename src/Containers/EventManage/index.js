@@ -57,6 +57,7 @@ const EventsManage = ({ history, ...props }) => {
     organizer: 'All'
   })
   // #endregion
+
   console.log('Event manage', eventList)
 
   return isFetching ? null : (
@@ -70,7 +71,7 @@ const EventsManage = ({ history, ...props }) => {
           values={values}
           setValues={setValues}
         />
-        <EventList redirect={props.redirect} />
+        <EventList redirect={props.redirect} eventList={eventList} />
       </div>
     </Container>
   )
