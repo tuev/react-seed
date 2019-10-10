@@ -58,8 +58,6 @@ const EventsManage = ({ history, ...props }) => {
   })
   // #endregion
 
-  console.log('Event manage', eventList)
-
   return isFetching ? null : (
     <Container>
       <div className='events-manage'>

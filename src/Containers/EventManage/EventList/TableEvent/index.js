@@ -8,6 +8,7 @@ import EnhancedTableHead from './EnhancedTableHead'
 import EditEvent from './EditEvent'
 
 const TableEvent = ({
+  redirect,
   classes,
   selected,
   order,
@@ -24,8 +25,7 @@ const TableEvent = ({
   emptyRows,
   headCells
 }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null)
-
+  console.log(eventList, redirect)
   return (
     <div className={classes.tableWrapper}>
       <Table
@@ -53,7 +53,7 @@ const TableEvent = ({
               return (
                 <TableRow
                   hover
-                  onClick={event => handleClick(event, row.name)}
+                  // onClick={event => handleClick(event, row.name)}
                   role='checkbox'
                   aria-checked={isItemSelected}
                   tabIndex={-1}
@@ -75,7 +75,7 @@ const TableEvent = ({
                     {row.name}
                   </TableCell>
                   <TableCell align='right'>
-                    <EditEvent anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
+                    <EditEvent redirect={redirect(row._id)} _id={row._id} />
                   </TableCell>
                 </TableRow>
               )

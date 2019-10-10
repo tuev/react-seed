@@ -1,18 +1,42 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import Button from '@material-ui/core/Button'
-// import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons'
+import { get } from 'lodash'
+import { withRouter } from 'react-router-dom'
 
-export default function EditEvent ({ anchorEl, setAnchorEl }) {
+const EditEvent = ({ history, ...restInfo }) => {
+  const [anchorEl, setAnchorEl] = useState(null)
+
   const handleClick = event => {
     setAnchorEl(event.currentTarget)
   }
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  console.log('restInfo', restInfo)
+  const redirect = get(restInfo, 'redirect')
+
+  const _defaultItemSelect = useCallback(
+    () => history.push(`/event/${get(restInfo, '_id', '')}`),
+    [history, restInfo]
+  )
+
+  const _handleEditEvent = useCallback(
+    () => (redirect ? redirect() : _defaultItemSelect()),
+    [_defaultItemSelect, redirect]
+  )
+
+  const _handleViewEvent = () => _defaultItemSelect()
+
+  const _handleCopyURL = () => {
+    console.log(history)
+    setAnchorEl(null)
+    return 'some text!'
   }
 
   return (
@@ -31,11 +55,15 @@ export default function EditEvent ({ anchorEl, setAnchorEl }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>View</MenuItem>
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
-        <MenuItem onClick={handleClose}>Copy URL</MenuItem>
+        <MenuItem onClick={_handleViewEvent}>View</MenuItem>
+        <MenuItem onClick={_handleEditEvent}>Edit</MenuItem>
+        <MenuItem className='copyURL' data-clipboard-text={_handleCopyURL}>
+          Copy URL
+        </MenuItem>
         <MenuItem onClick={handleClose}>Delete</MenuItem>
       </Menu>
     </div>
   )
 }
+
+export default withRouter(EditEvent)

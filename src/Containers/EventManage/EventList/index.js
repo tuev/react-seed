@@ -120,13 +120,14 @@ const EventList = ({ redirect, eventList = {} }) => {
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableEvent
+          redirect={redirect}
+          eventList={eventList}
           classes={classes}
           selected={selected}
           order={order}
           orderBy={orderBy}
           handleSelectAllClick={handleSelectAllClick}
           handleRequestSort={handleRequestSort}
-          eventList={eventList}
           stableSort={stableSort}
           getSorting={getSorting}
           page={page}
