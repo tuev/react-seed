@@ -1,9 +1,0 @@
-[
-  { "label": "Any date", "value": "" },
-  { "label": "Today", "value": "Today" },
-  { "label": "Tomorrow", "value": "Tomorrow" },
-  { "label": "This weekend", "value": "This weekend" },
-  { "label": "This week", "value": "This week" },
-  { "label": "Next week", "value": "Next week" },
-  { "label": "This month", "value": "This month" }
-]

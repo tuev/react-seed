@@ -1,11 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { withRouter } from 'react-router-dom'
 
-export default class Page404 extends Component {
-  render () {
-    return (
-      <div>
-        <h2>PAGE NOT FOUND</h2>
-      </div>
-    )
-  }
-}
+const Page404 = () => <div>404</div>
+
+export default withRouter(Page404)
