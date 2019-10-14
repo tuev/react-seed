@@ -18,7 +18,6 @@ const EditEvent = ({ history, ...restInfo }) => {
     setAnchorEl(null)
   }
 
-  console.log('restInfo', restInfo)
   const redirect = get(restInfo, 'redirect')
 
   const _defaultItemSelect = useCallback(
@@ -32,12 +31,6 @@ const EditEvent = ({ history, ...restInfo }) => {
   )
 
   const _handleViewEvent = () => _defaultItemSelect()
-
-  const _handleCopyURL = () => {
-    console.log(history)
-    setAnchorEl(null)
-    return 'some text!'
-  }
 
   return (
     <div>
@@ -57,9 +50,6 @@ const EditEvent = ({ history, ...restInfo }) => {
       >
         <MenuItem onClick={_handleViewEvent}>View</MenuItem>
         <MenuItem onClick={_handleEditEvent}>Edit</MenuItem>
-        <MenuItem className='copyURL' data-clipboard-text={_handleCopyURL}>
-          Copy URL
-        </MenuItem>
         <MenuItem onClick={handleClose}>Delete</MenuItem>
       </Menu>
     </div>

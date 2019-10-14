@@ -4,12 +4,11 @@ import * as actionTypes from './actionType'
 
 const defaultFieldSelect = [
   '_id',
-  'image',
-  'date',
-  'author',
-  'price',
-  'location',
-  'name'
+  'address',
+  'timeStart',
+  'timeEnd',
+  'name',
+  'status'
 ]
 
 const defaultOptions = {

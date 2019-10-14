@@ -32,6 +32,7 @@ const EnhancedTableHead = props => {
             inputProps={{ 'aria-label': 'select all desserts' }}
           />
         </TableCell>
+        <TableCell padding='none' style={{ padding: '0 10px 0 0' }} />
         {headCells.map(headCell => (
           <TableCell
             key={headCell.id}

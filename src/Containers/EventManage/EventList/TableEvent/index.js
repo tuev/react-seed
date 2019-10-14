@@ -1,4 +1,5 @@
 import React from 'react'
+import Moment from 'react-moment'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -26,6 +27,7 @@ const TableEvent = ({
   headCells
 }) => {
   console.log(eventList, redirect)
+
   return (
     <div className={classes.tableWrapper}>
       <Table
@@ -67,6 +69,22 @@ const TableEvent = ({
                     />
                   </TableCell>
                   <TableCell
+                    padding='none'
+                    component='th'
+                    style={{ padding: '0 10px 0 0' }}
+                  >
+                    <div
+                      style={{
+                        backgroundImage: `url(${row.banner.url})`,
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        height: '50px',
+                        width: '50px'
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell
                     component='th'
                     id={labelId}
                     scope='row'
@@ -74,6 +92,14 @@ const TableEvent = ({
                   >
                     {row.name}
                   </TableCell>
+                  <TableCell align='center'>{row.address}</TableCell>
+                  <TableCell align='center'>
+                    <Moment format='YYYY/MM/DD'>{row.timeStart}</Moment>
+                  </TableCell>
+                  <TableCell align='center'>
+                    <Moment format='YYYY/MM/DD'>{row.timeEnd}</Moment>
+                  </TableCell>
+                  <TableCell align='center'>{row.status}</TableCell>
                   <TableCell align='right'>
                     <EditEvent redirect={redirect(row._id)} _id={row._id} />
                   </TableCell>
