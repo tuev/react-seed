@@ -47,6 +47,20 @@ const updateEventCreateHandler = ({ options = {}, id = '', token }) => ({
   }
 })
 
+const deleteEventCreateHandler = ({ options = {}, id = '', token }) => ({
+  [REQUEST_API]: {
+    types: [
+      actionTypes.EVENT_DELETE_REQUEST,
+      actionTypes.EVENT_DELETE_SUCCESS,
+      actionTypes.EVENT_DELETE_FAILURE
+    ],
+    endpoint: `evt/${id}`,
+    method: 'delete',
+    headers: { Authorization: `Bearer ${token}` },
+    options: merge(defaultOptions, options)
+  }
+})
+
 const changeEventCreateDataHandler = ({ data }) => ({
   type: actionTypes.EVENT_CREATE_CHANGE,
   payload: data
@@ -60,6 +74,7 @@ export {
   postEventCreateHandler,
   updateEventCreateHandler,
   changeEventCreateDataHandler,
+  deleteEventCreateHandler,
   clearError,
   clearData
 }

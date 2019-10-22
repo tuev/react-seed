@@ -92,10 +92,18 @@
 	.title {
 		&__name {
 			font-weight: 600;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			width: 350px;
 		}
 
 		&__time {
 			font-size: 0.8rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			width: 350px;
 		}
 	}
 }

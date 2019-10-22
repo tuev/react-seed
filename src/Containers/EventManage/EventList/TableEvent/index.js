@@ -1,120 +1,133 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import Moment from 'react-moment'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableRow from '@material-ui/core/TableRow'
-import Checkbox from '@material-ui/core/Checkbox'
+import { useSelector, useDispatch } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { get, map } from 'lodash'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  Checkbox,
+  IconButton,
+  Tooltip
+} from '@material-ui/core'
+import { Delete, Edit } from '@material-ui/icons'
+import { deleteEventCreateHandler } from 'Redux/EventCreate/eventCreate.action'
+import { requestEventHandler } from 'Redux/Event/event.action'
+import useAuthorizationRequest from 'Hooks/useAuthorizationRequest'
+
 import EnhancedTableHead from './EnhancedTableHead'
-import EditEvent from './EditEvent'
 
 const TableEvent = ({
-  redirect,
-  classes,
-  selected,
-  order,
-  orderBy,
-  handleSelectAllClick,
-  handleRequestSort,
-  eventList,
-  stableSort,
-  getSorting,
-  page,
-  rowsPerPage,
-  isSelected,
-  handleClick,
-  emptyRows,
-  headCells
+  numSelected,
+  selectedIds = [],
+  toggleSelectedId,
+  history
 }) => {
-  console.log(eventList, redirect)
+  const dispatch = useDispatch()
+  const token = useSelector(state => get(state, ['profile', 'data', 'token']))
+  const eventList = useSelector(state =>
+    get(state, 'event.data.pagination.items')
+  )
+  const _getIsSelected = useCallback(id => selectedIds.includes(id), [
+    selectedIds
+  ])
+
+  const [_getEventData] = useAuthorizationRequest(
+    requestEventHandler,
+    {},
+    { author: true }
+  )
+
+  const handleItemChecked = useCallback(
+    _id => e => {
+      const isSelected = selectedIds.includes(_id)
+      if (isSelected) {
+        return toggleSelectedId(selectedIds.filter(item => item !== _id))
+      }
+      return toggleSelectedId([...selectedIds, _id])
+    },
+    [selectedIds, toggleSelectedId]
+  )
+  const selectAll = useCallback(
+    () => {
+      if (eventList.length === selectedIds.length) {
+        return toggleSelectedId([])
+      }
+      toggleSelectedId(map(eventList, '_id'))
+    },
+    [eventList, selectedIds.length, toggleSelectedId]
+  )
+
+  const handleEdit = useCallback(id => () => history.push(`/manage/${id}`), [
+    history
+  ])
+
+  const handleDelete = useCallback(
+    id => () => {
+      const deleteItemSelected = async () => {
+        await dispatch(deleteEventCreateHandler({ token, id }))
+        _getEventData()
+      }
+      deleteItemSelected()
+    },
+    [_getEventData, dispatch, token]
+  )
 
   return (
-    <div className={classes.tableWrapper}>
-      <Table
-        className={classes.table}
-        aria-labelledby='tableTitle'
-        size='medium'
-      >
-        <EnhancedTableHead
-          classes={classes}
-          numSelected={selected.length}
-          order={order}
-          orderBy={orderBy}
-          onSelectAllClick={handleSelectAllClick}
-          onRequestSort={handleRequestSort}
-          rowCount={eventList.length}
-          headCells={headCells}
-        />
+    <div>
+      <Table size='medium'>
+        <EnhancedTableHead numSelected={numSelected} selectAll={selectAll} />
         <TableBody>
-          {stableSort(eventList, getSorting(order, orderBy))
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((row, index) => {
-              const isItemSelected = isSelected(row.name)
-              const labelId = `enhanced-table-checkbox-${index}`
-
-              return (
-                <TableRow
-                  hover
-                  // onClick={event => handleClick(event, row.name)}
-                  role='checkbox'
-                  aria-checked={isItemSelected}
-                  tabIndex={-1}
-                  key={row.name}
-                  selected={isItemSelected}
-                >
-                  <TableCell padding='checkbox'>
-                    <Checkbox
-                      checked={isItemSelected}
-                      inputProps={{ 'aria-labelledby': labelId }}
-                    />
-                  </TableCell>
-                  <TableCell
-                    padding='none'
-                    component='th'
-                    style={{ padding: '0 10px 0 0' }}
+          {eventList.map(row => (
+            <TableRow
+              hover
+              role='checkbox'
+              aria-checked={_getIsSelected(row._id)}
+              tabIndex={-1}
+              key={row._id}
+              selected={_getIsSelected(row._id)}
+            >
+              <TableCell padding='checkbox'>
+                <Checkbox
+                  checked={_getIsSelected(row._id)}
+                  value={row._id}
+                  onChange={handleItemChecked(row._id)}
+                />
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {row.name}
+              </TableCell>
+              <TableCell>{row.address}</TableCell>
+              <TableCell>
+                <Moment format='YYYY/MM/DD'>{row.timeStart}</Moment>
+              </TableCell>
+              <TableCell>
+                <Moment format='YYYY/MM/DD'>{row.timeEnd}</Moment>
+              </TableCell>
+              <TableCell>{row.status}</TableCell>
+              <TableCell>
+                <Tooltip title='Delete'>
+                  <IconButton aria-label='delete' onClick={handleEdit(row._id)}>
+                    <Edit />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title='Delete'>
+                  <IconButton
+                    aria-label='delete'
+                    onClick={handleDelete(row._id)}
                   >
-                    <div
-                      style={{
-                        backgroundImage: `url(${row.banner.url})`,
-                        backgroundPosition: 'center',
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                        height: '50px',
-                        width: '50px'
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell
-                    component='th'
-                    id={labelId}
-                    scope='row'
-                    padding='none'
-                  >
-                    {row.name}
-                  </TableCell>
-                  <TableCell align='center'>{row.address}</TableCell>
-                  <TableCell align='center'>
-                    <Moment format='YYYY/MM/DD'>{row.timeStart}</Moment>
-                  </TableCell>
-                  <TableCell align='center'>
-                    <Moment format='YYYY/MM/DD'>{row.timeEnd}</Moment>
-                  </TableCell>
-                  <TableCell align='center'>{row.status}</TableCell>
-                  <TableCell align='right'>
-                    <EditEvent redirect={redirect(row._id)} _id={row._id} />
-                  </TableCell>
-                </TableRow>
-              )
-            })}
-          {emptyRows > 0 && (
-            <TableRow style={{ height: 49 * emptyRows }}>
-              <TableCell colSpan={6} />
+                    <Delete />
+                  </IconButton>
+                </Tooltip>
+              </TableCell>
             </TableRow>
-          )}
+          ))}
         </TableBody>
       </Table>
     </div>
   )
 }
 
-export default TableEvent
+export default withRouter(TableEvent)

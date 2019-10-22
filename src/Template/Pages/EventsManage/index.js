@@ -13,7 +13,7 @@ const EventManage = ({ history }) => {
 
   const [_getEventData] = useAuthorizationRequest(
     requestEventHandler,
-    {},
+    { options: { params: { limit: 10 } } },
     { errorHandler: _redirect, author: true }
   )
   useEffect(() => _getEventData(), [_getEventData, dispatch])

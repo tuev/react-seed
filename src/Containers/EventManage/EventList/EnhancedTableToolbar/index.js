@@ -1,83 +1,60 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import clsx from 'clsx'
-import { lighten, makeStyles } from '@material-ui/core/styles'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import Tooltip from '@material-ui/core/Tooltip'
-import DeleteIcon from '@material-ui/icons/Delete'
-import FilterListIcon from '@material-ui/icons/FilterList'
+import React, { useMemo, useCallback } from 'react'
+import { Toolbar, IconButton, Tooltip } from '@material-ui/core'
+import { Delete } from '@material-ui/icons'
+import Text from 'Components/Text'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteEventCreateHandler } from 'Redux/EventCreate/eventCreate.action'
+import { requestEventHandler } from 'Redux/Event/event.action'
+import { get } from 'lodash'
+import useAuthorizationRequest from 'Hooks/useAuthorizationRequest'
 
-const useToolbarStyles = makeStyles(theme => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1)
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-        color: theme.palette.secondary.main,
-        backgroundColor: lighten(theme.palette.secondary.light, 0.85)
+const EnhancedTableToolbar = ({ numSelected, selectedIds }) => {
+  const dispatch = useDispatch()
+  const token = useSelector(state => get(state, ['profile', 'data', 'token']))
+  const text = useMemo(
+    () => (numSelected > 0 ? `${numSelected} selected` : 'Your events'),
+    [numSelected]
+  )
+
+  const [_getEventData] = useAuthorizationRequest(
+    requestEventHandler,
+    {},
+    { author: true }
+  )
+
+  const handleDeleteAll = useCallback(
+    () => {
+      const deleteItemSelected = async () => {
+        await Promise.all(
+          selectedIds.map(async id =>
+            dispatch(deleteEventCreateHandler({ token, id }))
+          )
+        )
+        _getEventData()
       }
-      : {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.secondary.dark
-      },
-  spacer: {
-    flex: '1 1 100%'
-  },
-  actions: {
-    color: theme.palette.text.secondary
-  },
-  title: {
-    flex: '0 0 auto'
-  }
-}))
-
-const EnhancedTableToolbar = props => {
-  const classes = useToolbarStyles()
-  const { numSelected } = props
+      deleteItemSelected()
+    },
+    [_getEventData, dispatch, selectedIds, token]
+  )
 
   return (
-    <Toolbar
-      className={clsx(classes.root, {
-        [classes.highlight]: numSelected > 0
-      })}
-    >
-      <div className={classes.title}>
-        {numSelected > 0 ? (
-          <Typography color='inherit' variant='subtitle1'>
-            {numSelected} selected
-          </Typography>
-        ) : (
-          <Typography variant='h6' id='tableTitle'>
-            Your Events
-          </Typography>
-        )}
+    <Toolbar>
+      <div>
+        <Text>{text}</Text>
       </div>
-      <div className={classes.spacer} />
-      <div className={classes.actions}>
-        {numSelected > 0 ? (
+      <div>
+        {numSelected ? (
           <Tooltip title='Delete'>
-            <IconButton aria-label='delete'>
-              <DeleteIcon />
+            <IconButton aria-label='delete' onClick={handleDeleteAll}>
+              <Delete />
             </IconButton>
           </Tooltip>
         ) : (
-          <Tooltip title='Filter list'>
-            <IconButton aria-label='filter list'>
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
+          <div />
         )}
       </div>
     </Toolbar>
   )
-}
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired
 }
 
 export default EnhancedTableToolbar

@@ -1,72 +1,91 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import TableSortLabel from '@material-ui/core/TableSortLabel'
-import Checkbox from '@material-ui/core/Checkbox'
+import React, { useCallback, useMemo, useEffect, useState } from 'react'
+import {
+  TableCell,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+  Checkbox
+} from '@material-ui/core'
+import { useSelector } from 'react-redux'
+import { get, trimStart } from 'lodash'
+import { requestEventHandler } from 'Redux/Event/event.action'
+import useAuthorizationRequest from 'Hooks/useAuthorizationRequest'
 
-const EnhancedTableHead = props => {
-  const {
-    classes,
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-    headCells
-  } = props
-  const createSortHandler = property => event => {
-    onRequestSort(event, property)
+const headCells = [
+  { id: 'name', label: 'Event Name' },
+  { id: 'address', label: 'Address' },
+  { id: 'timeStart', label: 'Time start' },
+  { id: 'timeEnd', label: 'Time end ' },
+  { id: 'status', label: 'Status' },
+  { id: 'Action', label: 'Action' }
+]
+
+const EnhancedTableHead = ({ numSelected, selectAll }) => {
+  const [sortKey, toggleSort] = useState('')
+  const [sortOrder, toggleSortOrder] = useState('')
+
+  const [_getEventData] = useAuthorizationRequest(
+    requestEventHandler,
+    { options: { params: { sort: `${sortOrder}${sortKey}` } } },
+    { author: true }
+  )
+  const createSortHandler = (property, orderInfo) => event => {
+    const order = orderInfo === 'asc' ? '-' : ''
+    toggleSort(property)
+    toggleSortOrder(order)
   }
+
+  const handleSelectAll = useCallback(() => selectAll(), [selectAll])
+  const orderData = useSelector(
+    state => get(state, 'event.data.pagination.options.sort', ''),
+    []
+  )
+
+  const orderBy = useMemo(() => trimStart(orderData, '-'), [orderData])
+
+  const order = useMemo(
+    () => {
+      const isDescending = orderData.split('')[0] === '-'
+      return isDescending ? 'desc' : 'asc'
+    },
+    [orderData]
+  )
+
+  useEffect(() => _getEventData(), [_getEventData, sortKey, sortOrder])
+  const getSortInfo = useCallback(
+    headCell => (orderBy === headCell.id ? order : false),
+    [order, orderBy]
+  )
 
   return (
     <TableHead>
       <TableRow>
         <TableCell padding='checkbox'>
           <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={numSelected === rowCount}
-            onChange={onSelectAllClick}
+            indeterminate={numSelected > 0 && numSelected < 9}
+            checked={numSelected === 9}
+            onChange={handleSelectAll}
             inputProps={{ 'aria-label': 'select all desserts' }}
           />
         </TableCell>
-        <TableCell padding='none' style={{ padding: '0 10px 0 0' }} />
         {headCells.map(headCell => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
-            sortDirection={orderBy === headCell.id ? order : false}
+            align='left'
+            sortDirection={getSortInfo(headCell)}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
               direction={order}
-              onClick={createSortHandler(headCell.id)}
+              onClick={createSortHandler(headCell.id, getSortInfo(headCell))}
             >
               {headCell.label}
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
-              ) : null}
             </TableSortLabel>
           </TableCell>
         ))}
       </TableRow>
     </TableHead>
   )
-}
-
-EnhancedTableHead.propTypes = {
-  classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired
 }
 
 export default EnhancedTableHead
