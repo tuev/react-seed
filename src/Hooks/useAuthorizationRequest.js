@@ -15,7 +15,6 @@ const useAuthorizationRequest = (action, params = {}, options = {}) => {
       author ? { params: { query: { author: authorId } } } : {}
     )
   }
-  console.log(extraParams, 'extraPamras')
   const eventCallback = useEventCallback(() => {
     const _handleSubmit = async () => {
       try {

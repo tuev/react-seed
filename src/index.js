@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import { ThemeProvider } from 'styled-components'
 import './index.css'
 import firebaseConfig from './firebaseConfig'
 import * as serviceWorker from './serviceWorker'
@@ -24,7 +25,9 @@ if (process.env.NODE_ENV !== 'development') {
 }
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={{}}>
+      <App />
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 )

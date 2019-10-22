@@ -11,7 +11,6 @@ const callApi = async (
   headers = {}
 ) => {
   const fullUrl = `${SERVER_BASE_URL}/${endpoint}`
-  console.log(options, 'options')
   const result = await axios({
     method,
     url: fullUrl,

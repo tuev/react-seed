@@ -4,20 +4,20 @@ import * as actionTypes from './actionType'
 
 const defaultFieldSelect = [
   '_id',
-  'image',
-  'date',
-  'author',
-  'price',
-  'location',
-  'name'
+  'address',
+  'timeStart',
+  'timeEnd',
+  'name',
+  'status'
 ]
 
-const defaultOptions = {
+export const defaultOptions = {
   params: {
     limit: process.env.REACT_APP_PAGE_LIMIT,
     skip: 0,
     select: JSON.stringify(defaultFieldSelect),
-    populate: JSON.stringify([{ path: 'author' }, { path: 'banner' }])
+    populate: JSON.stringify([{ path: 'author' }, { path: 'banner' }]),
+    sort: 'createdAt'
   }
 }
 
@@ -27,7 +27,6 @@ const requestEventHandler = ({
   endpoint = 'event',
   token
 } = {}) => {
-  console.log(options, 'options')
   return {
     [REQUEST_API]: {
       types: [

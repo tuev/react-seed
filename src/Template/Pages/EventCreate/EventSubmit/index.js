@@ -41,7 +41,8 @@ const EventSubmit = ({ values, history }) => {
     background: 'white',
     width: '100%',
     left: 0,
-    zIndex: 2
+    zIndex: 2,
+    padding: '16px 0'
   })
 
   useEffect(
