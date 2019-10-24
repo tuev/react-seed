@@ -32,11 +32,11 @@ const _getPageItems = ({ minPage = 0, maxPage = 0 } = {}) =>
 
 const AppPagination = ({ skip, total, onPageSelect }) => {
   const currentPage = useMemo(
-    () => Math.floor(skip / process.env.REACT_APP_PAGE_LIMIT) || 1,
+    () => Math.ceil(skip / process.env.REACT_APP_PAGE_LIMIT),
     [skip]
   )
   const totalPage = useMemo(
-    () => Math.floor(total / process.env.REACT_APP_PAGE_LIMIT),
+    () => Math.ceil(total / process.env.REACT_APP_PAGE_LIMIT),
     [total]
   )
   const rangePage = useMemo(
@@ -47,14 +47,22 @@ const AppPagination = ({ skip, total, onPageSelect }) => {
       )({ currentPage, total: totalPage }),
     [currentPage, totalPage]
   )
-  const disabledPrevious = useMemo(() => rangePage[0] === 1, [rangePage])
-  const disabledNext = useMemo(() => last(rangePage) === totalPage, [
+  const disabledPreviousDots = useMemo(() => rangePage[0] === 1, [rangePage])
+  const disabledNextDots = useMemo(() => last(rangePage) === totalPage, [
     rangePage,
     totalPage
   ])
+  const disabledPrevious = useMemo(() => rangePage[0] - 1 === currentPage, [
+    currentPage,
+    rangePage
+  ])
+  const disabledNext = useMemo(() => last(rangePage) - 1 === currentPage, [
+    currentPage,
+    rangePage
+  ])
 
   const _handleFirstPage = useCallback(
-    () => currentPage > 1 && onPageSelect(1),
+    () => currentPage > 1 && onPageSelect(0),
     [currentPage, onPageSelect]
   )
   const _handlePreviousPage = useCallback(
@@ -66,39 +74,62 @@ const AppPagination = ({ skip, total, onPageSelect }) => {
     [currentPage, onPageSelect, totalPage]
   )
   const _handleLastPage = useCallback(
-    () => currentPage < totalPage && onPageSelect(totalPage),
+    () => currentPage < totalPage && onPageSelect(totalPage - 1),
     [currentPage, onPageSelect, totalPage]
   )
   const _handleSelectPage = useCallback(
     page => () => currentPage !== page && onPageSelect(page),
     [currentPage, onPageSelect]
   )
-
   return totalPage ? (
     <Pagination className='d-flex justify-content-center'>
-      <PaginationItem disabled={disabledPrevious} onClick={_handleFirstPage}>
-        <PaginationLink first href='#' />
-      </PaginationItem>
-      <PaginationItem disabled={disabledPrevious} onClick={_handlePreviousPage}>
-        <PaginationLink previous href='#' />
-      </PaginationItem>
-      {!disabledPrevious && <span className='mx-2'>...</span>}
+      {!disabledPrevious && (
+        <>
+          <PaginationItem
+            disabled={disabledPrevious}
+            onClick={_handleFirstPage}
+            style={{ cursor: !disabledPrevious ? 'pointer' : 'unset' }}
+          >
+            <PaginationLink first href='#' />
+          </PaginationItem>
+          <PaginationItem
+            disabled={disabledPrevious}
+            onClick={_handlePreviousPage}
+            style={{ cursor: !disabledPrevious ? 'pointer' : 'unset' }}
+          >
+            <PaginationLink previous href='#' />
+          </PaginationItem>
+        </>
+      )}
+      {!disabledPreviousDots && <span className='mx-2'>...</span>}
       {rangePage.map(item => (
         <PaginationItem
-          active={currentPage === item}
+          active={currentPage === item - 1}
           key={item}
-          onClick={_handleSelectPage(item)}
+          onClick={_handleSelectPage(item - 1)}
         >
           <PaginationLink>{item}</PaginationLink>
         </PaginationItem>
       ))}
-      {!disabledNext && <span className='mx-2'>...</span>}
-      <PaginationItem disabled={disabledNext} onClick={_handleNextPage}>
-        <PaginationLink next href='#' />
-      </PaginationItem>
-      <PaginationItem disabled={disabledNext} onClick={_handleLastPage}>
-        <PaginationLink last href='#' />
-      </PaginationItem>
+      {!disabledNextDots && <span className='mx-2'>...</span>}
+      {!disabledNext && (
+        <>
+          <PaginationItem
+            disabled={disabledNext}
+            onClick={_handleNextPage}
+            style={{ cursor: !disabledNext ? 'pointer' : 'unset' }}
+          >
+            <PaginationLink next href='#' />
+          </PaginationItem>
+          <PaginationItem
+            disabled={disabledNext}
+            onClick={_handleLastPage}
+            style={{ cursor: !disabledNext ? 'pointer' : 'unset' }}
+          >
+            <PaginationLink last href='#' />
+          </PaginationItem>
+        </>
+      )}
     </Pagination>
   ) : (
     <div />

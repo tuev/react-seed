@@ -17,7 +17,9 @@ const EventPagination = () => {
       const requestPage = async () => {
         dispatch(
           requestEventHandler({
-            options: { params: { skip: page * process.env.REACT_APP_PAGE_LIMIT } }
+            options: {
+              params: { skip: page * process.env.REACT_APP_PAGE_LIMIT }
+            }
           })
         )
       }
@@ -25,7 +27,7 @@ const EventPagination = () => {
     },
     [dispatch]
   )
-
+  console.log(total, 'total')
   return <AppPagination skip={skip} total={total} onPageSelect={_requestPage} />
 }
 

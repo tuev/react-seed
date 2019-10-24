@@ -45,7 +45,7 @@
 		}
 
 		@include media-breakpoint-down($range-device) {
-			align-items: center;
+			align-items: flex-start;
 			flex-flow: column;
 			justify-content: center;
 		}
@@ -83,10 +83,6 @@
 		line-height: 1.25rem;
 		margin: 0;
 		padding: 0;
-
-		@include media-breakpoint-down($range-device) {
-			display: none !important;
-		}
 	}
 
 	.title {
@@ -95,7 +91,7 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
-			width: 350px;
+			width: 550px;
 		}
 
 		&__time {

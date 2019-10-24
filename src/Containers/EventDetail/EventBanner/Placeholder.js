@@ -57,12 +57,6 @@ const EventListPlaceholder = () => (
               <rect x='2' y='2' rx='0' ry='0' width='70' height='50' />
             </ContentLoader>
           </h1>
-          <div className='d-flex'>
-            <div className='event-info__organizer'>by Organizer</div>
-            <div className='event-info__follow'>
-              <button title='Follow'>Follow</button>
-            </div>
-          </div>
         </div>
         <div className='event-info__price mt-auto'>
           <ContentLoader

@@ -1,7 +1,6 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { Row, Col } from 'reactstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShareAlt, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import { Like } from 'react-facebook'
 import { Sticky } from 'react-sticky'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
@@ -9,12 +8,16 @@ import { get } from 'lodash'
 
 const EventTicket = () => {
   const eventTime = useSelector(state => {
-    const time = get(state, 'eventDetail.data.time')
+    const time = get(state, 'eventDetail.data.timeStart')
     return moment(time).format('LLLL')
   })
   const name = useSelector(state => get(state, 'eventDetail.data.name'))
-  const price = useSelector(state => get(state, 'eventDetail.data.price'))
+  const _id = useSelector(state => get(state, 'eventDetail.data.price'))
 
+  const urlDetail = useMemo(
+    () => `https://brightsmile.firebaseapp.com/#/event/${_id}`,
+    [_id]
+  )
   const _stickyStyle = useCallback(
     ({ isSticky }) => ({
       zIndex: '1000',
@@ -32,35 +35,40 @@ const EventTicket = () => {
           }}
         >
           <Row className='event-detail__ticket'>
-            <Col
-              md='1'
-              className='d-flex justify-content-center align-items-center p-0 event-detail__ticket--actions'
-            >
-              <div className='event-detail__ticket--share'>
-                <FontAwesomeIcon icon={faShareAlt} title='Share event' />
-              </div>
-              <div className='event-detail__ticket--like'>
-                <FontAwesomeIcon icon={faThumbsUp} title='Like event' />
-              </div>
-            </Col>
             {isSticky && (
-              <Col md='6' className='event-detail__ticket--title text-left'>
+              <Col
+                xs='12'
+                md='6'
+                className='event-detail__ticket--title text-left'
+              >
                 <p className='title__name'>{name}</p>
                 <p className='title__time'>{eventTime}</p>
               </Col>
             )}
             {isSticky ? (
               <Col md='5' xs='12'>
-                <div className='event-detail__ticket--tickets d-flex'>
-                  <div className='tickets__price mt-auto'>{price}</div>
-                  <button>Tickets</button>
+                <div className='event-detail__ticket--tickets d-flex align-items-md-center'>
+                  <Like
+                    href={urlDetail}
+                    colorScheme='dark'
+                    showFaces
+                    share
+                    size='large'
+                    layout='button_count'
+                  />
                 </div>
               </Col>
             ) : (
               <Col md='11' xs='12'>
-                <div className='event-detail__ticket--tickets d-flex'>
-                  <div className='tickets__price mt-auto'>{price}</div>
-                  <button>Tickets</button>
+                <div className='event-detail__ticket--tickets d-flex align-items-center'>
+                  <Like
+                    href={urlDetail}
+                    colorScheme='dark'
+                    showFaces
+                    share
+                    size='large'
+                    layout='button_count'
+                  />
                 </div>
               </Col>
             )}

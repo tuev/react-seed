@@ -5,6 +5,7 @@ import LoginPage from './Pages/Login'
 import EventCreate from './Pages/EventCreate'
 import EventDetailManage from './Pages/EventDetailManage'
 import EventManage from './Pages/EventsManage'
+import PolicyPage from './Pages/Policy'
 
 const pageConfigs = [
   {
@@ -44,6 +45,11 @@ const pageConfigs = [
     component: EventCreate,
     exact: true,
     private: true
+  },
+  {
+    path: '/policy',
+    component: PolicyPage,
+    exact: true
   }
 ]
 

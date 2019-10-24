@@ -1,22 +1,14 @@
 .event-item {
 	.item {
 		border: 0 solid rgb(235, 235, 235);
+		border-radius: 4px;
+		box-shadow:
+		2px 1px 6px 0 rgba(40, 44, 53, 0.1),
+		0 2px 2px 0 rgba(40, 44, 53, 0.1);
 		width: 100%;
 
-		&:hover {
-			background-color: white;
-			border-radius: 4px;
-			box-shadow:
-			7px 20px 20px 13px rgba(40, 44, 53, 0.1),
-			0 2px 2px 0 rgba(40, 44, 53, 0.1);
-			cursor: pointer;
-			transition:
-			all 0.35s ease-in,
-			background-color 0.24s cubic-bezier(0.4, 0, 0.3, 1);
-		}
-
 		&__image {
-			max-height: 150px;
+			height: 150px;
 			overflow: hidden;
 
 			img {
@@ -43,6 +35,10 @@
 			margin-bottom: 0;
 			margin-top: 4px;
 			text-align: left;
+
+			&__wrapper {
+				height: 200px;
+			}
 
 			&--month {
 				color: #f05537;
@@ -85,8 +81,8 @@
 
 		&__action {
 			right: 16px;
-			top: -22px;
-			width: 112px;
+			top: -40px;
+			width: 120px;
 
 			&--share {
 				background: white;
@@ -107,6 +103,18 @@
 				padding: 1px;
 				width: 44px;
 			}
+		}
+
+		&:hover {
+			background-color: white;
+			border-radius: 4px;
+			box-shadow:
+			7px 20px 20px 13px rgba(40, 44, 53, 0.1),
+			0 2px 2px 0 rgba(40, 44, 53, 0.1);
+			cursor: pointer;
+			transition:
+			all 0.35s ease-in,
+			background-color 0.24s cubic-bezier(0.4, 0, 0.3, 1);
 		}
 	}
 }

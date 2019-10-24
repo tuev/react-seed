@@ -1,13 +1,7 @@
 import React, { useMemo } from 'react'
 import { Row, Col } from 'reactstrap'
 import { useSelector } from 'react-redux'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faTwitterSquare,
-  faInstagram,
-  faFacebookSquare,
-  faLinkedin
-} from '@fortawesome/free-brands-svg-icons'
+import { Comments } from 'react-facebook'
 import moment from 'moment'
 import { get } from 'lodash'
 
@@ -15,8 +9,10 @@ const EventDescription = () => {
   const description = useSelector(state =>
     get(state, 'eventDetail.data.description')
   )
-  const timeInfo = useSelector(state => get(state, 'eventDetail.data.time'))
-  const location = useSelector(state => get(state, 'eventDetail.data.location'))
+  const timeInfo = useSelector(state =>
+    get(state, 'eventDetail.data.timeStart')
+  )
+  const location = useSelector(state => get(state, 'eventDetail.data.address'))
 
   const eventTimeDate = useMemo(() => moment(timeInfo).format('DD/MM/YYYY'), [
     timeInfo
@@ -38,27 +34,7 @@ const EventDescription = () => {
             <div dangerouslySetInnerHTML={createMarkup()} />
           </div>
           <div className='share-event'>
-            <h5>Share With Friends</h5>
-            <FontAwesomeIcon
-              icon={faFacebookSquare}
-              className='share-event__icon'
-              title='Share this page on Facebook'
-            />
-            <FontAwesomeIcon
-              icon={faTwitterSquare}
-              className='share-event__icon'
-              title='Share this page on Twitter'
-            />
-            <FontAwesomeIcon
-              icon={faLinkedin}
-              className='share-event__icon'
-              title='Share this page on Linkedin'
-            />
-            <FontAwesomeIcon
-              icon={faInstagram}
-              className='share-event__icon'
-              title='Share this page on Instagram'
-            />
+            <Comments href='http://www.facebook.com' />
           </div>
         </div>
       </Col>

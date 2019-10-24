@@ -9,7 +9,9 @@ const EventBanner = () => {
   const image = useSelector(state =>
     get(state, 'eventDetail.data.banner.url', eventImage)
   )
-  const timeInfo = useSelector(state => get(state, 'eventDetail.data.date'))
+  const timeInfo = useSelector(state =>
+    get(state, 'eventDetail.data.timeStart')
+  )
   const name = useSelector(state => get(state, 'eventDetail.data.name'))
   const price = useSelector(state => get(state, 'eventDetail.data.price'))
 
@@ -34,12 +36,6 @@ const EventBanner = () => {
           </div>
           <div>
             <h1 className='event-info__name'>{name}</h1>
-            <div className='d-flex'>
-              <div className='event-info__organizer'>by Organizer</div>
-              <div className='event-info__follow'>
-                <button title='Follow'>Follow</button>
-              </div>
-            </div>
           </div>
           <div className='event-info__price mt-auto'>{price}</div>
         </div>
