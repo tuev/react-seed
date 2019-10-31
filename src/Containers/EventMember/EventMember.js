@@ -21,7 +21,7 @@ const EventMember = () => {
     },
     [dispatch]
   )
-  return <AppSlider title='Most active members' items={users} />
+  return <AppSlider title='Most activities charities' items={users} />
 }
 
 export default EventMember
